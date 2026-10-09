@@ -53,6 +53,8 @@ async def card(
             .order_by(Technology.id)
         )
     )
+    from app.assessment.service import published_result
+
     privacy = Privacy.model_validate(profile.privacy)
     return SafeCard(
         id=profile.id,
@@ -66,6 +68,7 @@ async def card(
         work_preferences=WorkPreferences.model_validate(profile.work_preferences),
         technology_ids=[row[0] for row in technologies],
         technology_names=[row[1] for row in technologies],
+        assessment=await published_result(db, profile.user_id, owner=owner),
     )
 
 

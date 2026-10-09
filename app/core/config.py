@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     worker_poll_seconds: float = Field(default=1, gt=0, le=60)
     job_lease_seconds: int = Field(default=60, ge=5, le=300)
     job_max_attempts: int = Field(default=3, ge=1, le=10)
+    assessment_bank: Path = Path("bank/private/full.json")
+    assessment_report: Path = Path("bank/private/technical_report.json")
+    assessment_reviews: Path | None = None
     runner_url: str | None = None
     runner_ca: Path | None = None
     runner_client_certificate: Path | None = None

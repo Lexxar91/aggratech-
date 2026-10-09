@@ -1,5 +1,6 @@
 import asyncio
 import hashlib
+import json
 from collections.abc import Awaitable, Callable
 from pathlib import Path
 from typing import Literal
@@ -148,8 +149,12 @@ async def check_bank(
     path: Path,
     execute: Callable[[ExecutionRequest], Awaitable[ExecutionResult]],
 ) -> dict[str, object]:
-    """Проверяет первые материалы и сохраняет ожидаемые/фактические результаты."""
+    """Проверяет полный банк либо историческую поставку первых двух семейств."""
     raw = await asyncio.to_thread(path.read_bytes)
+    if json.loads(raw).get("scope") == "full":
+        from app.assessment.bank_checker import BankQualityChecker
+
+        return (await BankQualityChecker(execute).check(path)).model_dump(mode="json")
     grader_source = await asyncio.to_thread(Path(__file__).read_bytes)
     materials = BankMaterials.model_validate_json(raw)
     validate_materials(materials)

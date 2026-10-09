@@ -198,3 +198,46 @@ Review X1/X4: в `bank/private/stage1.json` сверить условия/руб
 Основания: [Docker limits](https://docs.docker.com/engine/containers/resource_constraints/),
 [SQLAlchemy locking](https://docs.sqlalchemy.org/en/20/core/selectable.html#sqlalchemy.sql.expression.Select.with_for_update),
 [uv locked sync](https://docs.astral.sh/uv/concepts/projects/sync/).
+
+## Assessment этапа 4: демонстрационный режим
+
+После запуска Compose зарегистрируйте кандидата, подтвердите email через Mailpit
+и откройте «Проверка навыков и история» в профиле. Примите правила и выберите
+Junior/Middle. Сохранение черновика и окончательная фиксация — разные действия:
+после фиксации базы открывается перенос, возврата к базе нет. Кнопка сдачи
+фиксирует **сохранённые** черновики остальных заданий. После A можно сразу
+начать B, не ожидая worker. Состояние оценивания обновляется отдельной кнопкой.
+История и черновики восстанавливаются из БД после обновления и рестарта API.
+
+Банк `bank/private/full.json` имеет технический отчёт
+`bank/private/technical_report.json`, но `admission_status=not_admitted`.
+До независимого review на этапе 9 доступен только demo. Успешное демо можно
+добровольно опубликовать в собственном профиле/PDF; работодатель не получает
+его как подтверждённую категорию. API `mode=credit` отклоняется проверкой
+допуска, переменной отключения этой проверки нет. Смена материалов или оценщика
+не должна молча переоценивать ранее начатый цикл: сохраняется снимок и хеш.
+
+Апелляция доступна на странице цикла. Мотивированное служебное решение:
+
+```bash
+docker compose exec worker python -m app.tools.assessment_admin UUID uphold \
+  --reviewer operator --reason 'Проверены ответы и журнал технического сбоя'
+```
+
+Другие действия: `review` — открыть проверку, `invalidate` — признать цикл
+технически недействительным, `extend --seconds 300` — продлить текущий этап
+или срок начала B, `retry` — повторить неготовую оценку тех же ответов.
+Каждая операция требует причину и имя оператора, сохраняет аудит и историю
+показанных семейств. Эти команды не меняют demo на credit и не выдают допуск банку.
+
+Пакет этапа 4 (после сборки образа `checks`, миграции — до тестов):
+
+```bash
+docker compose --profile check run --rm checks sh -c \
+  'alembic upgrade head && pytest -q tests/test_stage4_grading.py tests/test_stage4_cycles.py tests/test_stage4_browser.py tests/test_queue.py tests/test_auth_profiles.py tests/test_api.py -p no:cacheprovider'
+```
+
+Браузерный тест использует Chromium, Mailpit, PostgreSQL и настоящий runner:
+создаёт новый demo-цикл через UI, фиксирует A/B, перезапускает API, публикует
+результат и читает PDF. Это автоматизированный сценарий с подготовленными
+ответами, **не человеческая валидация** объективности или сложности банка.

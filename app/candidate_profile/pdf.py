@@ -42,8 +42,25 @@ def generate_pdf(card: SafeCard, contacts: ContactsView | None = None) -> bytes:
         "Форматы работы: " + ", ".join(card.work_preferences.formats),
         "Город: " + (card.work_preferences.location or "не указан"),
         "Заявленные технологии: " + (", ".join(card.technology_names) or "не указаны"),
-        "Технологии заявлены самостоятельно; категория пока не подтверждена.",
+        (
+            "Технологии заявлены самостоятельно."
+            if card.assessment and card.assessment.verified
+            else "Технологии заявлены самостоятельно; категория пока не подтверждена."
+        ),
     ]
+    if card.assessment:
+        assessment = card.assessment
+        lines += [
+            assessment.label,
+            f"Уровень: {assessment.grade}; версия: {assessment.methodology}",
+            assessment.scope,
+            f"Дата: {assessment.assessed_at}",
+        ]
+        lines += [
+            f"{item.skill}: {item.status}; различных семейств: {item.families}; "
+            f"результат: {item.score}"
+            for item in assessment.skills
+        ]
     if contacts:
         lines += [
             "Контакты владельца",

@@ -23,7 +23,7 @@
         "http_api",
         "security_validation"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "X3",
@@ -33,7 +33,7 @@
         "sql_data",
         "debug_reliability"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "X4",
@@ -53,7 +53,7 @@
         "sql_data",
         "debug_reliability"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "X6",
@@ -63,7 +63,7 @@
         "http_api",
         "security_validation"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "Y1",
@@ -73,7 +73,7 @@
         "language_algorithms",
         "sql_data"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "Y2",
@@ -83,7 +83,7 @@
         "http_api",
         "security_validation"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "Y3",
@@ -93,7 +93,7 @@
         "sql_data",
         "debug_reliability"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "Y4",
@@ -103,7 +103,7 @@
         "language_algorithms",
         "http_api"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "Y5",
@@ -113,7 +113,7 @@
         "sql_data",
         "debug_reliability"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     },
     {
       "id": "Y6",
@@ -123,7 +123,7 @@
         "http_api",
         "security_validation"
       ],
-      "material_status": "planned"
+      "material_status": "prepared_review_pending"
     }
   ]
 }

@@ -15,6 +15,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException
 from starlette.responses import Response
 
+from app.assessment.router import router as assessment_router
 from app.auth.router import router as auth_router
 from app.candidate_profile.router import router as candidate_router
 from app.catalog.router import router as catalog_router
@@ -82,7 +83,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             },
         )
 
-    for router in (auth_router, candidate_router, employer_router, catalog_router):
+    for router in (
+        auth_router,
+        candidate_router,
+        employer_router,
+        catalog_router,
+        assessment_router,
+    ):
         application.include_router(router, prefix="/api/v1")
 
     @application.middleware("http")

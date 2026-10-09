@@ -85,7 +85,9 @@ async function download(path) {
   const anchor = node("a"); anchor.href = url; anchor.download = "profile.pdf"; anchor.click(); URL.revokeObjectURL(url);
 }
 async function candidateScreen() {
+  link("Проверка навыков и история", "#assessment");
   const profile = await request("/candidate/profile");
+  if (profile.assessment) content.append(node("p", profile.assessment.label));
   content.append(node("h2", "Ручной профиль"), node("p", "Зарплата: рубли в месяц до налогов (gross). Технологии заявлены самостоятельно; категория пока не подтверждена."));
   const form = node("form"); form.id = "candidate-profile"; content.append(form);
   field(form, "display_name", "Имя", profile.display_name); field(form, "summary", "Описание", profile.summary, "textarea");
@@ -131,6 +133,11 @@ async function render() {
   if (route === "register" || route === "login") return authScreen(route);
   if (route === "verify" || route === "reset") return actionScreen(route, decodeURIComponent(rawToken || ""));
   if (route === "reset-request") return resetScreen();
+  if (route === "assessment") {
+    if (!user) { location.hash = "#login"; return; }
+    if (user.role !== "candidate") throw new Error("Раздел доступен кандидату.");
+    return assessmentScreen(rawToken);
+  }
   if (["profile","candidate","employer"].includes(route)) {
     if (!user) { location.hash = "#login"; return; }
     content.append(node("h1",user.role === "candidate" ? "Кабинет кандидата" : "Кабинет работодателя"));

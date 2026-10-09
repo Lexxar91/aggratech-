@@ -6,6 +6,8 @@ from time import perf_counter
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
+from app.assessment.jobs import expire_due_cycles, process_assessment
+from app.core import models  # noqa: F401 — регистрирует FK для отдельного процесса
 from app.core.config import Settings
 from app.core.database import create_database, create_sessions
 from app.core.logging import configure_logging
@@ -26,6 +28,7 @@ async def process_one(
 ) -> bool:
     """Обрабатывает одно сохраняемое задание с отдельной транзакцией захвата."""
     async with sessions.begin() as session:
+        await expire_due_cycles(session)
         job = await claim(
             session,
             now=utc_now(),
@@ -34,6 +37,9 @@ async def process_one(
         )
     if job is None:
         return False
+    if job.kind == "assessment_grade":
+        await process_assessment(sessions, settings, job)
+        return True
     started = perf_counter()
     email_error: str | None = None
     if job.kind == "auth_email":

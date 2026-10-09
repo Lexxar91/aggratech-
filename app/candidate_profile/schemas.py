@@ -5,6 +5,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, model_validator
 
+from app.assessment.schemas import ResultView
+
 
 class Privacy(BaseModel):
     """Публикация карточки не даёт права на контакт или скрытое имя."""
@@ -78,6 +80,7 @@ class SafeCard(BaseModel):
     work_preferences: WorkPreferences
     technology_ids: list[UUID]
     technology_names: list[str]
+    assessment: ResultView | None = None
 
 
 class ProfileView(SafeCard):

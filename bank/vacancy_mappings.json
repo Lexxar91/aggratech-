@@ -1,0 +1,248 @@
+{
+  "version": "vacancy-mapping-v1",
+  "examples": [
+    {
+      "title": "Junior CRUD/API",
+      "grade": "junior",
+      "description": "Разработка CRUD/API на Python: валидация входа, разграничение доступа, агрегаты и обработка HTTP.",
+      "direction": "backend",
+      "forms": {
+        "X": [
+          "X1",
+          "X2",
+          "X3",
+          "X4",
+          "X5",
+          "X6"
+        ],
+        "Y": [
+          "Y1",
+          "Y2",
+          "Y3",
+          "Y4",
+          "Y5",
+          "Y6"
+        ]
+      },
+      "rows": [
+        {
+          "requirement": "Проверять вход и права доступа",
+          "skill": "security_validation",
+          "technology": "HTTP/API",
+          "families": [
+            "X2",
+            "Y2"
+          ],
+          "action": "Определить границу доверия и негативный сценарий.",
+          "rubric": "security_validation"
+        },
+        {
+          "requirement": "Соблюдать контракт HTTP",
+          "skill": "http_api",
+          "technology": "HTTP/API",
+          "families": [
+            "X4",
+            "Y4"
+          ],
+          "action": "Завершать пагинацию/повторы по объявленному условию.",
+          "rubric": "http_api"
+        },
+        {
+          "requirement": "Преобразовывать записи в Python",
+          "skill": "language_algorithms",
+          "technology": "Python",
+          "families": [
+            "X1",
+            "Y1"
+          ],
+          "action": "Построить агрегат/упорядоченный диапазон и адаптировать перенос.",
+          "rubric": "language_algorithms"
+        },
+        {
+          "requirement": "Правильно обрабатывать SQL-данные",
+          "skill": "sql_data",
+          "technology": "SQL",
+          "families": [
+            "X3",
+            "Y3"
+          ],
+          "action": "Выбрать безопасное агрегирование/атомарное обновление.",
+          "rubric": "sql_data"
+        },
+        {
+          "requirement": "Диагностировать граничные случаи данных",
+          "skill": "debug_reliability",
+          "technology": "SQL",
+          "families": [
+            "X5",
+            "Y5"
+          ],
+          "action": "Найти NULL-ошибку/неоднозначную последнюю запись и проверить границу.",
+          "rubric": "debug_reliability"
+        }
+      ]
+    },
+    {
+      "title": "Middle отчёты/SQL",
+      "grade": "middle",
+      "description": "Поддержка отчётности: корректность JOIN, NULL, последних ревизий; надёжные обновления и безопасный API.",
+      "direction": "backend",
+      "forms": {
+        "X": [
+          "X1",
+          "X2",
+          "X3",
+          "X4",
+          "X5",
+          "X6"
+        ],
+        "Y": [
+          "Y1",
+          "Y2",
+          "Y3",
+          "Y4",
+          "Y5",
+          "Y6"
+        ]
+      },
+      "rows": [
+        {
+          "requirement": "Устранять искажения отчётов",
+          "skill": "sql_data",
+          "technology": "SQL",
+          "families": [
+            "X3",
+            "Y3"
+          ],
+          "action": "Исключить умножение строк/потерянное обновление и сохранить транзакционные свойства.",
+          "rubric": "sql_data"
+        },
+        {
+          "requirement": "Разбирать неоднозначные результаты",
+          "skill": "debug_reliability",
+          "technology": "SQL",
+          "families": [
+            "X5",
+            "Y5"
+          ],
+          "action": "Диагностировать NULL/равные временные метки и задать воспроизводящий случай.",
+          "rubric": "debug_reliability"
+        },
+        {
+          "requirement": "Обрабатывать ревизии и стабильные диапазоны",
+          "skill": "language_algorithms",
+          "technology": "Python",
+          "families": [
+            "X1",
+            "Y1"
+          ],
+          "action": "Выбрать нужные ревизии и адаптировать алгоритм переноса.",
+          "rubric": "language_algorithms"
+        },
+        {
+          "requirement": "Защитить контракты команд и загрузки",
+          "skill": "security_validation",
+          "technology": "HTTP/API",
+          "families": [
+            "X6",
+            "Y6"
+          ],
+          "action": "Проверить атомарную неизменность команды/границы обработки файла.",
+          "rubric": "security_validation"
+        },
+        {
+          "requirement": "Учитывать семантику HTTP",
+          "skill": "http_api",
+          "technology": "HTTP/API",
+          "families": [
+            "X2",
+            "Y2"
+          ],
+          "action": "Указать статусы и порядок проверок webhook/доступа.",
+          "rubric": "http_api"
+        }
+      ]
+    },
+    {
+      "title": "Middle внешние интеграции",
+      "grade": "middle",
+      "description": "Интеграции на Python: HTTP-пагинация, повторы при сбоях, идемпотентность и целостность данных.",
+      "direction": "backend",
+      "forms": {
+        "X": [
+          "X1",
+          "X2",
+          "X3",
+          "X4",
+          "X5",
+          "X6"
+        ],
+        "Y": [
+          "Y1",
+          "Y2",
+          "Y3",
+          "Y4",
+          "Y5",
+          "Y6"
+        ]
+      },
+      "rows": [
+        {
+          "requirement": "Ограничивать сетевые операции",
+          "skill": "http_api",
+          "technology": "HTTP/API",
+          "families": [
+            "X4",
+            "Y4"
+          ],
+          "action": "Обработать цикл курсоров/бюджет повторов и прекращение вызовов.",
+          "rubric": "http_api"
+        },
+        {
+          "requirement": "Проверять свой алгоритм на границах",
+          "skill": "language_algorithms",
+          "technology": "Python",
+          "families": [
+            "X4",
+            "Y4"
+          ],
+          "action": "Предложить 2–3 корректных случая и выявить объявленные обязательные классы ошибок.",
+          "rubric": "language_algorithms"
+        },
+        {
+          "requirement": "Не допускать повторных побочных эффектов",
+          "skill": "security_validation",
+          "technology": "HTTP/API",
+          "families": [
+            "X6",
+            "Y6"
+          ],
+          "action": "Проверить захват ключа/ограничения размера и недоверенных метаданных.",
+          "rubric": "security_validation"
+        },
+        {
+          "requirement": "Сохранять корректность данных интеграции",
+          "skill": "sql_data",
+          "technology": "SQL",
+          "families": [
+            "X1",
+            "Y1"
+          ],
+          "action": "Получить агрегаты/упорядоченную выборку с SQL-семантикой.",
+          "rubric": "sql_data"
+        },
+        {
+          "requirement": "Диагностировать сбои данных",
+          "skill": "debug_reliability",
+          "technology": "SQL",
+          "families": [
+            "X3",
+            "Y3"
+          ],
+          "action": "Объяснить кратность JOIN/потерю изменения и проверить исправление.",
+          "rubric": "debug_reliability"
+        }
+      ]
+    }
+  ]
+}

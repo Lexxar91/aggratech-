@@ -1,5 +1,13 @@
 """Регистрация моделей для единой схемы Alembic."""
 
+from app.assessment.models import (
+    AssessmentAnswer,
+    AssessmentAppeal,
+    AssessmentCycle,
+    AssessmentPublication,
+    AssessmentSurvey,
+    FamilyExposure,
+)
 from app.auth.models import (
     AuthActionToken,
     AuthRateBucket,
@@ -19,6 +27,12 @@ from app.employer.models import EmployerProfile
 from app.notifications.models import AuditEvent, BackgroundJob
 
 __all__ = [
+    "AssessmentAnswer",
+    "AssessmentAppeal",
+    "AssessmentCycle",
+    "AssessmentPublication",
+    "AssessmentSurvey",
+    "FamilyExposure",
     "AuthActionToken",
     "AuthRateBucket",
     "AuthSession",
