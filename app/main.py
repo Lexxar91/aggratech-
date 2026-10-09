@@ -24,6 +24,10 @@ from app.core.database import create_database, create_sessions
 from app.core.errors import ApiError
 from app.core.logging import configure_logging
 from app.employer.router import router as employer_router
+from app.fsp.router import router as fsp_router
+from app.invitations.router import router as invitations_router
+from app.matching.router import router as matching_router
+from app.vacancies.router import router as vacancies_router
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +93,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         employer_router,
         catalog_router,
         assessment_router,
+        matching_router,
+        invitations_router,
+        fsp_router,
+        vacancies_router,
     ):
         application.include_router(router, prefix="/api/v1")
 

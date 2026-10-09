@@ -15,13 +15,13 @@ from app.core.errors import ApiError
 
 
 async def transaction(request: Request) -> AsyncIterator[AsyncSession]:
-    """Каждая операция имеет одну явную транзакцию и отдельную сессию."""
+    """Фиксирует транзакцию до ответа, включая созданную сессию авторизации."""
     sessions: async_sessionmaker[AsyncSession] = request.app.state.sessions
     async with sessions.begin() as session:
         yield session
 
 
-Db = Annotated[AsyncSession, Depends(transaction)]
+Db = Annotated[AsyncSession, Depends(transaction, scope="function")]
 
 
 def auth_service(request: Request) -> AuthService:

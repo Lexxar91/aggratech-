@@ -1,0 +1,305 @@
+{
+  "schema_version": "matching-fixture-v1",
+  "dataset_id": "jury-example",
+  "as_of": "2026-10-07T09:00:00Z",
+  "candidates": [
+    {
+      "candidate_id": "sql-strong",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "jury-example-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "sql_data": {
+          "score": 95.0,
+          "verified_at": "2026-10-01T09:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 60.0,
+          "verified_at": "2026-10-01T09:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "self_reported",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 150000.0,
+        "salary_to": 200000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-10-15",
+        "confirmed_at": "2026-10-01T09:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "http-strong",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "jury-example-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "sql_data": {
+          "score": 60.0,
+          "verified_at": "2026-10-01T09:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 95.0,
+          "verified_at": "2026-10-01T09:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "self_reported",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 150000.0,
+        "salary_to": 200000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-10-15",
+        "confirmed_at": "2026-10-01T09:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "unknown-salary",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "jury-example-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "sql_data": {
+          "score": 75.0,
+          "verified_at": "2026-10-01T09:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 75.0,
+          "verified_at": "2026-10-01T09:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "self_reported",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": null,
+        "salary_to": null,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-10-15",
+        "confirmed_at": "2026-10-01T09:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "unconfirmed",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "unconfirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "jury-example-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {},
+      "technologies": {
+        "python": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 150000.0,
+        "salary_to": 200000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-10-15",
+        "confirmed_at": "2026-10-01T09:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "private",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "jury-example-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "sql_data": {
+          "score": 90.0,
+          "verified_at": "2026-10-01T09:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 90.0,
+          "verified_at": "2026-10-01T09:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "self_reported",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 150000.0,
+        "salary_to": 200000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-10-15",
+        "confirmed_at": "2026-10-01T09:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": false,
+        "blocked_employer_ids": []
+      }
+    }
+  ],
+  "needs": [
+    {
+      "need_id": "sql-priority",
+      "employer_id": "employer-demo",
+      "title": "sql-priority",
+      "specialization": "backend",
+      "accepted_grades": [
+        "middle"
+      ],
+      "required_stack": [
+        {
+          "technology": "python",
+          "verification_required": false
+        }
+      ],
+      "preferred_stack": [
+        "sql",
+        "http_api"
+      ],
+      "skill_priorities": {
+        "sql_data": 2,
+        "http_api": 1
+      },
+      "required_verified_skills": [
+        "sql_data",
+        "http_api"
+      ],
+      "work_formats": [
+        "remote"
+      ],
+      "location": null,
+      "salary_from": 160000.0,
+      "salary_to": 220000.0,
+      "desired_start_date": "2026-10-20",
+      "start_date_required": false,
+      "role": "",
+      "team_description": "",
+      "task_description": "",
+      "additional_requirements": {},
+      "additional_wishes": "",
+      "urgency": "normal",
+      "vacancy_id": null,
+      "version": 1,
+      "template_code": null,
+      "template_version": null,
+      "salary_currency": "RUB",
+      "salary_basis": "gross"
+    },
+    {
+      "need_id": "http-priority",
+      "employer_id": "employer-demo",
+      "title": "http-priority",
+      "specialization": "backend",
+      "accepted_grades": [
+        "middle"
+      ],
+      "required_stack": [
+        {
+          "technology": "python",
+          "verification_required": false
+        }
+      ],
+      "preferred_stack": [
+        "sql",
+        "http_api"
+      ],
+      "skill_priorities": {
+        "sql_data": 1,
+        "http_api": 2
+      },
+      "required_verified_skills": [
+        "sql_data",
+        "http_api"
+      ],
+      "work_formats": [
+        "remote"
+      ],
+      "location": null,
+      "salary_from": 160000.0,
+      "salary_to": 220000.0,
+      "desired_start_date": "2026-10-20",
+      "start_date_required": false,
+      "role": "",
+      "team_description": "",
+      "task_description": "",
+      "additional_requirements": {},
+      "additional_wishes": "",
+      "urgency": "normal",
+      "vacancy_id": null,
+      "version": 1,
+      "template_code": null,
+      "template_version": null,
+      "salary_currency": "RUB",
+      "salary_basis": "gross"
+    }
+  ]
+}

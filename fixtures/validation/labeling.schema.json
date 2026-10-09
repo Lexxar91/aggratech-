@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage 7 future human annotation, not matching input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "dataset_id", "reviewer_code", "annotations"],
+  "properties": {
+    "protocol_version": {"const": "stage7-labeling-v1"},
+    "dataset_id": {"type": "string"},
+    "reviewer_code": {"enum": ["A", "B"]},
+    "annotations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["need_id", "candidate_id", "relevance", "eligibility", "rationale"],
+        "properties": {
+          "need_id": {"type": "string"},
+          "candidate_id": {"type": "string"},
+          "relevance": {"type": "integer", "minimum": 0, "maximum": 3},
+          "eligibility": {"enum": ["eligible", "needs_clarification", "excluded"]},
+          "rationale": {"type": "string", "minLength": 1, "maxLength": 1000}
+        }
+      }
+    }
+  }
+}

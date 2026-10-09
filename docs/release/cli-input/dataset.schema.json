@@ -1,0 +1,660 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "Conditions": {
+      "additionalProperties": false,
+      "properties": {
+        "salary_from": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "decimal_places": 2,
+              "ge": 0,
+              "le": 9999999999,
+              "maximum": 9999999999,
+              "minimum": 0,
+              "multipleOf": 0.01
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Salary From"
+        },
+        "salary_to": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "decimal_places": 2,
+              "ge": 0,
+              "le": 9999999999,
+              "maximum": 9999999999,
+              "minimum": 0,
+              "multipleOf": 0.01
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Salary To"
+        },
+        "work_formats": {
+          "anyOf": [
+            {
+              "items": {
+                "enum": [
+                  "remote",
+                  "hybrid",
+                  "office"
+                ],
+                "type": "string"
+              },
+              "maxItems": 3,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Work Formats"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Location"
+        },
+        "available_from": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Available From"
+        },
+        "confirmed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confirmed At"
+        }
+      },
+      "required": [
+        "salary_from",
+        "salary_to",
+        "work_formats",
+        "location",
+        "available_from",
+        "confirmed_at"
+      ],
+      "title": "Conditions",
+      "type": "object"
+    },
+    "FixtureCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "specialization": {
+          "const": "backend",
+          "title": "Specialization",
+          "type": "string"
+        },
+        "grade": {
+          "enum": [
+            "junior",
+            "middle"
+          ],
+          "title": "Grade",
+          "type": "string"
+        },
+        "category_status": {
+          "enum": [
+            "fixture_confirmed",
+            "unconfirmed"
+          ],
+          "title": "Category Status",
+          "type": "string"
+        },
+        "assessment_scope": {
+          "$ref": "#/$defs/FixtureScope"
+        },
+        "skills": {
+          "additionalProperties": {
+            "$ref": "#/$defs/FixtureEvidence"
+          },
+          "propertyNames": {
+            "enum": [
+              "language_algorithms",
+              "sql_data",
+              "http_api",
+              "debug_reliability",
+              "security_validation"
+            ]
+          },
+          "title": "Skills",
+          "type": "object"
+        },
+        "technologies": {
+          "additionalProperties": false,
+          "patternProperties": {
+            "^\\s*(?:[pP][yY][tT][hH][oO][nN]|[sS][qQ][lL]|[pP][oO][sS][tT][gG][rR][eE][sS][qQ][lL]|[pP][oO][sS][tT][gG][rR][eE][sS]|[fF][aA][sS][tT][aA][pP][iI]|[dD][oO][cC][kK][eE][rR]|[hH][tT][tT][pP]_[aA][pP][iI]|[hH][tT][tT][pP]/[aA][pP][iI])\\s*$": {
+              "enum": [
+                "verified",
+                "self_reported"
+              ],
+              "type": "string"
+            }
+          },
+          "title": "Technologies",
+          "type": "object"
+        },
+        "fsp_verified": {
+          "title": "Fsp Verified",
+          "type": "boolean"
+        },
+        "conditions": {
+          "$ref": "#/$defs/Conditions"
+        },
+        "visibility": {
+          "$ref": "#/$defs/Visibility"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "specialization",
+        "grade",
+        "category_status",
+        "assessment_scope",
+        "skills",
+        "technologies",
+        "fsp_verified",
+        "conditions",
+        "visibility"
+      ],
+      "title": "FixtureCandidate",
+      "type": "object"
+    },
+    "FixtureEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "score": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "ge": 0,
+          "le": 100,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Score"
+        },
+        "verified_at": {
+          "format": "date-time",
+          "title": "Verified At",
+          "type": "string"
+        },
+        "mode": {
+          "const": "independent",
+          "title": "Mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "score",
+        "verified_at",
+        "mode"
+      ],
+      "title": "FixtureEvidence",
+      "type": "object"
+    },
+    "FixtureScope": {
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "const": "python",
+          "title": "Language",
+          "type": "string"
+        },
+        "method_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Method Version",
+          "type": "string"
+        },
+        "format": {
+          "const": "jury-skill-100-v1",
+          "title": "Format",
+          "type": "string"
+        }
+      },
+      "required": [
+        "language",
+        "method_version",
+        "format"
+      ],
+      "title": "FixtureScope",
+      "type": "object"
+    },
+    "Need": {
+      "additionalProperties": false,
+      "properties": {
+        "need_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Need Id",
+          "type": "string"
+        },
+        "employer_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Employer Id",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "specialization": {
+          "const": "backend",
+          "title": "Specialization",
+          "type": "string"
+        },
+        "accepted_grades": {
+          "items": {
+            "enum": [
+              "junior",
+              "middle"
+            ],
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Accepted Grades",
+          "type": "array"
+        },
+        "required_stack": {
+          "items": {
+            "$ref": "#/$defs/RequiredTechnology"
+          },
+          "maxItems": 30,
+          "title": "Required Stack",
+          "type": "array"
+        },
+        "preferred_stack": {
+          "items": {
+            "pattern": "^\\s*(?:[pP][yY][tT][hH][oO][nN]|[sS][qQ][lL]|[pP][oO][sS][tT][gG][rR][eE][sS][qQ][lL]|[pP][oO][sS][tT][gG][rR][eE][sS]|[fF][aA][sS][tT][aA][pP][iI]|[dD][oO][cC][kK][eE][rR]|[hH][tT][tT][pP]_[aA][pP][iI]|[hH][tT][tT][pP]/[aA][pP][iI])\\s*$",
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Preferred Stack",
+          "type": "array"
+        },
+        "skill_priorities": {
+          "additionalProperties": {
+            "enum": [
+              1,
+              2
+            ],
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "language_algorithms",
+              "sql_data",
+              "http_api",
+              "debug_reliability",
+              "security_validation"
+            ]
+          },
+          "title": "Skill Priorities",
+          "type": "object"
+        },
+        "required_verified_skills": {
+          "items": {
+            "enum": [
+              "language_algorithms",
+              "sql_data",
+              "http_api",
+              "debug_reliability",
+              "security_validation"
+            ],
+            "type": "string"
+          },
+          "maxItems": 5,
+          "title": "Required Verified Skills",
+          "type": "array"
+        },
+        "work_formats": {
+          "items": {
+            "enum": [
+              "remote",
+              "hybrid",
+              "office"
+            ],
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Work Formats",
+          "type": "array"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Location"
+        },
+        "salary_from": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "decimal_places": 2,
+          "ge": 0,
+          "le": 9999999999,
+          "maximum": 9999999999,
+          "minimum": 0,
+          "multipleOf": 0.01,
+          "title": "Salary From"
+        },
+        "salary_to": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "decimal_places": 2,
+          "ge": 0,
+          "le": 9999999999,
+          "maximum": 9999999999,
+          "minimum": 0,
+          "multipleOf": 0.01,
+          "title": "Salary To"
+        },
+        "desired_start_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Desired Start Date"
+        },
+        "start_date_required": {
+          "title": "Start Date Required",
+          "type": "boolean"
+        },
+        "role": {
+          "default": "",
+          "maxLength": 120,
+          "title": "Role",
+          "type": "string"
+        },
+        "team_description": {
+          "default": "",
+          "maxLength": 4000,
+          "title": "Team Description",
+          "type": "string"
+        },
+        "task_description": {
+          "default": "",
+          "maxLength": 4000,
+          "title": "Task Description",
+          "type": "string"
+        },
+        "additional_requirements": {
+          "additionalProperties": {
+            "maximum": 50,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "propertyNames": {
+            "const": "required_experience_years"
+          },
+          "title": "Additional Requirements",
+          "type": "object"
+        },
+        "additional_wishes": {
+          "default": "",
+          "maxLength": 2000,
+          "title": "Additional Wishes",
+          "type": "string"
+        },
+        "urgency": {
+          "default": "normal",
+          "enum": [
+            "urgent",
+            "normal",
+            "flexible"
+          ],
+          "title": "Urgency",
+          "type": "string"
+        },
+        "vacancy_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vacancy Id"
+        },
+        "version": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "template_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Template Code"
+        },
+        "template_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Template Version"
+        },
+        "salary_currency": {
+          "const": "RUB",
+          "default": "RUB",
+          "title": "Salary Currency",
+          "type": "string"
+        },
+        "salary_basis": {
+          "const": "gross",
+          "default": "gross",
+          "title": "Salary Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "need_id",
+        "employer_id",
+        "title",
+        "specialization",
+        "accepted_grades",
+        "required_stack",
+        "preferred_stack",
+        "skill_priorities",
+        "required_verified_skills",
+        "work_formats",
+        "location",
+        "salary_from",
+        "salary_to",
+        "desired_start_date",
+        "start_date_required"
+      ],
+      "title": "Need",
+      "type": "object"
+    },
+    "RequiredTechnology": {
+      "additionalProperties": false,
+      "properties": {
+        "technology": {
+          "pattern": "^\\s*(?:[pP][yY][tT][hH][oO][nN]|[sS][qQ][lL]|[pP][oO][sS][tT][gG][rR][eE][sS][qQ][lL]|[pP][oO][sS][tT][gG][rR][eE][sS]|[fF][aA][sS][tT][aA][pP][iI]|[dD][oO][cC][kK][eE][rR]|[hH][tT][tT][pP]_[aA][pP][iI]|[hH][tT][tT][pP]/[aA][pP][iI])\\s*$",
+          "title": "Technology",
+          "type": "string"
+        },
+        "verification_required": {
+          "title": "Verification Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "technology",
+        "verification_required"
+      ],
+      "title": "RequiredTechnology",
+      "type": "object"
+    },
+    "Visibility": {
+      "additionalProperties": false,
+      "properties": {
+        "consent_to_match": {
+          "title": "Consent To Match",
+          "type": "boolean"
+        },
+        "blocked_employer_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.:-]+$",
+            "type": "string"
+          },
+          "maxItems": 1000,
+          "title": "Blocked Employer Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "consent_to_match",
+        "blocked_employer_ids"
+      ],
+      "title": "Visibility",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "matching-fixture-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "as_of": {
+      "format": "date-time",
+      "title": "As Of",
+      "type": "string"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/FixtureCandidate"
+      },
+      "maxItems": 1000,
+      "title": "Candidates",
+      "type": "array"
+    },
+    "needs": {
+      "items": {
+        "$ref": "#/$defs/Need"
+      },
+      "maxItems": 100,
+      "title": "Needs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "as_of",
+    "candidates",
+    "needs"
+  ],
+  "title": "Dataset",
+  "type": "object"
+}

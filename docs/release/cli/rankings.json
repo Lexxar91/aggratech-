@@ -1,0 +1,1331 @@
+{
+  "fixture_only": true,
+  "rankings": [
+    {
+      "need_id": "jury-sql-priority",
+      "need_version": 1,
+      "algorithm": "B0",
+      "as_of": "2026-10-07T09:00:00Z",
+      "recommendations": [
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-http-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 0.0,
+          "components": {
+            "T": 0.71666667,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B0: только фильтры и стабильный идентификатор.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-sql-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 0.0,
+          "components": {
+            "T": 0.83333333,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B0: только фильтры и стабильный идентификатор.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unknown-salary",
+          "grade": "middle",
+          "group": "needs_clarification",
+          "score": 0.0,
+          "components": {
+            "T": 0.75,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B0: только фильтры и стабильный идентификатор.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплату нужно уточнить.",
+            "Нужно уточнить: salary."
+          ],
+          "missing_conditions": [
+            "salary"
+          ],
+          "skills": {
+            "sql_data": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-private",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 0.0,
+          "components": {
+            "T": 0.9,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "privacy"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unconfirmed",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 0.0,
+          "components": {
+            "T": 0.0,
+            "K": 0.3,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 0.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "unconfirmed_category",
+            "required_skill:sql_data",
+            "required_skill:http_api"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        }
+      ]
+    },
+    {
+      "need_id": "jury-http-priority",
+      "need_version": 1,
+      "algorithm": "B0",
+      "as_of": "2026-10-07T09:00:00Z",
+      "recommendations": [
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-http-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 0.0,
+          "components": {
+            "T": 0.83333333,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B0: только фильтры и стабильный идентификатор.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-sql-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 0.0,
+          "components": {
+            "T": 0.71666667,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B0: только фильтры и стабильный идентификатор.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unknown-salary",
+          "grade": "middle",
+          "group": "needs_clarification",
+          "score": 0.0,
+          "components": {
+            "T": 0.75,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B0: только фильтры и стабильный идентификатор.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплату нужно уточнить.",
+            "Нужно уточнить: salary."
+          ],
+          "missing_conditions": [
+            "salary"
+          ],
+          "skills": {
+            "sql_data": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-private",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 0.0,
+          "components": {
+            "T": 0.9,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "privacy"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unconfirmed",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 0.0,
+          "components": {
+            "T": 0.0,
+            "K": 0.3,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 0.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "unconfirmed_category",
+            "required_skill:sql_data",
+            "required_skill:http_api"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        }
+      ]
+    },
+    {
+      "need_id": "jury-sql-priority",
+      "need_version": 1,
+      "algorithm": "B1",
+      "as_of": "2026-10-07T09:00:00Z",
+      "recommendations": [
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-http-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 80.0,
+          "components": {
+            "T": 0.71666667,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B1: порядок по совпадению запрошенного стека.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-sql-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 80.0,
+          "components": {
+            "T": 0.83333333,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B1: порядок по совпадению запрошенного стека.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unknown-salary",
+          "grade": "middle",
+          "group": "needs_clarification",
+          "score": 80.0,
+          "components": {
+            "T": 0.75,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B1: порядок по совпадению запрошенного стека.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплату нужно уточнить.",
+            "Нужно уточнить: salary."
+          ],
+          "missing_conditions": [
+            "salary"
+          ],
+          "skills": {
+            "sql_data": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-private",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 80.0,
+          "components": {
+            "T": 0.9,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "privacy"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unconfirmed",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 30.0,
+          "components": {
+            "T": 0.0,
+            "K": 0.3,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 0.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "unconfirmed_category",
+            "required_skill:sql_data",
+            "required_skill:http_api"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        }
+      ]
+    },
+    {
+      "need_id": "jury-http-priority",
+      "need_version": 1,
+      "algorithm": "B1",
+      "as_of": "2026-10-07T09:00:00Z",
+      "recommendations": [
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-http-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 80.0,
+          "components": {
+            "T": 0.83333333,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B1: порядок по совпадению запрошенного стека.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-sql-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 80.0,
+          "components": {
+            "T": 0.71666667,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B1: порядок по совпадению запрошенного стека.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unknown-salary",
+          "grade": "middle",
+          "group": "needs_clarification",
+          "score": 80.0,
+          "components": {
+            "T": 0.75,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "B1: порядок по совпадению запрошенного стека.",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплату нужно уточнить.",
+            "Нужно уточнить: salary."
+          ],
+          "missing_conditions": [
+            "salary"
+          ],
+          "skills": {
+            "sql_data": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-private",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 80.0,
+          "components": {
+            "T": 0.9,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "privacy"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unconfirmed",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 30.0,
+          "components": {
+            "T": 0.0,
+            "K": 0.3,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 0.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "unconfirmed_category",
+            "required_skill:sql_data",
+            "required_skill:http_api"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        }
+      ]
+    },
+    {
+      "need_id": "jury-sql-priority",
+      "need_version": 1,
+      "algorithm": "B2",
+      "as_of": "2026-10-07T09:00:00Z",
+      "recommendations": [
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-sql-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 78.833333,
+          "components": {
+            "T": 0.83333333,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "SQL и данные: 95/100, приоритет 2",
+            "HTTP/API: 60/100, приоритет 1",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован.",
+            "ФСП: нет подтверждённой истории; F=0, остальные веса сохранены.",
+            "Актуальность доказательств U=1; штраф условий P=0."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-http-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 72.416667,
+          "components": {
+            "T": 0.71666667,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "SQL и данные: 60/100, приоритет 2",
+            "HTTP/API: 95/100, приоритет 1",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован.",
+            "ФСП: нет подтверждённой истории; F=0, остальные веса сохранены.",
+            "Актуальность доказательств U=1; штраф условий P=0."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unknown-salary",
+          "grade": "middle",
+          "group": "needs_clarification",
+          "score": 74.25,
+          "components": {
+            "T": 0.75,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "SQL и данные: 75/100, приоритет 2",
+            "HTTP/API: 75/100, приоритет 1",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплату нужно уточнить.",
+            "Нужно уточнить: salary.",
+            "ФСП: нет подтверждённой истории; F=0, остальные веса сохранены.",
+            "Актуальность доказательств U=1; штраф условий P=0."
+          ],
+          "missing_conditions": [
+            "salary"
+          ],
+          "skills": {
+            "sql_data": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-private",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 82.5,
+          "components": {
+            "T": 0.9,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "privacy"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unconfirmed",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 15.5,
+          "components": {
+            "T": 0.0,
+            "K": 0.3,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 0.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "unconfirmed_category",
+            "required_skill:sql_data",
+            "required_skill:http_api"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        }
+      ]
+    },
+    {
+      "need_id": "jury-http-priority",
+      "need_version": 1,
+      "algorithm": "B2",
+      "as_of": "2026-10-07T09:00:00Z",
+      "recommendations": [
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-http-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 78.833333,
+          "components": {
+            "T": 0.83333333,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "HTTP/API: 95/100, приоритет 2",
+            "SQL и данные: 60/100, приоритет 1",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован.",
+            "ФСП: нет подтверждённой истории; F=0, остальные веса сохранены.",
+            "Актуальность доказательств U=1; штраф условий P=0."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-sql-strong",
+          "grade": "middle",
+          "group": "eligible",
+          "score": 72.416667,
+          "components": {
+            "T": 0.71666667,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "HTTP/API: 60/100, приоритет 2",
+            "SQL и данные: 95/100, приоритет 1",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован.",
+            "ФСП: нет подтверждённой истории; F=0, остальные веса сохранены.",
+            "Актуальность доказательств U=1; штраф условий P=0."
+          ],
+          "missing_conditions": [],
+          "skills": {
+            "sql_data": {
+              "score": 95.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 60.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unknown-salary",
+          "grade": "middle",
+          "group": "needs_clarification",
+          "score": 74.25,
+          "components": {
+            "T": 0.75,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [],
+          "explanations": [
+            "Источник категории: внешний тестовый fixture; квалификация сервисом не подтверждена",
+            "HTTP/API: 75/100, приоритет 2",
+            "SQL и данные: 75/100, приоритет 1",
+            "Стек: 3 из 3, подтверждено 2.",
+            "Зарплату нужно уточнить.",
+            "Нужно уточнить: salary.",
+            "ФСП: нет подтверждённой истории; F=0, остальные веса сохранены.",
+            "Актуальность доказательств U=1; штраф условий P=0."
+          ],
+          "missing_conditions": [
+            "salary"
+          ],
+          "skills": {
+            "sql_data": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            },
+            "http_api": {
+              "score": 75.0,
+              "verified_at": "2026-10-01T09:00:00Z",
+              "mode": "independent",
+              "families": 0
+            }
+          },
+          "technologies": {
+            "python": "self_reported",
+            "sql": "verified",
+            "http_api": "verified"
+          },
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-private",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 82.5,
+          "components": {
+            "T": 0.9,
+            "K": 0.8,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 1.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "privacy"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        },
+        {
+          "evidence_snapshot": {},
+          "candidate_id": "jury-unconfirmed",
+          "grade": "middle",
+          "group": "excluded",
+          "score": 15.5,
+          "components": {
+            "T": 0.0,
+            "K": 0.3,
+            "A": 1.0,
+            "F": 0.0,
+            "U": 0.0,
+            "P": 0.0
+          },
+          "reasons": [
+            "unconfirmed_category",
+            "required_skill:sql_data",
+            "required_skill:http_api"
+          ],
+          "explanations": [],
+          "missing_conditions": [],
+          "skills": {},
+          "technologies": {},
+          "assessment_scope": {
+            "language": "python",
+            "method_version": "jury-example-v1",
+            "format": "jury-skill-100-v1"
+          },
+          "origin": "jury_fixture",
+          "fsp_origin": "none"
+        }
+      ]
+    }
+  ]
+}

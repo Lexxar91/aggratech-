@@ -1,0 +1,34 @@
+{
+  "dataset_id": "stage7-synthetic-v1-control",
+  "dataset_sha256": "13dbdf9e72ae50ea086175aeac888f8a4875b4b77a1043a6e7d6f08f8d2a77af",
+  "labels_sha256": "8107847d814e68b45770b5fafb38f1145e01e2d8a934c2cdd51d7513037b7e17",
+  "schema_version": "matching-fixture-v1",
+  "labels_schema_version": "matching-labels-v1",
+  "schema_hash_mode": "canonical_json_sort_keys_true",
+  "algorithm_version": "matching-baseline-v1",
+  "catalog_version": "matching-catalog-v1",
+  "adapter_version": "matching-adapter-v1",
+  "as_of": "2026-10-09T12:00:00+00:00",
+  "candidates": 80,
+  "needs": 8,
+  "labels": 0,
+  "duration_seconds": 0.530026,
+  "code_sha256": {
+    "matching/__init__.py": "10c5aa0f7c599303a826cd6f36e862a78cbe2da7836ef8a53ef3740594d3af3f",
+    "matching/catalog.py": "caab8209cae7dd84221d640b4ad83f315c3c0f6711a9bcc721e87dfc4df769ee",
+    "matching/engine.py": "cc0149b1c13e63f360fe426a53450c6b60af9326e1d9c3a146a5b7ce665a4232",
+    "matching/fixtures.py": "cadfc35dc3fb253b6ab0635efd0bb14834a90084a49fa76c2b61b4fb29d43adc",
+    "matching/metrics.py": "dee7a1317d3aa89887ed2cdbf175d2ff944b1b114196762cce2786239104a3c2",
+    "matching/models.py": "7fc66494232ac46652054fcf1c16f6beb55e87e2ab573d3ff763460718266a3c",
+    "matching/router.py": "403217f06137533b05c2641fa486f0428ab1c2b4d6f672d7ffacfad71003f107",
+    "matching/schemas.py": "0bf26c143ae7235a1ad64e85cbd72b8e4b43130c0b65de3976891e5561a0d8a5",
+    "matching/service.py": "2a97b61fc8cd53ad295dae4c73bd7b9e4249093b3a3bf47cbe020d0c2cef1b52",
+    "tools/matching_check.py": "ce15dd9d831bd135ca52272b0f16061c02f8d708909f1cebdcd2516ecfd030ce"
+  },
+  "schema_sha256": {
+    "dataset.schema.json": "7361ab3ceafe96d32bc8534e595fd9f4f8b12082b24309a0d9cff4bb91f2c42e",
+    "labels.schema.json": "e2ad9d307944164e33fa3c8da8375250ea10316025667753b0b2f92818b42c87"
+  },
+  "fixture_only": true,
+  "admission": "not applicable; fixture scores are not verified qualifications"
+}

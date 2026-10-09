@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "LabelPair": {
+      "additionalProperties": false,
+      "properties": {
+        "need_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Need Id",
+          "type": "string"
+        },
+        "candidate_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "relevance": {
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Relevance",
+          "type": "integer"
+        },
+        "eligibility": {
+          "enum": [
+            "eligible",
+            "needs_clarification",
+            "excluded"
+          ],
+          "title": "Eligibility",
+          "type": "string"
+        }
+      },
+      "required": [
+        "need_id",
+        "candidate_id",
+        "relevance",
+        "eligibility"
+      ],
+      "title": "LabelPair",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "matching-labels-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "pairs": {
+      "items": {
+        "$ref": "#/$defs/LabelPair"
+      },
+      "maxItems": 100000,
+      "title": "Pairs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "pairs"
+  ],
+  "title": "Labels",
+  "type": "object"
+}

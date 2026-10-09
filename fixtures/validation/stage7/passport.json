@@ -1,0 +1,1569 @@
+{
+  "version": "stage7-synthetic-v1",
+  "seed": 20261009,
+  "as_of": "2026-10-09T12:00:00+00:00",
+  "source": "synthetic_generated",
+  "human_labeling": "deferred_to_stage9",
+  "weights_tuned": false,
+  "nominal_preparedness_not_score_or_truth": true,
+  "employers": [
+    {
+      "employer_id": "employer-01",
+      "source": "synthetic"
+    },
+    {
+      "employer_id": "employer-02",
+      "source": "synthetic"
+    },
+    {
+      "employer_id": "employer-03",
+      "source": "synthetic"
+    },
+    {
+      "employer_id": "employer-04",
+      "source": "synthetic"
+    },
+    {
+      "employer_id": "employer-05",
+      "source": "synthetic"
+    },
+    {
+      "employer_id": "employer-06",
+      "source": "synthetic"
+    }
+  ],
+  "candidate_metadata": [
+    {
+      "candidate_id": "d-j-001",
+      "split": "development",
+      "profile_family": "d-j-001",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-j-002",
+      "split": "development",
+      "profile_family": "d-j-002",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-j-003",
+      "split": "development",
+      "profile_family": "d-j-003",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "api",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-j-004",
+      "split": "development",
+      "profile_family": "d-j-004",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-005",
+      "split": "control",
+      "profile_family": "c-j-005",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "reliability",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-006",
+      "split": "control",
+      "profile_family": "c-j-006",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-007",
+      "split": "control",
+      "profile_family": "c-j-007",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-008",
+      "split": "control",
+      "profile_family": "c-j-008",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-009",
+      "split": "control",
+      "profile_family": "c-j-009",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-010",
+      "split": "control",
+      "profile_family": "c-j-010",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-j-011",
+      "split": "development",
+      "profile_family": "d-j-011",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-j-012",
+      "split": "development",
+      "profile_family": "d-j-012",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "d-j-013",
+      "split": "development",
+      "profile_family": "d-j-013",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-j-014",
+      "split": "development",
+      "profile_family": "d-j-014",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-015",
+      "split": "control",
+      "profile_family": "c-j-015",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "reliability",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-016",
+      "split": "control",
+      "profile_family": "c-j-016",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-017",
+      "split": "control",
+      "profile_family": "c-j-017",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-018",
+      "split": "control",
+      "profile_family": "c-j-018",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-019",
+      "split": "control",
+      "profile_family": "c-j-019",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-020",
+      "split": "control",
+      "profile_family": "c-j-020",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "reliability",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-j-021",
+      "split": "development",
+      "profile_family": "d-j-021",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-j-022",
+      "split": "development",
+      "profile_family": "d-j-022",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "reliability",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "d-j-023",
+      "split": "development",
+      "profile_family": "d-j-023",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-024",
+      "split": "control",
+      "profile_family": "c-j-024",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-j-025",
+      "split": "control",
+      "profile_family": "c-j-025",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-j-026",
+      "split": "control",
+      "profile_family": "c-j-026",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-j-027",
+      "split": "control",
+      "profile_family": "c-j-027",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "reliability",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-028",
+      "split": "control",
+      "profile_family": "c-j-028",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "reliability",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-029",
+      "split": "control",
+      "profile_family": "c-j-029",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-030",
+      "split": "control",
+      "profile_family": "c-j-030",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-j-031",
+      "split": "development",
+      "profile_family": "d-j-031",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-j-032",
+      "split": "development",
+      "profile_family": "d-j-032",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-j-033",
+      "split": "development",
+      "profile_family": "d-j-033",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-034",
+      "split": "control",
+      "profile_family": "c-j-034",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-035",
+      "split": "control",
+      "profile_family": "c-j-035",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-036",
+      "split": "control",
+      "profile_family": "c-j-036",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-037",
+      "split": "control",
+      "profile_family": "c-j-037",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-038",
+      "split": "control",
+      "profile_family": "c-j-038",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-039",
+      "split": "control",
+      "profile_family": "c-j-039",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-040",
+      "split": "control",
+      "profile_family": "c-j-040",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-j-041",
+      "split": "development",
+      "profile_family": "d-j-041",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-j-042",
+      "split": "development",
+      "profile_family": "d-j-042",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-j-043",
+      "split": "development",
+      "profile_family": "d-j-043",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-044",
+      "split": "control",
+      "profile_family": "c-j-044",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "reliability",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-045",
+      "split": "control",
+      "profile_family": "c-j-045",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-046",
+      "split": "control",
+      "profile_family": "c-j-046",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-047",
+      "split": "control",
+      "profile_family": "c-j-047",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-048",
+      "split": "control",
+      "profile_family": "c-j-048",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-049",
+      "split": "control",
+      "profile_family": "c-j-049",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-050",
+      "split": "control",
+      "profile_family": "c-j-050",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-j-051",
+      "split": "development",
+      "profile_family": "d-j-051",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-j-052",
+      "split": "development",
+      "profile_family": "d-j-052",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "d-j-053",
+      "split": "development",
+      "profile_family": "d-j-053",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-054",
+      "split": "control",
+      "profile_family": "c-j-054",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-055",
+      "split": "control",
+      "profile_family": "c-j-055",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-j-056",
+      "split": "control",
+      "profile_family": "c-j-056",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-057",
+      "split": "control",
+      "profile_family": "c-j-057",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-j-058",
+      "split": "control",
+      "profile_family": "c-j-058",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-j-059",
+      "split": "control",
+      "profile_family": "c-j-059",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-j-060",
+      "split": "control",
+      "profile_family": "c-j-060",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-m-001",
+      "split": "development",
+      "profile_family": "d-m-001",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-m-002",
+      "split": "development",
+      "profile_family": "d-m-002",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "d-m-003",
+      "split": "development",
+      "profile_family": "d-m-003",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-m-004",
+      "split": "development",
+      "profile_family": "d-m-004",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-m-005",
+      "split": "control",
+      "profile_family": "c-m-005",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-006",
+      "split": "control",
+      "profile_family": "c-m-006",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-m-007",
+      "split": "control",
+      "profile_family": "c-m-007",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-m-008",
+      "split": "control",
+      "profile_family": "c-m-008",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-009",
+      "split": "control",
+      "profile_family": "c-m-009",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-010",
+      "split": "control",
+      "profile_family": "c-m-010",
+      "nominal_preparedness": "below",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "d-m-011",
+      "split": "development",
+      "profile_family": "d-m-011",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-m-012",
+      "split": "development",
+      "profile_family": "d-m-012",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-m-013",
+      "split": "development",
+      "profile_family": "d-m-013",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-m-014",
+      "split": "development",
+      "profile_family": "d-m-014",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-m-015",
+      "split": "control",
+      "profile_family": "c-m-015",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-m-016",
+      "split": "control",
+      "profile_family": "c-m-016",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-017",
+      "split": "control",
+      "profile_family": "c-m-017",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "reliability",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-m-018",
+      "split": "control",
+      "profile_family": "c-m-018",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-m-019",
+      "split": "control",
+      "profile_family": "c-m-019",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-m-020",
+      "split": "control",
+      "profile_family": "c-m-020",
+      "nominal_preparedness": "below",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "api",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-m-021",
+      "split": "development",
+      "profile_family": "d-m-021",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "d-m-022",
+      "split": "development",
+      "profile_family": "d-m-022",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "d-m-023",
+      "split": "development",
+      "profile_family": "d-m-023",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "reliability",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-024",
+      "split": "control",
+      "profile_family": "c-m-024",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-m-025",
+      "split": "control",
+      "profile_family": "c-m-025",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-m-026",
+      "split": "control",
+      "profile_family": "c-m-026",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "reliability",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-027",
+      "split": "control",
+      "profile_family": "c-m-027",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-m-028",
+      "split": "control",
+      "profile_family": "c-m-028",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-029",
+      "split": "control",
+      "profile_family": "c-m-029",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "api",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-m-030",
+      "split": "control",
+      "profile_family": "c-m-030",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "security",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-m-031",
+      "split": "development",
+      "profile_family": "d-m-031",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "reliability",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-m-032",
+      "split": "development",
+      "profile_family": "d-m-032",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "reliability",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-m-033",
+      "split": "development",
+      "profile_family": "d-m-033",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-034",
+      "split": "control",
+      "profile_family": "c-m-034",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-035",
+      "split": "control",
+      "profile_family": "c-m-035",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-036",
+      "split": "control",
+      "profile_family": "c-m-036",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-037",
+      "split": "control",
+      "profile_family": "c-m-037",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-038",
+      "split": "control",
+      "profile_family": "c-m-038",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-m-039",
+      "split": "control",
+      "profile_family": "c-m-039",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-040",
+      "split": "control",
+      "profile_family": "c-m-040",
+      "nominal_preparedness": "boundary",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-m-041",
+      "split": "development",
+      "profile_family": "d-m-041",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "reliability",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-m-042",
+      "split": "development",
+      "profile_family": "d-m-042",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-m-043",
+      "split": "development",
+      "profile_family": "d-m-043",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-m-044",
+      "split": "control",
+      "profile_family": "c-m-044",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-m-045",
+      "split": "control",
+      "profile_family": "c-m-045",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-m-046",
+      "split": "control",
+      "profile_family": "c-m-046",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-m-047",
+      "split": "control",
+      "profile_family": "c-m-047",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "security",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-048",
+      "split": "control",
+      "profile_family": "c-m-048",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "api",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-m-049",
+      "split": "control",
+      "profile_family": "c-m-049",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-050",
+      "split": "control",
+      "profile_family": "c-m-050",
+      "nominal_preparedness": "above",
+      "fsp_stratum": false,
+      "task_background": [
+        "reliability",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "d-m-051",
+      "split": "development",
+      "profile_family": "d-m-051",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "d-m-052",
+      "split": "development",
+      "profile_family": "d-m-052",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "api",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "d-m-053",
+      "split": "development",
+      "profile_family": "d-m-053",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "api",
+        "data",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-m-054",
+      "split": "control",
+      "profile_family": "c-m-054",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "api",
+        "reliability"
+      ]
+    },
+    {
+      "candidate_id": "c-m-055",
+      "split": "control",
+      "profile_family": "c-m-055",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "data",
+        "security"
+      ]
+    },
+    {
+      "candidate_id": "c-m-056",
+      "split": "control",
+      "profile_family": "c-m-056",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-057",
+      "split": "control",
+      "profile_family": "c-m-057",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "data",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-058",
+      "split": "control",
+      "profile_family": "c-m-058",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "security",
+        "api",
+        "data"
+      ]
+    },
+    {
+      "candidate_id": "c-m-059",
+      "split": "control",
+      "profile_family": "c-m-059",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "data",
+        "security",
+        "api"
+      ]
+    },
+    {
+      "candidate_id": "c-m-060",
+      "split": "control",
+      "profile_family": "c-m-060",
+      "nominal_preparedness": "above",
+      "fsp_stratum": true,
+      "task_background": [
+        "reliability",
+        "api",
+        "data"
+      ]
+    }
+  ],
+  "need_metadata": [
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "split": "development",
+      "need_family": "legacy-normalizer",
+      "task_theme": "data"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "split": "development",
+      "need_family": "paginated-client",
+      "task_theme": "api"
+    },
+    {
+      "need_id": "c-j-ledger-reconciliation",
+      "split": "control",
+      "need_family": "ledger-reconciliation",
+      "task_theme": "data"
+    },
+    {
+      "need_id": "c-j-webhook-contract",
+      "split": "control",
+      "need_family": "webhook-contract",
+      "task_theme": "api"
+    },
+    {
+      "need_id": "c-j-queue-recovery",
+      "split": "control",
+      "need_family": "queue-recovery",
+      "task_theme": "reliability"
+    },
+    {
+      "need_id": "c-j-access-control",
+      "split": "control",
+      "need_family": "access-control",
+      "task_theme": "security"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "split": "development",
+      "need_family": "legacy-normalizer",
+      "task_theme": "data"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "split": "development",
+      "need_family": "paginated-client",
+      "task_theme": "api"
+    },
+    {
+      "need_id": "c-m-ledger-reconciliation",
+      "split": "control",
+      "need_family": "ledger-reconciliation",
+      "task_theme": "data"
+    },
+    {
+      "need_id": "c-m-webhook-contract",
+      "split": "control",
+      "need_family": "webhook-contract",
+      "task_theme": "api"
+    },
+    {
+      "need_id": "c-m-queue-recovery",
+      "split": "control",
+      "need_family": "queue-recovery",
+      "task_theme": "reliability"
+    },
+    {
+      "need_id": "c-m-access-control",
+      "split": "control",
+      "need_family": "access-control",
+      "task_theme": "security"
+    }
+  ],
+  "assessment_baseline": {
+    "bank_version": "backend-xy-stage3-v1",
+    "bank_hash": "50c9ab8d4519a465128e97788b76a92a7abadf9e3419c4eb95c8afc2b93bdb3e",
+    "grader_version": "backend-bank-grader-v1",
+    "grader_hash": "52e13ec4f8b97b4a1c658779e8485bff6a94c085ba92ea468e7219765d73ef63",
+    "admission_status": "not_admitted"
+  },
+  "validation_rules": "docs/03 matching + docs/04 validation; human review deferred stage9",
+  "success_criteria": {
+    "metric_tolerance": 1e-12,
+    "deterministic_artifacts_equal": true,
+    "privacy_violations": 0,
+    "eligibility_errors": 0
+  },
+  "schema_sha256": {
+    "dataset.schema.json": "059e3483d87a51f749304506219fb1a0dbb3f2f9c133912b72ed68213f101127",
+    "labels.schema.json": "f114d1f357dab36389a1619db4be5afb29540d662770dd5eb4075744a2fa986e"
+  }
+}

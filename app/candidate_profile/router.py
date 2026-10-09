@@ -4,7 +4,7 @@ from fastapi import APIRouter, Response
 from sqlalchemy import select
 
 from app.auth.dependencies import Candidate, Db, Employer
-from app.candidate_profile import service
+from app.candidate_profile import access, service
 from app.candidate_profile.models import CandidateEmployerBlock
 from app.candidate_profile.pdf import render_pdf
 from app.candidate_profile.schemas import (
@@ -16,6 +16,7 @@ from app.candidate_profile.schemas import (
     ProfileView,
     SafeCard,
 )
+from app.core.errors import ApiError
 from app.employer.models import EmployerProfile
 
 router = APIRouter(tags=["candidate_profile"])
@@ -89,7 +90,13 @@ async def public_card(candidate_id: UUID, db: Db, principal: Employer) -> SafeCa
 async def public_pdf(candidate_id: UUID, db: Db, principal: Employer) -> Response:
     """Права и проекция совпадают с API безопасной карточки."""
     row = await service.visible_profile(db, candidate_id, principal.user.id)
-    data = await render_pdf(await service.card(db, row))
+    try:
+        shared = await access.read_contacts(db, candidate_id, principal.user.id)
+    except ApiError as error:
+        if error.code != "contacts_unavailable":
+            raise
+        shared = None
+    data = await render_pdf(await service.card(db, row), shared)
     return Response(
         data,
         media_type="application/pdf",
@@ -124,3 +131,15 @@ async def unblock(employer_id: UUID, db: Db, principal: Candidate) -> Response:
     """Удаляет блокировку; приватность карточки остаётся обязательной."""
     await service.set_block(db, principal.user.id, employer_id, blocked=False)
     return Response(status_code=204)
+
+
+@router.get(
+    "/candidates/{candidate_id}/contacts",
+    response_model=access.SharedContacts,
+    response_model_exclude_none=True,
+)
+async def shared_contacts(
+    candidate_id: UUID, db: Db, principal: Employer
+) -> access.SharedContacts:
+    """Разрешённые поля отдельно от публичной карточки, с текущей проверкой прав."""
+    return await access.read_contacts(db, candidate_id, principal.user.id)

@@ -11,7 +11,8 @@ from app.core import models  # noqa: F401 — регистрирует FK для
 from app.core.config import Settings
 from app.core.database import create_database, create_sessions
 from app.core.logging import configure_logging
-from app.notifications.email import finish_email, send_auth_email
+from app.invitations.service import expire_due
+from app.notifications.email import finish_email, send_auth_email, send_invitation_email
 from app.notifications.queue import (
     claim,
     fail,
@@ -29,6 +30,7 @@ async def process_one(
     """Обрабатывает одно сохраняемое задание с отдельной транзакцией захвата."""
     async with sessions.begin() as session:
         await expire_due_cycles(session)
+        await expire_due(session)
         job = await claim(
             session,
             now=utc_now(),
@@ -42,15 +44,19 @@ async def process_one(
         return True
     started = perf_counter()
     email_error: str | None = None
-    if job.kind == "auth_email":
+    if job.kind in ("auth_email", "invitation_email"):
         try:
-            await asyncio.to_thread(send_auth_email, settings, job)
+            await asyncio.to_thread(
+                send_auth_email if job.kind == "auth_email" else send_invitation_email,
+                settings,
+                job,
+            )
         except smtplib.SMTPException, OSError:
             email_error = "smtp_unavailable"
         except ValueError:
             email_error = "invalid_email_job"
     async with sessions.begin() as session:
-        if job.kind == "auth_email":
+        if job.kind in ("auth_email", "invitation_email"):
             completed = (
                 await finish_email(session, job)
                 if email_error is None

@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "ReviewRecord": {
+      "additionalProperties": false,
+      "description": "Запись фактической независимой проверки конкретных байтов материалов.",
+      "properties": {
+        "reviewer": {
+          "minLength": 1,
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "author": {
+          "minLength": 1,
+          "title": "Author",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "format": "date-time",
+          "title": "Reviewed At",
+          "type": "string"
+        },
+        "bank_hash": {
+          "title": "Bank Hash",
+          "type": "string"
+        },
+        "blueprint_hash": {
+          "title": "Blueprint Hash",
+          "type": "string"
+        },
+        "mappings_hash": {
+          "title": "Mappings Hash",
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "approved",
+            "changes_requested"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "evidence": {
+          "minLength": 1,
+          "title": "Evidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reviewer",
+        "author",
+        "reviewed_at",
+        "bank_hash",
+        "blueprint_hash",
+        "mappings_hash",
+        "decision",
+        "evidence"
+      ],
+      "title": "ReviewRecord",
+      "type": "object"
+    }
+  },
+  "items": {
+    "$ref": "#/$defs/ReviewRecord"
+  },
+  "type": "array"
+}

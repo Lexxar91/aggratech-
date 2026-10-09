@@ -1,0 +1,66 @@
+{
+  "schema_version": "matching-labels-v1",
+  "dataset_id": "jury-example",
+  "pairs": [
+    {
+      "need_id": "sql-priority",
+      "candidate_id": "sql-strong",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "sql-priority",
+      "candidate_id": "http-strong",
+      "relevance": 2,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "sql-priority",
+      "candidate_id": "unknown-salary",
+      "relevance": 2,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "sql-priority",
+      "candidate_id": "unconfirmed",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "sql-priority",
+      "candidate_id": "private",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "http-priority",
+      "candidate_id": "sql-strong",
+      "relevance": 2,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "http-priority",
+      "candidate_id": "http-strong",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "http-priority",
+      "candidate_id": "unknown-salary",
+      "relevance": 2,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "http-priority",
+      "candidate_id": "unconfirmed",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "http-priority",
+      "candidate_id": "private",
+      "relevance": 0,
+      "eligibility": "excluded"
+    }
+  ]
+}

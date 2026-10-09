@@ -1,0 +1,13 @@
+{
+  "status": "нет данных",
+  "source": "saved_attempts_with_verified_human_registry",
+  "observed_candidates": 0,
+  "source_attempts": 0,
+  "excluded_attempts": 0,
+  "excluded_modes": {},
+  "rows": [],
+  "repeatability": "не измерено",
+  "false_confirmation": "не измерено",
+  "false_failure": "не измерено",
+  "interpretation": "Не подтверждает объективность и сопоставимую сложность; технические ошибки не являются ошибками кандидата."
+}

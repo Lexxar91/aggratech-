@@ -1,0 +1,150 @@
+{
+  "environment": {
+    "python": "3.14.4",
+    "platform": "Linux"
+  },
+  "synthetic_only": true,
+  "samples": [
+    {
+      "algorithm": "B0",
+      "need_id": "c-j-ledger-reconciliation",
+      "seconds": 0.023197307004011236
+    },
+    {
+      "algorithm": "B0",
+      "need_id": "c-j-webhook-contract",
+      "seconds": 0.021546292999119032
+    },
+    {
+      "algorithm": "B0",
+      "need_id": "c-j-queue-recovery",
+      "seconds": 0.022180029001901858
+    },
+    {
+      "algorithm": "B0",
+      "need_id": "c-j-access-control",
+      "seconds": 0.020674578001489863
+    },
+    {
+      "algorithm": "B0",
+      "need_id": "c-m-ledger-reconciliation",
+      "seconds": 0.018746456000371836
+    },
+    {
+      "algorithm": "B0",
+      "need_id": "c-m-webhook-contract",
+      "seconds": 0.021232758001133334
+    },
+    {
+      "algorithm": "B0",
+      "need_id": "c-m-queue-recovery",
+      "seconds": 0.025646360001701396
+    },
+    {
+      "algorithm": "B0",
+      "need_id": "c-m-access-control",
+      "seconds": 0.02092220300255576
+    },
+    {
+      "algorithm": "B0",
+      "sample_unit": "one_need_matching_calculation",
+      "n": 8,
+      "p50_seconds": 0.021232758001133334,
+      "p95_seconds": 0.025646360001701396
+    },
+    {
+      "algorithm": "B1",
+      "need_id": "c-j-ledger-reconciliation",
+      "seconds": 0.01949654799682321
+    },
+    {
+      "algorithm": "B1",
+      "need_id": "c-j-webhook-contract",
+      "seconds": 0.018969403994560707
+    },
+    {
+      "algorithm": "B1",
+      "need_id": "c-j-queue-recovery",
+      "seconds": 0.015549362993624527
+    },
+    {
+      "algorithm": "B1",
+      "need_id": "c-j-access-control",
+      "seconds": 0.01222095199773321
+    },
+    {
+      "algorithm": "B1",
+      "need_id": "c-m-ledger-reconciliation",
+      "seconds": 0.012912402999063488
+    },
+    {
+      "algorithm": "B1",
+      "need_id": "c-m-webhook-contract",
+      "seconds": 0.015965465005137958
+    },
+    {
+      "algorithm": "B1",
+      "need_id": "c-m-queue-recovery",
+      "seconds": 0.01449986599618569
+    },
+    {
+      "algorithm": "B1",
+      "need_id": "c-m-access-control",
+      "seconds": 0.01268849700136343
+    },
+    {
+      "algorithm": "B1",
+      "sample_unit": "one_need_matching_calculation",
+      "n": 8,
+      "p50_seconds": 0.01449986599618569,
+      "p95_seconds": 0.01949654799682321
+    },
+    {
+      "algorithm": "B2",
+      "need_id": "c-j-ledger-reconciliation",
+      "seconds": 0.012341405003098771
+    },
+    {
+      "algorithm": "B2",
+      "need_id": "c-j-webhook-contract",
+      "seconds": 0.013387520004471298
+    },
+    {
+      "algorithm": "B2",
+      "need_id": "c-j-queue-recovery",
+      "seconds": 0.017190846003359184
+    },
+    {
+      "algorithm": "B2",
+      "need_id": "c-j-access-control",
+      "seconds": 0.015424200995767023
+    },
+    {
+      "algorithm": "B2",
+      "need_id": "c-m-ledger-reconciliation",
+      "seconds": 0.016179660000489093
+    },
+    {
+      "algorithm": "B2",
+      "need_id": "c-m-webhook-contract",
+      "seconds": 0.013247230999695603
+    },
+    {
+      "algorithm": "B2",
+      "need_id": "c-m-queue-recovery",
+      "seconds": 0.012294123996980488
+    },
+    {
+      "algorithm": "B2",
+      "need_id": "c-m-access-control",
+      "seconds": 0.02195845200185431
+    },
+    {
+      "algorithm": "B2",
+      "sample_unit": "one_need_matching_calculation",
+      "n": 8,
+      "p50_seconds": 0.013387520004471298,
+      "p95_seconds": 0.02195845200185431
+    }
+  ]
+}

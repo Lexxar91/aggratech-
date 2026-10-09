@@ -4,6 +4,7 @@ from sqlalchemy import delete, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.candidate_profile.access import revoke
 from app.candidate_profile.models import (
     CandidateContact,
     CandidateEmployerBlock,
@@ -118,6 +119,7 @@ async def save_profile(
         profile.consent_version = data.consent_version
         profile.consented_at = utc_now() if data.consent_version else None
         if not data.consent_version:
+            await revoke(db, profile.id, actor_id=user_id)
             profile.privacy = {**profile.privacy, "visible_to_employers": False}
         db.add(
             AuditEvent(
@@ -175,6 +177,7 @@ async def visible_profile(
     profile = await db.get(CandidateProfile, identifier)
     if (
         not employer
+        or employer.status != "active"
         or not profile
         or not Privacy.model_validate(profile.privacy).visible_to_employers
         or not profile.consented_at
@@ -194,6 +197,7 @@ async def set_block(
     if not await db.get(EmployerProfile, employer_id):
         raise ApiError(404, "employer_missing", "Компания не найдена.")
     if blocked:
+        await revoke(db, profile.id, employer_id, actor_id=user_id)
         await db.execute(
             insert(CandidateEmployerBlock)
             .values(
@@ -208,3 +212,23 @@ async def set_block(
                 CandidateEmployerBlock.employer_id == employer_id,
             )
         )
+
+    if blocked:
+        # Приглашения закрываются той же транзакцией; снятие блока их не оживляет.
+        from app.invitations.models import Invitation
+        from app.invitations.service import action
+
+        identifiers = list(
+            await db.scalars(
+                select(Invitation.id)
+                .where(
+                    Invitation.candidate_id == profile.id,
+                    Invitation.employer_id == employer_id,
+                    Invitation.status.in_(("sent", "viewed")),
+                )
+                .order_by(Invitation.id)
+            )
+        )
+        await db.flush()
+        for identifier in identifiers:
+            await action(db, user_id, "candidate", identifier, None)

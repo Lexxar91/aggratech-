@@ -1,0 +1,1325 @@
+{
+  "B2-without-fsp-v1": {
+    "not_product": true,
+    "comparisons": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "score_changes": 13,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "score_changes": 13,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "score_changes": 5,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-access-control",
+        "score_changes": 13,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "score_changes": 12,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "score_changes": 13,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "score_changes": 5,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-access-control",
+        "score_changes": 10,
+        "order_changed": true,
+        "groups_unchanged": true
+      }
+    ],
+    "metric_records": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.6,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.5943071720316861,
+        "returned": 20,
+        "relevant_in_oracle": 11,
+        "relevant_fraction_of_returned": 0.55,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.2,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.5868707635128156,
+        "returned": 6,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.7,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6643773296438683,
+        "returned": 20,
+        "relevant_in_oracle": 13,
+        "relevant_fraction_of_returned": 0.65,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.4,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.907269049310237,
+        "returned": 6,
+        "relevant_in_oracle": 4,
+        "relevant_fraction_of_returned": 0.6666666666666666,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.0,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.40447957224393916,
+        "returned": 14,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.14285714285714285,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.1,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.7967075809905066,
+        "returned": 3,
+        "relevant_in_oracle": 1,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.7,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6918135406046274,
+        "returned": 20,
+        "relevant_in_oracle": 11,
+        "relevant_fraction_of_returned": 0.55,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.4,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6709775428170647,
+        "returned": 6,
+        "relevant_in_oracle": 4,
+        "relevant_fraction_of_returned": 0.6666666666666666,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.5,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.5372330632280667,
+        "returned": 16,
+        "relevant_in_oracle": 7,
+        "relevant_fraction_of_returned": 0.4375,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.6,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.8603313457212691,
+        "returned": 6,
+        "relevant_in_oracle": 6,
+        "relevant_fraction_of_returned": 1.0,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.5067534266660042,
+        "returned": 18,
+        "relevant_in_oracle": 5,
+        "relevant_fraction_of_returned": 0.2777777777777778,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.2,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.5681831723570755,
+        "returned": 6,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6289995525622707,
+        "returned": 7,
+        "relevant_in_oracle": 3,
+        "relevant_fraction_of_returned": 0.42857142857142855,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.1,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.9828422279067397,
+        "returned": 3,
+        "relevant_in_oracle": 1,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.7,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6278702897543222,
+        "returned": 17,
+        "relevant_in_oracle": 12,
+        "relevant_fraction_of_returned": 0.7058823529411765,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.9607618369839246,
+        "returned": 4,
+        "relevant_in_oracle": 3,
+        "relevant_fraction_of_returned": 0.75,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      }
+    ],
+    "differences_vs_B2": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.05400603891209721
+      },
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.07691080758303648
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": -0.10000000000000009,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.04314379468916596
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0987373383959772
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0540067995901915
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.09999999999999998,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.11492928240205225
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.09999999999999998,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0397241391586603
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.02454689743735816
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.011697393505070541
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.05819559861722079
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.04720641261140168
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.02310320386767073
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.03923816301607541
+      }
+    ]
+  },
+  "B2-without-freshness-v1": {
+    "not_product": true,
+    "comparisons": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "score_changes": 25,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "score_changes": 22,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "score_changes": 16,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-access-control",
+        "score_changes": 22,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "score_changes": 20,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "score_changes": 22,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "score_changes": 7,
+        "order_changed": false,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-access-control",
+        "score_changes": 19,
+        "order_changed": true,
+        "groups_unchanged": true
+      }
+    ],
+    "metric_records": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.7,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6242896010786471,
+        "returned": 20,
+        "relevant_in_oracle": 11,
+        "relevant_fraction_of_returned": 0.55,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.2,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6637815710958521,
+        "returned": 6,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.7,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6571502384898253,
+        "returned": 20,
+        "relevant_in_oracle": 13,
+        "relevant_fraction_of_returned": 0.65,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.4,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.8897552351927531,
+        "returned": 6,
+        "relevant_in_oracle": 4,
+        "relevant_fraction_of_returned": 0.6666666666666666,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.0,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.3488808879027121,
+        "returned": 14,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.14285714285714285,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.1,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.7967075809905066,
+        "returned": 3,
+        "relevant_in_oracle": 1,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.6,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6300181445354567,
+        "returned": 20,
+        "relevant_in_oracle": 11,
+        "relevant_fraction_of_returned": 0.55,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.4,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6499072130662625,
+        "returned": 6,
+        "relevant_in_oracle": 4,
+        "relevant_fraction_of_returned": 0.6666666666666666,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.4,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.45884957247061836,
+        "returned": 16,
+        "relevant_in_oracle": 7,
+        "relevant_fraction_of_returned": 0.4375,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.6,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.8168870981774197,
+        "returned": 6,
+        "relevant_in_oracle": 6,
+        "relevant_fraction_of_returned": 1.0,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.47650018424581325,
+        "returned": 18,
+        "relevant_in_oracle": 5,
+        "relevant_fraction_of_returned": 0.2777777777777778,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.2,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6897551619265436,
+        "returned": 6,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.581793139950869,
+        "returned": 7,
+        "relevant_in_oracle": 3,
+        "relevant_fraction_of_returned": 0.42857142857142855,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.1,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.9828422279067397,
+        "returned": 3,
+        "relevant_in_oracle": 1,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.7,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.7031831093118266,
+        "returned": 17,
+        "relevant_in_oracle": 12,
+        "relevant_fraction_of_returned": 0.7058823529411765,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 1.0,
+        "returned": 4,
+        "relevant_in_oracle": 3,
+        "relevant_fraction_of_returned": 0.75,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      }
+    ],
+    "differences_vs_B2": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.09999999999999998,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.024023609865136297
+      },
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": -0.10000000000000009,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.050370885843208923
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.08122352427849333
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.001591884751035555
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.05313388633288152
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.02107032975080214
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.03865935159878808
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.018897350106491295
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.01855584891512041
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.06337639095224734
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.05220961568983362
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      }
+    ]
+  },
+  "B2-without-availability-v1": {
+    "not_product": true,
+    "comparisons": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "score_changes": 20,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "score_changes": 20,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "score_changes": 16,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-j-access-control",
+        "score_changes": 20,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "score_changes": 14,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "score_changes": 15,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "score_changes": 9,
+        "order_changed": true,
+        "groups_unchanged": true
+      },
+      {
+        "need_id": "c-m-access-control",
+        "score_changes": 14,
+        "order_changed": true,
+        "groups_unchanged": true
+      }
+    ],
+    "metric_records": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.6,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.5409254049008844,
+        "returned": 20,
+        "relevant_in_oracle": 11,
+        "relevant_fraction_of_returned": 0.55,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.2,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6637815710958521,
+        "returned": 6,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.8,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.7679125913950092,
+        "returned": 20,
+        "relevant_in_oracle": 13,
+        "relevant_fraction_of_returned": 0.65,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.4,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.7549579868871825,
+        "returned": 6,
+        "relevant_in_oracle": 4,
+        "relevant_fraction_of_returned": 0.6666666666666666,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.0,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.35047277265374766,
+        "returned": 14,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.14285714285714285,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.1,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6885288809404666,
+        "returned": 3,
+        "relevant_in_oracle": 1,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.6,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.48727802679443116,
+        "returned": 20,
+        "relevant_in_oracle": 11,
+        "relevant_fraction_of_returned": 0.55,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.4,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6821336608193568,
+        "returned": 6,
+        "relevant_in_oracle": 4,
+        "relevant_fraction_of_returned": 0.6666666666666666,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.4,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.39032403536484656,
+        "returned": 16,
+        "relevant_in_oracle": 7,
+        "relevant_fraction_of_returned": 0.4375,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.6,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.835784448283911,
+        "returned": 6,
+        "relevant_in_oracle": 6,
+        "relevant_fraction_of_returned": 1.0,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.5259735647857527,
+        "returned": 18,
+        "relevant_in_oracle": 5,
+        "relevant_fraction_of_returned": 0.2777777777777778,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.2,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.7850431142602208,
+        "returned": 6,
+        "relevant_in_oracle": 2,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.581793139950869,
+        "returned": 7,
+        "relevant_in_oracle": 3,
+        "relevant_fraction_of_returned": 0.42857142857142855,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.1,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6442869262030828,
+        "returned": 3,
+        "relevant_in_oracle": 1,
+        "relevant_fraction_of_returned": 0.3333333333333333,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "eligible",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.7,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 0.6902299116178033,
+        "returned": 17,
+        "relevant_in_oracle": 12,
+        "relevant_fraction_of_returned": 0.7058823529411765,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "algorithm": "B2",
+        "status": "measured",
+        "precision_at_10": 0.3,
+        "recall_at_20": 1.0,
+        "ndcg_at_10": 1.0,
+        "returned": 4,
+        "relevant_in_oracle": 3,
+        "relevant_fraction_of_returned": 0.75,
+        "missing_pairs": [],
+        "eligibility_errors": [],
+        "privacy_violations": []
+      }
+    ],
+    "differences_vs_B2": [
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.10738780604289899
+      },
+      {
+        "need_id": "c-j-ledger-reconciliation",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.06039146706197496
+      },
+      {
+        "need_id": "c-j-webhook-contract",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.053573724027077274
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-j-queue-recovery",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.10817870005004004
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.089606231408144
+      },
+      {
+        "need_id": "c-j-access-control",
+        "grade": "junior",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.011156118002292104
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.10718488870455989
+      },
+      {
+        "need_id": "c-m-ledger-reconciliation",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.030917531624819083
+      },
+      {
+        "need_id": "c-m-webhook-contract",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.1586643432859245
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      },
+      {
+        "need_id": "c-m-queue-recovery",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": -0.3385553017036569
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "eligible",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.039256417995810367
+      },
+      {
+        "need_id": "c-m-access-control",
+        "grade": "middle",
+        "group": "needs_clarification",
+        "precision_at_10": 0.0,
+        "recall_at_20": 0.0,
+        "ndcg_at_10": 0.0
+      }
+    ]
+  }
+}

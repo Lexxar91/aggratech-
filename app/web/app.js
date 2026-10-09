@@ -85,6 +85,10 @@ async function download(path) {
   const anchor = node("a"); anchor.href = url; anchor.download = "profile.pdf"; anchor.click(); URL.revokeObjectURL(url);
 }
 async function candidateScreen() {
+  link("Вакансии", "#vacancies");
+  link("Мои отклики", "#applications");
+  link("Приглашения", "#invitations");
+  link("ФСП mock", "#fsp");
   link("Проверка навыков и история", "#assessment");
   const profile = await request("/candidate/profile");
   if (profile.assessment) content.append(node("p", profile.assessment.label));
@@ -122,6 +126,9 @@ async function candidateScreen() {
     button(row, blocked.has(company.id) ? "Разблокировать" : "Заблокировать", async () => { await request(`/candidate/blocks/${company.id}`, {method: blocked.has(company.id) ? "DELETE" : "PUT"}); message("Блокировка сохранена."); await render(); }); }
 }
 async function employerScreen() {
+  link("Мои вакансии", "#vacancies");
+  link("Приглашения", "#invitations");
+  link("Потребности и подбор", "#needs");
   const profile = await request("/employer/profile"); const form = node("form"); form.id = "employer-profile"; content.append(form);
   field(form,"company_name","Название компании",profile.company_name); field(form,"description","Описание компании",profile.description,"textarea");
   field(form,"industry","Отрасль",profile.industry); field(form,"representative_contact","Контакт представителя",profile.representative_contact);
@@ -133,6 +140,25 @@ async function render() {
   if (route === "register" || route === "login") return authScreen(route);
   if (route === "verify" || route === "reset") return actionScreen(route, decodeURIComponent(rawToken || ""));
   if (route === "reset-request") return resetScreen();
+  if (["vacancies", "vacancy", "vacancy-edit", "applications", "application"].includes(route)) {
+    if (route === "vacancy-edit" && user?.role !== "employer") throw new Error("Доступно работодателю.");
+    if (["applications","application"].includes(route) && !user) { location.hash="#login"; return; }
+    if (route === "vacancies") return vacanciesScreen();
+    if (route === "vacancy") return vacancyScreen(rawToken);
+    if (route === "vacancy-edit") return vacancyEditor(rawToken);
+    if (route === "application") return applicationScreen(rawToken);
+    return applicationsScreen(rawToken);
+  }
+  if (["invitations", "offer"].includes(route)) {
+    if (!user) { location.hash = "#login"; return; }
+    if (route === "offer" && user.role !== "employer") throw new Error("Доступно работодателю.");
+    return route === "offer" ? invitationOfferScreen(rawToken, location.hash.slice(1).split("/")[2]) : invitationsScreen(rawToken);
+  }
+  if (["needs", "recommendations", "fsp"].includes(route)) {
+    if (!user) { location.hash = "#login"; return; }
+    if (user.role !== (route === "fsp" ? "candidate" : "employer")) throw new Error("Недоступно для этой роли.");
+    return route === "fsp" ? fspScreen() : route === "needs" ? needsScreen(rawToken) : recommendationsScreen(rawToken);
+  }
   if (route === "assessment") {
     if (!user) { location.hash = "#login"; return; }
     if (user.role !== "candidate") throw new Error("Раздел доступен кандидату.");
@@ -148,6 +174,7 @@ async function render() {
   }
   content.append(node("h1","Подбор по проверенным навыкам"),node("p","Создайте аккаунт кандидата или работодателя и заполните профиль."));
   link("Регистрация","#register"); link("Вход","#login");
+  link("Вакансии","#vacancies");
 }
 window.addEventListener("hashchange",() => render().catch(error => message(error.message,true)));
 (async () => { if (csrf()) { try { await restore(); } catch { user=null; accessToken=null; } }

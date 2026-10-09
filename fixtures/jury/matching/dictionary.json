@@ -1,0 +1,54 @@
+{
+  "version": "matching-catalog-v1",
+  "specializations": [
+    "backend"
+  ],
+  "grades": [
+    "junior",
+    "middle"
+  ],
+  "languages": [
+    "python"
+  ],
+  "formats": [
+    "remote",
+    "hybrid",
+    "office"
+  ],
+  "skills": {
+    "language_algorithms": "Python и алгоритмы",
+    "sql_data": "SQL и данные",
+    "http_api": "HTTP/API",
+    "debug_reliability": "Отладка и надёжность",
+    "security_validation": "Безопасность и валидация"
+  },
+  "technologies": {
+    "python": [
+      "python"
+    ],
+    "sql": [
+      "sql"
+    ],
+    "postgresql": [
+      "postgresql",
+      "postgres"
+    ],
+    "fastapi": [
+      "fastapi"
+    ],
+    "docker": [
+      "docker"
+    ],
+    "http_api": [
+      "http_api",
+      "http/api"
+    ]
+  },
+  "verified_technology_evidence": {
+    "python": "language_algorithms",
+    "sql": "sql_data",
+    "http_api": "http_api"
+  },
+  "score_format": "jury-skill-100-v1",
+  "method_version_rule": "One explicitly declared comparable method_version per dataset; fixture is not a real assessment."
+}

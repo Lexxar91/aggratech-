@@ -16,6 +16,7 @@ from pydantic import SecretStr
 from pypdf import PdfReader
 from sqlalchemy import select, text, update
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+from starlette.types import Message
 
 from app.auth.dependencies import Principal, require_verified_candidate
 from app.auth.models import AuthActionToken, AuthSession, User
@@ -143,6 +144,68 @@ async def test_register_confirm_one_use_and_gate(
     ).status_code == 400
     assert (await client.get("/test/verified-gate")).status_code == 200
     assert (await client.get("/api/v1/auth/me")).json()["assessment_allowed"]
+
+
+async def test_login_session_committed_before_response_headers(
+    client: httpx.AsyncClient,
+    auth_app: FastAPI,
+    sessions: async_sessionmaker[AsyncSession],
+) -> None:
+    """Проверяет видимость сессии из другого соединения при отправке HTTP-ответа."""
+    identifier = await register(client)
+    payload = json.dumps(
+        {"email": "candidate@example.com", "password": PASSWORD}
+    ).encode()
+    received = False
+    committed_at_headers = False
+    body = bytearray()
+
+    async def receive() -> Message:
+        nonlocal received
+        if received:
+            await asyncio.Event().wait()
+        received = True
+        return {"type": "http.request", "body": payload, "more_body": False}
+
+    async def send(message: Message) -> None:
+        nonlocal committed_at_headers
+        if message["type"] == "http.response.start":
+            assert message["status"] == 200
+            async with sessions() as db:
+                committed_at_headers = (
+                    await db.scalar(
+                        select(AuthSession.id).where(AuthSession.user_id == identifier)
+                    )
+                    is not None
+                )
+        elif message["type"] == "http.response.body":
+            body.extend(message.get("body", b""))
+
+    await auth_app(
+        {
+            "type": "http",
+            "asgi": {"version": "3.0"},
+            "http_version": "1.1",
+            "method": "POST",
+            "scheme": "https",
+            "path": "/api/v1/auth/login",
+            "raw_path": b"/api/v1/auth/login",
+            "root_path": "",
+            "query_string": b"",
+            "headers": [
+                (b"host", b"testserver"),
+                (b"origin", ORIGIN.encode()),
+                (b"content-type", b"application/json"),
+            ],
+            "client": ("127.0.0.1", 54321),
+            "server": ("testserver", 443),
+        },
+        receive,
+        send,
+    )
+    assert committed_at_headers
+    client.headers["Authorization"] = f"Bearer {json.loads(body)['access_token']}"
+    assert (await client.get("/api/v1/auth/me")).status_code == 200
     assert (
         await client.post(
             "/api/v1/auth/register",

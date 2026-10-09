@@ -1,0 +1,966 @@
+{
+  "schema_version": "matching-labels-v1",
+  "dataset_id": "stage7-synthetic-v1-development",
+  "pairs": [
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-001",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-002",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-003",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-004",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-011",
+      "relevance": 2,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-012",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-013",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-014",
+      "relevance": 2,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-021",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-022",
+      "relevance": 3,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-023",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-031",
+      "relevance": 2,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-032",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-033",
+      "relevance": 2,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-041",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-042",
+      "relevance": 3,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-043",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-051",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-052",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-j-053",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-001",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-002",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-003",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-004",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-011",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-012",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-013",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-014",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-021",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-022",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-023",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-031",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-032",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-033",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-041",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-042",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-043",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-051",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-052",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "candidate_id": "d-m-053",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-001",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-002",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-003",
+      "relevance": 2,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-004",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-011",
+      "relevance": 0,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-012",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-013",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-014",
+      "relevance": 1,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-021",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-022",
+      "relevance": 1,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-023",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-031",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-032",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-033",
+      "relevance": 1,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-041",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-042",
+      "relevance": 2,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-043",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-051",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-052",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-j-053",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-001",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-002",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-003",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-004",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-011",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-012",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-013",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-014",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-021",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-022",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-023",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-031",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-032",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-033",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-041",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-042",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-043",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-051",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-052",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "candidate_id": "d-m-053",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-001",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-002",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-003",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-004",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-011",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-012",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-013",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-014",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-021",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-022",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-023",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-031",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-032",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-033",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-041",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-042",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-043",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-051",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-052",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-j-053",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-001",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-002",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-003",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-004",
+      "relevance": 2,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-011",
+      "relevance": 3,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-012",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-013",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-014",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-021",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-022",
+      "relevance": 3,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-023",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-031",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-032",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-033",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-041",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-042",
+      "relevance": 2,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-043",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-051",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-052",
+      "relevance": 1,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "candidate_id": "d-m-053",
+      "relevance": 2,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-001",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-002",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-003",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-004",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-011",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-012",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-013",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-014",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-021",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-022",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-023",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-031",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-032",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-033",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-041",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-042",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-043",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-051",
+      "relevance": 2,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-052",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-j-053",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-001",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-002",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-003",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-004",
+      "relevance": 3,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-011",
+      "relevance": 2,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-012",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-013",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-014",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-021",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-022",
+      "relevance": 1,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-023",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-031",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-032",
+      "relevance": 0,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-033",
+      "relevance": 1,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-041",
+      "relevance": 0,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-042",
+      "relevance": 0,
+      "eligibility": "needs_clarification"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-043",
+      "relevance": 2,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-051",
+      "relevance": 3,
+      "eligibility": "excluded"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-052",
+      "relevance": 2,
+      "eligibility": "eligible"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "candidate_id": "d-m-053",
+      "relevance": 3,
+      "eligibility": "eligible"
+    }
+  ]
+}

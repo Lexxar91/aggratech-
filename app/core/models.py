@@ -16,6 +16,7 @@ from app.auth.models import (
     User,
     UserIdentity,
 )
+from app.candidate_profile.access import ContactGrant
 from app.candidate_profile.models import (
     CandidateContact,
     CandidateEmployerBlock,
@@ -24,9 +25,27 @@ from app.candidate_profile.models import (
 )
 from app.catalog.models import Category, Grade, Skill, Specialization, Technology
 from app.employer.models import EmployerProfile
+from app.fsp.models import FspLink
+from app.invitations.models import Invitation
+from app.matching.models import (
+    CandidateNeedMark,
+    EmployerNeed,
+    MatchingSnapshot,
+    NeedVersion,
+)
 from app.notifications.models import AuditEvent, BackgroundJob
+from app.vacancies.models import Application, Vacancy
 
 __all__ = [
+    "Application",
+    "Vacancy",
+    "Invitation",
+    "ContactGrant",
+    "CandidateNeedMark",
+    "EmployerNeed",
+    "MatchingSnapshot",
+    "NeedVersion",
+    "FspLink",
     "AssessmentAnswer",
     "AssessmentAppeal",
     "AssessmentCycle",

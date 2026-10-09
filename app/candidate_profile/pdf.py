@@ -8,6 +8,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 
+from app.candidate_profile.access import SharedContacts
 from app.candidate_profile.schemas import ContactsView, SafeCard
 from app.core.errors import ApiError
 
@@ -17,7 +18,9 @@ pdfmetrics.registerFont(
 )
 
 
-def generate_pdf(card: SafeCard, contacts: ContactsView | None = None) -> bytes:
+def generate_pdf(
+    card: SafeCard, contacts: ContactsView | SharedContacts | None = None
+) -> bytes:
     """Создаёт PDF только из уже разрешённых DTO с встроенной кириллицей."""
     buffer = BytesIO()
     document = SimpleDocTemplate(buffer, title="Профиль кандидата", author="Aggratech")
@@ -64,9 +67,9 @@ def generate_pdf(card: SafeCard, contacts: ContactsView | None = None) -> bytes:
     if contacts:
         lines += [
             "Контакты владельца",
-            str(contacts.email),
-            contacts.phone,
-            *[f"{key}: {value}" for key, value in contacts.messengers.items()],
+            str(contacts.email) if contacts.email else "",
+            contacts.phone or "",
+            *[f"{key}: {value}" for key, value in (contacts.messengers or {}).items()],
         ]
     story = [
         Paragraph(escape(line).replace("\n", "<br/>"), style) for line in lines if line
@@ -77,7 +80,10 @@ def generate_pdf(card: SafeCard, contacts: ContactsView | None = None) -> bytes:
 
 
 async def render_pdf(
-    card: SafeCard, contacts: ContactsView | None = None, *, timeout_seconds: float = 10
+    card: SafeCard,
+    contacts: ContactsView | SharedContacts | None = None,
+    *,
+    timeout_seconds: float = 10,
 ) -> bytes:
     """Ограничивает ожидание PDF; введённый текст уже ограничен схемой профиля."""
     try:

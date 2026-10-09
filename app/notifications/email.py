@@ -48,7 +48,7 @@ async def finish_email(session: AsyncSession, job: ClaimedJob) -> bool:
         insert(AuditEvent)
         .values(
             id=uuid4(),
-            action="auth_email_sent",
+            action=f"{job.kind}_sent",
             entity_type="background_job",
             entity_id=job.id,
             safe_metadata={},
@@ -61,3 +61,27 @@ async def finish_email(session: AsyncSession, job: ClaimedJob) -> bool:
     row.lease_until = None
     row.payload = {}
     return True
+
+
+def send_invitation_email(settings: Settings, job: ClaimedJob) -> None:
+    """Доставляет уведомление без имени и контактных значений кандидата."""
+    email = job.payload.get("email")
+    identifier = job.payload.get("invitation_id")
+    status = job.payload.get("status")
+    if (
+        not isinstance(email, str)
+        or not isinstance(identifier, str)
+        or status not in ("sent", "accepted", "rejected", "withdrawn", "expired")
+    ):
+        raise ValueError("invalid_invitation_email")
+    message = EmailMessage()
+    message["From"] = settings.smtp_from
+    message["To"] = email
+    message["Subject"] = "Обновление приглашения"
+    message.set_content(
+        f"Статус приглашения: {status}.\n"
+        f"{settings.public_origin}/#invitations/{quote(identifier, safe='')}\n\n"
+        "Контакты доступны только по актуальному разрешению при открытии в кабинете."
+    )
+    with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=10) as smtp:
+        smtp.send_message(message)

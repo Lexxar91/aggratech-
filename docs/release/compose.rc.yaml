@@ -1,0 +1,15 @@
+services:
+  api:
+    image: aggratech-rc:app
+  migrate:
+    image: aggratech-rc:app
+  app-secret:
+    image: aggratech-rc:app
+  worker:
+    image: aggratech-rc:app
+  checks:
+    image: aggratech-rc:check
+  runner-pki:
+    image: aggratech-rc:runner-controller
+  runner-controller:
+    image: aggratech-rc:runner-controller

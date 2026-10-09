@@ -1,0 +1,2381 @@
+{
+  "schema_version": "matching-fixture-v1",
+  "dataset_id": "stage7-synthetic-v1-development",
+  "as_of": "2026-10-09T12:00:00Z",
+  "candidates": [
+    {
+      "candidate_id": "d-j-001",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 55.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 47.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 40.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 98.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 59.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 100000.0,
+        "salary_to": 150000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": null,
+        "available_from": "2026-11-23",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-002",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 97.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 81.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 87.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 54.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 73.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 70000.0,
+        "salary_to": 120000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": null,
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-003",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 83.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 42.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 31.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 84.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 33.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "self_reported",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 70000.0,
+        "salary_to": 120000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": null,
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-004",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 55.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 96.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 45.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 80.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 77.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 100000.0,
+        "salary_to": 150000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-011",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 34.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 57.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 68.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 70.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 46.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": null,
+        "salary_to": null,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": null,
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-012",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 49.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 77.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 90.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 74.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 43.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 100000.0,
+        "salary_to": 150000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": null,
+        "available_from": "2026-10-14",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-013",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 36.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 100000.0,
+        "salary_to": 150000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Казань",
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-014",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 60.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 35.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 72.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 31.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 36.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 100000.0,
+        "salary_to": 150000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": null,
+        "available_from": null,
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-021",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 57.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 93.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 56.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 75.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 96.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "http_api": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 130000.0,
+        "salary_to": 180000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-14",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-022",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 51.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 62.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 95.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 96.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 43.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": null,
+        "salary_to": null,
+        "work_formats": [
+          "remote"
+        ],
+        "location": "Казань",
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-023",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 82.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 92.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 70.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 45.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 49.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 70000.0,
+        "salary_to": 120000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": "Казань",
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": false,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-031",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 47.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 50.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 42.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 60.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 94.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 70000.0,
+        "salary_to": 120000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-032",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 95.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 53.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 71.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 75.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 78.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 100000.0,
+        "salary_to": 150000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Москва",
+        "available_from": "2026-11-23",
+        "confirmed_at": null
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-033",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 81.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 34.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 31.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 80.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 77.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": null,
+        "salary_to": null,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Москва",
+        "available_from": "2026-11-23",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-041",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 47.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 32.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 80.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 66.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 50.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 70000.0,
+        "salary_to": 120000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": "Казань",
+        "available_from": "2026-11-23",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-042",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 41.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 70.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 94.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 97.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 79.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 70000.0,
+        "salary_to": 120000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": "Москва",
+        "available_from": null,
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-043",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 66.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 76.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 72.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 76.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 49.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 130000.0,
+        "salary_to": 180000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": null,
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-051",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "unconfirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {},
+      "technologies": {
+        "python": "self_reported",
+        "sql": "self_reported",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 100000.0,
+        "salary_to": 150000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Казань",
+        "available_from": "2026-10-14",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-052",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 84.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 70000.0,
+        "salary_to": 120000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-14",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-j-053",
+      "specialization": "backend",
+      "grade": "junior",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 36.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 47.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 84.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 76.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 90.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 130000.0,
+        "salary_to": 180000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Казань",
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-001",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 34.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 83.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 37.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 79.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 98.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 210000.0,
+        "salary_to": 260000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-002",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 32.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 63.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 87.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 55.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 69.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 170000.0,
+        "salary_to": 220000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": null,
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-003",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 71.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 65.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 85.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 74.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 71.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "http_api": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 170000.0,
+        "salary_to": 220000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-004",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 30.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 31.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 96.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 90.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 98.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 170000.0,
+        "salary_to": 220000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-011",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 92.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 94.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 37.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 74.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 34.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "verified"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": null,
+        "salary_to": null,
+        "work_formats": [
+          "remote"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-012",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 57.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 51.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 46.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 69.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 66.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "http_api": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 170000.0,
+        "salary_to": 220000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-09",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-013",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 49.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 170000.0,
+        "salary_to": 220000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": "Москва",
+        "available_from": "2026-11-23",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-014",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 48.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 91.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 95.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 60.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 83.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 130000.0,
+        "salary_to": 180000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": null,
+        "available_from": null,
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-021",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 74.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 69.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 61.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 54.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 54.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 130000.0,
+        "salary_to": 180000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-022",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 61.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 63.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 38.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 45.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 34.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": null,
+        "salary_to": null,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": null,
+        "available_from": "2026-11-23",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-023",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 40.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 87.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 34.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 68.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 50.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 170000.0,
+        "salary_to": 220000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": false,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-031",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 34.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 47.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 96.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 90.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 61.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 210000.0,
+        "salary_to": 260000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-14",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-032",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 58.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 84.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 38.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 79.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 31.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "verified"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 210000.0,
+        "salary_to": 260000.0,
+        "work_formats": [
+          "office"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-24",
+        "confirmed_at": null
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-033",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 58.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 82.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 42.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 92.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 39.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": null,
+        "salary_to": null,
+        "work_formats": [
+          "office"
+        ],
+        "location": "Казань",
+        "available_from": "2026-10-14",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-041",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 95.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 94.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 44.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 30.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 84.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "verified"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 130000.0,
+        "salary_to": 180000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-042",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 62.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 79.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 41.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 85.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 57.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "verified",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 170000.0,
+        "salary_to": 220000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": null,
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-043",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 45.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 91.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 94.0,
+          "verified_at": "2026-06-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 44.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 87.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "self_reported",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": false,
+      "conditions": {
+        "salary_from": 170000.0,
+        "salary_to": 220000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": "Москва",
+        "available_from": "2026-11-23",
+        "confirmed_at": "2026-03-23T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-051",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "unconfirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {},
+      "technologies": {
+        "python": "self_reported",
+        "sql": "self_reported",
+        "http_api": "self_reported",
+        "postgresql": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 210000.0,
+        "salary_to": 260000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": "Казань",
+        "available_from": "2026-11-23",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-052",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 54.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "http_api": "self_reported"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 130000.0,
+        "salary_to": 180000.0,
+        "work_formats": [
+          "remote",
+          "hybrid"
+        ],
+        "location": "Москва",
+        "available_from": "2026-10-24",
+        "confirmed_at": "2026-07-06T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    },
+    {
+      "candidate_id": "d-m-053",
+      "specialization": "backend",
+      "grade": "middle",
+      "category_status": "fixture_confirmed",
+      "assessment_scope": {
+        "language": "python",
+        "method_version": "stage7-synthetic-v1",
+        "format": "jury-skill-100-v1"
+      },
+      "skills": {
+        "language_algorithms": {
+          "score": 32.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "sql_data": {
+          "score": 49.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        },
+        "http_api": {
+          "score": 91.0,
+          "verified_at": "2026-02-11T12:00:00Z",
+          "mode": "independent"
+        },
+        "debug_reliability": {
+          "score": 95.0,
+          "verified_at": "2026-09-29T12:00:00Z",
+          "mode": "independent"
+        },
+        "security_validation": {
+          "score": 88.0,
+          "verified_at": "2026-07-16T12:00:00Z",
+          "mode": "independent"
+        }
+      },
+      "technologies": {
+        "python": "verified",
+        "sql": "verified",
+        "http_api": "verified"
+      },
+      "fsp_verified": true,
+      "conditions": {
+        "salary_from": 130000.0,
+        "salary_to": 180000.0,
+        "work_formats": [
+          "remote"
+        ],
+        "location": null,
+        "available_from": "2026-11-23",
+        "confirmed_at": "2026-10-04T12:00:00Z"
+      },
+      "visibility": {
+        "consent_to_match": true,
+        "blocked_employer_ids": []
+      }
+    }
+  ],
+  "needs": [
+    {
+      "need_id": "d-j-legacy-normalizer",
+      "employer_id": "employer-01",
+      "title": "Тестовая потребность: legacy-normalizer / junior",
+      "specialization": "backend",
+      "accepted_grades": [
+        "junior"
+      ],
+      "required_stack": [
+        {
+          "technology": "python",
+          "verification_required": false
+        }
+      ],
+      "preferred_stack": [
+        "sql"
+      ],
+      "skill_priorities": {
+        "language_algorithms": 2,
+        "sql_data": 1
+      },
+      "required_verified_skills": [],
+      "work_formats": [
+        "remote"
+      ],
+      "location": null,
+      "salary_from": 90000.0,
+      "salary_to": 150000.0,
+      "desired_start_date": "2026-10-16",
+      "start_date_required": false,
+      "role": "legacy-normalizer",
+      "team_description": "Синтетическая команда",
+      "task_description": "Искусственный сценарий: legacy-normalizer; тема data.",
+      "additional_requirements": {},
+      "additional_wishes": "",
+      "urgency": "normal",
+      "vacancy_id": null,
+      "version": 1,
+      "template_code": null,
+      "template_version": null,
+      "salary_currency": "RUB",
+      "salary_basis": "gross"
+    },
+    {
+      "need_id": "d-j-paginated-client",
+      "employer_id": "employer-02",
+      "title": "Тестовая потребность: paginated-client / junior",
+      "specialization": "backend",
+      "accepted_grades": [
+        "junior"
+      ],
+      "required_stack": [
+        {
+          "technology": "python",
+          "verification_required": false
+        }
+      ],
+      "preferred_stack": [
+        "http_api"
+      ],
+      "skill_priorities": {
+        "http_api": 2,
+        "language_algorithms": 1
+      },
+      "required_verified_skills": [],
+      "work_formats": [
+        "remote",
+        "hybrid"
+      ],
+      "location": "Москва",
+      "salary_from": 95000.0,
+      "salary_to": 155000.0,
+      "desired_start_date": "2026-10-16",
+      "start_date_required": false,
+      "role": "paginated-client",
+      "team_description": "Синтетическая команда",
+      "task_description": "Искусственный сценарий: paginated-client; тема api.",
+      "additional_requirements": {},
+      "additional_wishes": "",
+      "urgency": "normal",
+      "vacancy_id": null,
+      "version": 1,
+      "template_code": null,
+      "template_version": null,
+      "salary_currency": "RUB",
+      "salary_basis": "gross"
+    },
+    {
+      "need_id": "d-m-legacy-normalizer",
+      "employer_id": "employer-01",
+      "title": "Тестовая потребность: legacy-normalizer / middle",
+      "specialization": "backend",
+      "accepted_grades": [
+        "middle"
+      ],
+      "required_stack": [
+        {
+          "technology": "python",
+          "verification_required": false
+        }
+      ],
+      "preferred_stack": [
+        "sql"
+      ],
+      "skill_priorities": {
+        "language_algorithms": 2,
+        "sql_data": 1
+      },
+      "required_verified_skills": [],
+      "work_formats": [
+        "remote"
+      ],
+      "location": null,
+      "salary_from": 160000.0,
+      "salary_to": 230000.0,
+      "desired_start_date": "2026-10-16",
+      "start_date_required": false,
+      "role": "legacy-normalizer",
+      "team_description": "Синтетическая команда",
+      "task_description": "Искусственный сценарий: legacy-normalizer; тема data.",
+      "additional_requirements": {},
+      "additional_wishes": "",
+      "urgency": "normal",
+      "vacancy_id": null,
+      "version": 1,
+      "template_code": null,
+      "template_version": null,
+      "salary_currency": "RUB",
+      "salary_basis": "gross"
+    },
+    {
+      "need_id": "d-m-paginated-client",
+      "employer_id": "employer-02",
+      "title": "Тестовая потребность: paginated-client / middle",
+      "specialization": "backend",
+      "accepted_grades": [
+        "middle"
+      ],
+      "required_stack": [
+        {
+          "technology": "python",
+          "verification_required": false
+        }
+      ],
+      "preferred_stack": [
+        "http_api"
+      ],
+      "skill_priorities": {
+        "http_api": 2,
+        "language_algorithms": 1
+      },
+      "required_verified_skills": [],
+      "work_formats": [
+        "remote",
+        "hybrid"
+      ],
+      "location": "Москва",
+      "salary_from": 165000.0,
+      "salary_to": 235000.0,
+      "desired_start_date": "2026-10-16",
+      "start_date_required": false,
+      "role": "paginated-client",
+      "team_description": "Синтетическая команда",
+      "task_description": "Искусственный сценарий: paginated-client; тема api.",
+      "additional_requirements": {},
+      "additional_wishes": "",
+      "urgency": "normal",
+      "vacancy_id": null,
+      "version": 1,
+      "template_code": null,
+      "template_version": null,
+      "salary_currency": "RUB",
+      "salary_basis": "gross"
+    }
+  ]
+}
