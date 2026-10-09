@@ -1,0 +1,1943 @@
+{
+  "bank_version": "stage1-python-v2",
+  "versions": [
+    {
+      "family": "X1",
+      "grade": "junior",
+      "version": "python-v2",
+      "skills": [
+        "language_algorithms",
+        "sql_data"
+      ],
+      "condition": "Реализуйте solve(data): сгруппируйте rows по team, суммируйте целые amount, None не суммируется, группа с одними None имеет total=0. Верните список {team,total}, отсортированный по team. status в базовом условии не фильтруется; отрицательные значения допустимы.",
+      "diagnosis": "Укажите причину ошибки: количество ненулевых строк заменило сумму amount. Фиксируется до исправления кода.",
+      "transfer": "Добавлен paid_only=true: суммируйте только записи со status=paid. Сохраните правила None, сортировки и группировки.",
+      "verification": "Выберите проверки пустого входа, None, отрицательных сумм, порядка групп и фильтра paid_only. Этап связан с этим семейством.",
+      "rubric": {
+        "language_algorithms": {
+          "0": "Нет корректных основных результатов",
+          "1": "Причина названа, решения нет",
+          "2": "Базовое решение работает, перенос или проверка не выполнены",
+          "3": "Все обязательные базовые/переносные случаи и выбор проверки корректны",
+          "4": "Дополнительно решение не зависит от порядка входа и не изменяет вход."
+        },
+        "sql_data": {
+          "0": "Неверные группы",
+          "2": "Группы верны, семантика COUNT неверна",
+          "3": "Группы и COUNT(amount) верны",
+          "4": "Дополнительно явно верна семантика NULL и сохранения группы"
+        }
+      },
+      "provenance": "Подготовлено агентом по docs/02 §2.6.1; взаимная проверка командой ещё не проведена.",
+      "review_status": "pending",
+      "cases": [
+        {
+          "id": "ordinary",
+          "phase": "base",
+          "input": {
+            "rows": [
+              {
+                "team": "b",
+                "amount": 3,
+                "status": "paid"
+              },
+              {
+                "team": "a",
+                "amount": 2,
+                "status": "paid"
+              },
+              {
+                "team": "a",
+                "amount": null,
+                "status": "cancelled"
+              }
+            ]
+          },
+          "expected": [
+            {
+              "team": "a",
+              "total": 2
+            },
+            {
+              "team": "b",
+              "total": 3
+            }
+          ]
+        },
+        {
+          "id": "empty",
+          "phase": "base",
+          "input": {
+            "rows": []
+          },
+          "expected": []
+        },
+        {
+          "id": "boundary",
+          "phase": "base",
+          "input": {
+            "rows": [
+              {
+                "team": "a",
+                "amount": -2,
+                "status": "paid"
+              },
+              {
+                "team": "a",
+                "amount": 2,
+                "status": "cancelled"
+              },
+              {
+                "team": "b",
+                "amount": null,
+                "status": "paid"
+              }
+            ]
+          },
+          "expected": [
+            {
+              "team": "a",
+              "total": 0
+            },
+            {
+              "team": "b",
+              "total": 0
+            }
+          ]
+        },
+        {
+          "id": "transfer_ordinary",
+          "phase": "transfer",
+          "input": {
+            "rows": [
+              {
+                "team": "b",
+                "amount": 3,
+                "status": "paid"
+              },
+              {
+                "team": "a",
+                "amount": 2,
+                "status": "paid"
+              },
+              {
+                "team": "a",
+                "amount": null,
+                "status": "cancelled"
+              }
+            ],
+            "paid_only": true
+          },
+          "expected": [
+            {
+              "team": "a",
+              "total": 2
+            },
+            {
+              "team": "b",
+              "total": 3
+            }
+          ]
+        },
+        {
+          "id": "transfer_empty",
+          "phase": "transfer",
+          "input": {
+            "rows": [],
+            "paid_only": true
+          },
+          "expected": []
+        },
+        {
+          "id": "transfer_boundary",
+          "phase": "transfer",
+          "input": {
+            "rows": [
+              {
+                "team": "a",
+                "amount": -2,
+                "status": "paid"
+              },
+              {
+                "team": "a",
+                "amount": 2,
+                "status": "cancelled"
+              },
+              {
+                "team": "b",
+                "amount": null,
+                "status": "paid"
+              }
+            ],
+            "paid_only": true
+          },
+          "expected": [
+            {
+              "team": "a",
+              "total": -2
+            },
+            {
+              "team": "b",
+              "total": 0
+            }
+          ]
+        }
+      ],
+      "solutions": [
+        {
+          "id": "reference",
+          "kind": "reference",
+          "source": "def solve(data):\n    groups = {}\n    for row in data['rows']:\n        if data.get('paid_only') and row['status'] != 'paid':\n            continue\n        team = row['team']\n        groups.setdefault(team, 0)\n        if row['amount'] is not None:\n            groups[team] += row['amount']\n    return [{'team': team, 'total': total} for team, total in sorted(groups.items())]\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary"
+          ]
+        },
+        {
+          "id": "alternative",
+          "kind": "alternative",
+          "source": "def solve(data):\n    rows = [r for r in data['rows'] if not data.get('paid_only') or r['status'] == 'paid']\n    teams = sorted({r['team'] for r in rows})\n    return [{'team': t, 'total': sum(r['amount'] for r in rows if r['team'] == t and r['amount'] is not None)} for t in teams]\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary"
+          ]
+        },
+        {
+          "id": "wrong_sum",
+          "kind": "mistake",
+          "source": "def solve(data):\n    groups = {}\n    for row in data['rows']:\n        if data.get('paid_only') and row['status'] != 'paid':\n            continue\n        team = row['team']\n        groups.setdefault(team, 0)\n        if row['amount'] is not None:\n            groups[team] += 1\n    return [{'team': team, 'total': total} for team, total in sorted(groups.items())]\n",
+          "expected_passes": [
+            "empty",
+            "transfer_empty"
+          ],
+          "error_class": "wrong_aggregate"
+        },
+        {
+          "id": "unadapted",
+          "kind": "unadapted",
+          "source": "def solve(data):\n    groups = {}\n    for row in data['rows']:\n        if False:\n            continue\n        team = row['team']\n        groups.setdefault(team, 0)\n        if row['amount'] is not None:\n            groups[team] += row['amount']\n    return [{'team': team, 'total': total} for team, total in sorted(groups.items())]\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty"
+          ]
+        }
+      ],
+      "structured_cases": [
+        {
+          "id": "sql_0",
+          "condition": "Для заданной результирующей таблицы GROUP BY team укажите SUM(amount) с COALESCE(...,0) и COUNT(amount), а также семантику NULL. Ответ структурированный: groups, count_kind и null_policy; свободный SQL не требуется.",
+          "rows": [
+            {
+              "team": "a",
+              "amount": null
+            },
+            {
+              "team": "a",
+              "amount": 2
+            },
+            {
+              "team": "b",
+              "amount": 3
+            }
+          ],
+          "expected_groups": [
+            {
+              "team": "a",
+              "sum": 2,
+              "count": 1
+            },
+            {
+              "team": "b",
+              "sum": 3,
+              "count": 1
+            }
+          ],
+          "examples": [
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 2,
+                    "count": 1
+                  },
+                  {
+                    "team": "b",
+                    "sum": 3,
+                    "count": 1
+                  }
+                ],
+                "count_kind": "non_null",
+                "null_policy": "skip_amount_keep_group"
+              },
+              "expected_score": 4
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 2,
+                    "count": 1
+                  },
+                  {
+                    "team": "b",
+                    "sum": 3,
+                    "count": 1
+                  }
+                ],
+                "count_kind": "non_null"
+              },
+              "expected_score": 3
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 2,
+                    "count": 1
+                  },
+                  {
+                    "team": "b",
+                    "sum": 3,
+                    "count": 1
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 2
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "wrong",
+                    "sum": 999,
+                    "count": 999
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 0
+            }
+          ]
+        },
+        {
+          "id": "sql_1",
+          "condition": "Для заданной результирующей таблицы GROUP BY team укажите SUM(amount) с COALESCE(...,0) и COUNT(amount), а также семантику NULL. Ответ структурированный: groups, count_kind и null_policy; свободный SQL не требуется.",
+          "rows": [],
+          "expected_groups": [],
+          "examples": [
+            {
+              "answer": {
+                "groups": [],
+                "count_kind": "non_null",
+                "null_policy": "skip_amount_keep_group"
+              },
+              "expected_score": 4
+            },
+            {
+              "answer": {
+                "groups": [],
+                "count_kind": "non_null"
+              },
+              "expected_score": 3
+            },
+            {
+              "answer": {
+                "groups": [],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 2
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "wrong",
+                    "sum": 999,
+                    "count": 999
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 0
+            }
+          ]
+        },
+        {
+          "id": "sql_2",
+          "condition": "Для заданной результирующей таблицы GROUP BY team укажите SUM(amount) с COALESCE(...,0) и COUNT(amount), а также семантику NULL. Ответ структурированный: groups, count_kind и null_policy; свободный SQL не требуется.",
+          "rows": [
+            {
+              "team": "a",
+              "amount": null
+            },
+            {
+              "team": "b",
+              "amount": -2
+            },
+            {
+              "team": "b",
+              "amount": 2
+            }
+          ],
+          "expected_groups": [
+            {
+              "team": "a",
+              "sum": 0,
+              "count": 0
+            },
+            {
+              "team": "b",
+              "sum": 0,
+              "count": 2
+            }
+          ],
+          "examples": [
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 0,
+                    "count": 0
+                  },
+                  {
+                    "team": "b",
+                    "sum": 0,
+                    "count": 2
+                  }
+                ],
+                "count_kind": "non_null",
+                "null_policy": "skip_amount_keep_group"
+              },
+              "expected_score": 4
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 0,
+                    "count": 0
+                  },
+                  {
+                    "team": "b",
+                    "sum": 0,
+                    "count": 2
+                  }
+                ],
+                "count_kind": "non_null"
+              },
+              "expected_score": 3
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 0,
+                    "count": 0
+                  },
+                  {
+                    "team": "b",
+                    "sum": 0,
+                    "count": 2
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 2
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "wrong",
+                    "sum": 999,
+                    "count": 999
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 0
+            }
+          ]
+        }
+      ],
+      "candidate_tests": []
+    },
+    {
+      "family": "X4",
+      "grade": "junior",
+      "version": "python-v2",
+      "skills": [
+        "language_algorithms",
+        "http_api"
+      ],
+      "condition": "solve(data) обходит локальные pages со start. Верните {items,calls}; сохраняйте первое появление каждого id, включая перекрытия страниц. calls — реально запрошенные курсоры. has_more=false запрещает следующий запрос даже при заполненном next; пустая промежуточная страница не завершает обход.",
+      "diagnosis": "Назовите нарушение контракта завершения или повторов данных; ответ фиксируется до решения.",
+      "transfer": "Добавлен max_items: прекратите запросы после накопления указанного числа различных id и обрежьте последнюю страницу до лимита. При max_items=0 запросов нет. Остальные правила сохраняются.",
+      "verification": "Задайте 2–3 JSON-случая вход→ожидаемый результат. Обязательные классы: first_page и duplicates; дополнительный: after_end. Обе корректные реализации должны принять все случаи. Произвольный тестовый код не принимается.",
+      "rubric": {
+        "language_algorithms": {
+          "0": "Нет корректного обхода",
+          "1": "Причина распознана без решения",
+          "2": "База верна; перенос или проверка не выполнены",
+          "3": "База и перенос верны; все свои случаи верны и находят first_page и duplicates",
+          "4": "Дополнительно найдён after_end; решение не изменяет вход и сохраняет стабильный порядок"
+        },
+        "http_api": {
+          "0": "Не соблюдается базовый контракт",
+          "1": "Причина распознана",
+          "2": "Базовый контракт верен, перенос неполон",
+          "3": "Соблюдены завершение, calls и перенос",
+          "4": "Дополнительно корректная обработка пустой промежуточной и конечной страницы"
+        }
+      },
+      "provenance": "Подготовлено агентом по docs/02 §2.3.1 и §2.6.1; взаимная проверка командой ещё не проведена.",
+      "review_status": "pending",
+      "cases": [
+        {
+          "id": "ordinary",
+          "phase": "base",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  },
+                  {
+                    "id": "2",
+                    "value": 2
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 1
+              },
+              {
+                "id": "2",
+                "value": 2
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "empty",
+          "phase": "base",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [],
+            "calls": [
+              "a"
+            ]
+          }
+        },
+        {
+          "id": "boundary",
+          "phase": "base",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": false,
+                "next": "c"
+              },
+              "c": {
+                "items": [
+                  {
+                    "id": "9",
+                    "value": 9
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 0
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "empty_intermediate",
+          "phase": "base",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [],
+                "has_more": true,
+                "next": "c"
+              },
+              "c": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  },
+                  {
+                    "id": "2",
+                    "value": 2
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 1
+              },
+              {
+                "id": "2",
+                "value": 2
+              }
+            ],
+            "calls": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        },
+        {
+          "id": "transfer_ordinary",
+          "phase": "transfer",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  },
+                  {
+                    "id": "2",
+                    "value": 2
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            },
+            "max_items": 1
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 1
+              }
+            ],
+            "calls": [
+              "a"
+            ]
+          }
+        },
+        {
+          "id": "transfer_empty",
+          "phase": "transfer",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            },
+            "max_items": 2
+          },
+          "expected": {
+            "items": [],
+            "calls": [
+              "a"
+            ]
+          }
+        },
+        {
+          "id": "transfer_boundary",
+          "phase": "transfer",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": false,
+                "next": "c"
+              },
+              "c": {
+                "items": [
+                  {
+                    "id": "9",
+                    "value": 9
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            },
+            "max_items": 0
+          },
+          "expected": {
+            "items": [],
+            "calls": []
+          }
+        }
+      ],
+      "solutions": [
+        {
+          "id": "reference",
+          "kind": "reference",
+          "source": "def solve(data):\n    cursor, calls, items, seen = data['start'], [], [], set()\n    limit = data.get('max_items')\n    if limit == 0:\n        return {'items': [], 'calls': []}\n    while True:\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            if item['id'] not in seen:\n                items.append(item)\n                seen.add(item['id'])\n        if limit is not None and len(items) >= limit:\n            items = items[:limit]\n            break\n        if not page['has_more']:\n            break\n        cursor = page['next']\n    return {'items': items, 'calls': calls}\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary",
+            "empty_intermediate"
+          ]
+        },
+        {
+          "id": "alternative",
+          "kind": "alternative",
+          "source": "def solve(data):\n    calls, unique = [], {}\n    limit = data.get('max_items')\n    if limit == 0:\n        return {'items': [], 'calls': []}\n    def visit(cursor):\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            unique.setdefault(item['id'], item)\n        if page['has_more'] and (limit is None or len(unique) < limit):\n            visit(page['next'])\n    visit(data['start'])\n    items = list(unique.values())\n    return {'items': items if limit is None else items[:limit], 'calls': calls}\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary",
+            "empty_intermediate"
+          ]
+        },
+        {
+          "id": "first_page",
+          "kind": "mistake",
+          "source": "def solve(data):\n    page = data['pages'][data['start']]\n    unique = {}\n    for item in page['items']:\n        unique.setdefault(item['id'], item)\n    return {'items':list(unique.values()), 'calls':[data['start']]}\n",
+          "expected_passes": [
+            "empty",
+            "transfer_ordinary",
+            "transfer_empty"
+          ],
+          "error_class": "first_page"
+        },
+        {
+          "id": "duplicates",
+          "kind": "mistake",
+          "source": "def solve(data):\n    cursor, calls, items, seen = data['start'], [], [], set()\n    limit = data.get('max_items')\n    if limit == 0:\n        return {'items': [], 'calls': []}\n    while True:\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            if True:\n                items.append(item)\n                seen.add(item['id'])\n        if limit is not None and len(items) >= limit:\n            items = items[:limit]\n            break\n        if not page['has_more']:\n            break\n        cursor = page['next']\n    return {'items': items, 'calls': calls}\n",
+          "expected_passes": [
+            "empty",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary"
+          ],
+          "error_class": "duplicates"
+        },
+        {
+          "id": "after_end",
+          "kind": "mistake",
+          "source": "def solve(data):\n    cursor, calls, items, seen = data['start'], [], [], set()\n    limit = data.get('max_items')\n    if limit == 0:\n        return {'items': [], 'calls': []}\n    while True:\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            if item['id'] not in seen:\n                items.append(item)\n                seen.add(item['id'])\n        if limit is not None and len(items) >= limit:\n            items = items[:limit]\n            break\n        if not page['has_more']:\n            break\n        cursor = page['next']\n    return {'items': items, 'calls': calls + ['__after_end__']}\n",
+          "expected_passes": [
+            "transfer_boundary"
+          ],
+          "error_class": "after_end"
+        },
+        {
+          "id": "unadapted",
+          "kind": "unadapted",
+          "source": "def solve(data):\n    cursor, calls, items, seen = data['start'], [], [], set()\n    limit = None\n    if limit == 0:\n        return {'items': [], 'calls': []}\n    while True:\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            if item['id'] not in seen:\n                items.append(item)\n                seen.add(item['id'])\n        if limit is not None and len(items) >= limit:\n            items = items[:limit]\n            break\n        if not page['has_more']:\n            break\n        cursor = page['next']\n    return {'items': items, 'calls': calls}\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_empty",
+            "empty_intermediate"
+          ]
+        }
+      ],
+      "structured_cases": [],
+      "candidate_tests": [
+        {
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  },
+                  {
+                    "id": "2",
+                    "value": 2
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 1
+              },
+              {
+                "id": "2",
+                "value": 2
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": false,
+                "next": "c"
+              },
+              "c": {
+                "items": [
+                  {
+                    "id": "9",
+                    "value": 9
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 0
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [],
+                "has_more": true,
+                "next": "c"
+              },
+              "c": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  },
+                  {
+                    "id": "2",
+                    "value": 2
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 1
+              },
+              {
+                "id": "2",
+                "value": 2
+              }
+            ],
+            "calls": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "family": "X1",
+      "grade": "middle",
+      "version": "python-v1",
+      "skills": [
+        "language_algorithms",
+        "sql_data"
+      ],
+      "condition": "Реализуйте solve(data): сначала для каждого id выберите запись с максимальной revision, затем суммируйте amount по team и сортируйте команды. Ревизии одного id различны; порядок входа произвольный. None не суммируется; группа сохраняется с нулём. Целые отрицательные amount допустимы.",
+      "diagnosis": "Укажите причину ошибки: количество строк заменило сумму / выбрана старая ревизия. Фиксируется до исправления кода.",
+      "transfer": "Добавлен paid_only=true: фильтруйте status=paid после выбора действующей записи. Сохраните правила None, сортировки и группировки.",
+      "verification": "Выберите проверки пустого входа, None, отрицательных сумм и порядка; для middle также выбора последней ревизии. Этап связан с этим семейством.",
+      "rubric": {
+        "language_algorithms": {
+          "0": "Нет корректных основных результатов",
+          "1": "Причина названа, решения нет",
+          "2": "Базовое решение работает, перенос или проверка не выполнены",
+          "3": "Все обязательные базовые/переносные случаи и выбор проверки корректны",
+          "4": "Дополнительно не зависит от порядка входа; не изменяет вход; middle линейное выделение последних ревизий"
+        },
+        "sql_data": {
+          "0": "Неверные группы",
+          "2": "Группы верны, семантика COUNT неверна",
+          "3": "Группы и COUNT(amount) верны",
+          "4": "Дополнительно явно верна семантика NULL и сохранения группы"
+        }
+      },
+      "provenance": "Подготовлено агентом по docs/02 §2.6.1; взаимная проверка командой ещё не проведена.",
+      "review_status": "pending",
+      "cases": [
+        {
+          "id": "ordinary",
+          "phase": "base",
+          "input": {
+            "rows": [
+              {
+                "id": "r1",
+                "revision": 1,
+                "team": "a",
+                "amount": 2,
+                "status": "paid"
+              },
+              {
+                "id": "r1",
+                "revision": 2,
+                "team": "a",
+                "amount": 5,
+                "status": "cancelled"
+              },
+              {
+                "id": "r2",
+                "revision": 1,
+                "team": "b",
+                "amount": -3,
+                "status": "paid"
+              }
+            ]
+          },
+          "expected": [
+            {
+              "team": "a",
+              "total": 5
+            },
+            {
+              "team": "b",
+              "total": -3
+            }
+          ]
+        },
+        {
+          "id": "empty",
+          "phase": "base",
+          "input": {
+            "rows": []
+          },
+          "expected": []
+        },
+        {
+          "id": "boundary",
+          "phase": "base",
+          "input": {
+            "rows": [
+              {
+                "id": "r1",
+                "revision": 2,
+                "team": "a",
+                "amount": null,
+                "status": "paid"
+              },
+              {
+                "id": "r1",
+                "revision": 1,
+                "team": "a",
+                "amount": 7,
+                "status": "cancelled"
+              },
+              {
+                "id": "r2",
+                "revision": 1,
+                "team": "a",
+                "amount": 0,
+                "status": "paid"
+              }
+            ]
+          },
+          "expected": [
+            {
+              "team": "a",
+              "total": 0
+            }
+          ]
+        },
+        {
+          "id": "transfer_ordinary",
+          "phase": "transfer",
+          "input": {
+            "rows": [
+              {
+                "id": "r1",
+                "revision": 1,
+                "team": "a",
+                "amount": 2,
+                "status": "paid"
+              },
+              {
+                "id": "r1",
+                "revision": 2,
+                "team": "a",
+                "amount": 5,
+                "status": "cancelled"
+              },
+              {
+                "id": "r2",
+                "revision": 1,
+                "team": "b",
+                "amount": -3,
+                "status": "paid"
+              }
+            ],
+            "paid_only": true
+          },
+          "expected": [
+            {
+              "team": "b",
+              "total": -3
+            }
+          ]
+        },
+        {
+          "id": "transfer_empty",
+          "phase": "transfer",
+          "input": {
+            "rows": [],
+            "paid_only": true
+          },
+          "expected": []
+        },
+        {
+          "id": "transfer_boundary",
+          "phase": "transfer",
+          "input": {
+            "rows": [
+              {
+                "id": "r1",
+                "revision": 2,
+                "team": "a",
+                "amount": null,
+                "status": "paid"
+              },
+              {
+                "id": "r1",
+                "revision": 1,
+                "team": "a",
+                "amount": 7,
+                "status": "cancelled"
+              },
+              {
+                "id": "r2",
+                "revision": 1,
+                "team": "a",
+                "amount": 0,
+                "status": "paid"
+              }
+            ],
+            "paid_only": true
+          },
+          "expected": [
+            {
+              "team": "a",
+              "total": 0
+            }
+          ]
+        }
+      ],
+      "solutions": [
+        {
+          "id": "reference",
+          "kind": "reference",
+          "source": "def solve(data):\n    latest = {}\n    for row in data['rows']:\n        old = latest.get(row['id'])\n        if old is None or row['revision'] > old['revision']:\n            latest[row['id']] = row\n    groups = {}\n    for row in latest.values():\n        if data.get('paid_only') and row['status'] != 'paid':\n            continue\n        groups.setdefault(row['team'], 0)\n        if row['amount'] is not None:\n            groups[row['team']] += row['amount']\n    return [{'team': t, 'total': n} for t, n in sorted(groups.items())]\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary"
+          ]
+        },
+        {
+          "id": "alternative",
+          "kind": "alternative",
+          "source": "def solve(data):\n    rows = sorted(data['rows'], key=lambda r: (r['id'], -r['revision']))\n    unique = {}\n    for row in rows:\n        unique.setdefault(row['id'], row)\n    selected = [r for r in unique.values() if not data.get('paid_only') or r['status'] == 'paid']\n    return [{'team': t, 'total': sum(r['amount'] for r in selected if r['team'] == t and r['amount'] is not None)} for t in sorted({r['team'] for r in selected})]\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary"
+          ]
+        },
+        {
+          "id": "wrong_sum_or_revision",
+          "kind": "mistake",
+          "source": "def solve(data):\n    latest = {}\n    for row in data['rows']:\n        old = latest.get(row['id'])\n        if old is None or row['revision'] < old['revision']:\n            latest[row['id']] = row\n    groups = {}\n    for row in latest.values():\n        if data.get('paid_only') and row['status'] != 'paid':\n            continue\n        groups.setdefault(row['team'], 0)\n        if row['amount'] is not None:\n            groups[row['team']] += row['amount']\n    return [{'team': t, 'total': n} for t, n in sorted(groups.items())]\n",
+          "expected_passes": [
+            "empty",
+            "transfer_empty",
+            "transfer_boundary"
+          ],
+          "error_class": "wrong_aggregate"
+        },
+        {
+          "id": "unadapted",
+          "kind": "unadapted",
+          "source": "def solve(data):\n    latest = {}\n    for row in data['rows']:\n        old = latest.get(row['id'])\n        if old is None or row['revision'] > old['revision']:\n            latest[row['id']] = row\n    groups = {}\n    for row in latest.values():\n        if False:\n            continue\n        groups.setdefault(row['team'], 0)\n        if row['amount'] is not None:\n            groups[row['team']] += row['amount']\n    return [{'team': t, 'total': n} for t, n in sorted(groups.items())]\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_empty",
+            "transfer_boundary"
+          ]
+        }
+      ],
+      "structured_cases": [
+        {
+          "id": "sql_0",
+          "condition": "Для заданной результирующей таблицы GROUP BY team укажите SUM(amount) с COALESCE(...,0) и COUNT(amount), а также семантику NULL. Свободный SQL не требуется. Middle: объяснение выбора COUNT(amount), не COUNT(*), обязательно как структурированный count_kind.",
+          "rows": [
+            {
+              "team": "a",
+              "amount": null
+            },
+            {
+              "team": "a",
+              "amount": 2
+            },
+            {
+              "team": "b",
+              "amount": 3
+            }
+          ],
+          "expected_groups": [
+            {
+              "team": "a",
+              "sum": 2,
+              "count": 1
+            },
+            {
+              "team": "b",
+              "sum": 3,
+              "count": 1
+            }
+          ],
+          "examples": [
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 2,
+                    "count": 1
+                  },
+                  {
+                    "team": "b",
+                    "sum": 3,
+                    "count": 1
+                  }
+                ],
+                "count_kind": "non_null",
+                "null_policy": "skip_amount_keep_group"
+              },
+              "expected_score": 4
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 2,
+                    "count": 1
+                  },
+                  {
+                    "team": "b",
+                    "sum": 3,
+                    "count": 1
+                  }
+                ],
+                "count_kind": "non_null"
+              },
+              "expected_score": 3
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 2,
+                    "count": 1
+                  },
+                  {
+                    "team": "b",
+                    "sum": 3,
+                    "count": 1
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 2
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "wrong",
+                    "sum": 999,
+                    "count": 999
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 0
+            }
+          ]
+        },
+        {
+          "id": "sql_1",
+          "condition": "Для заданной результирующей таблицы GROUP BY team укажите SUM(amount) с COALESCE(...,0) и COUNT(amount), а также семантику NULL. Свободный SQL не требуется. Middle: объяснение выбора COUNT(amount), не COUNT(*), обязательно как структурированный count_kind.",
+          "rows": [],
+          "expected_groups": [],
+          "examples": [
+            {
+              "answer": {
+                "groups": [],
+                "count_kind": "non_null",
+                "null_policy": "skip_amount_keep_group"
+              },
+              "expected_score": 4
+            },
+            {
+              "answer": {
+                "groups": [],
+                "count_kind": "non_null"
+              },
+              "expected_score": 3
+            },
+            {
+              "answer": {
+                "groups": [],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 2
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "wrong",
+                    "sum": 999,
+                    "count": 999
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 0
+            }
+          ]
+        },
+        {
+          "id": "sql_2",
+          "condition": "Для заданной результирующей таблицы GROUP BY team укажите SUM(amount) с COALESCE(...,0) и COUNT(amount), а также семантику NULL. Свободный SQL не требуется. Middle: объяснение выбора COUNT(amount), не COUNT(*), обязательно как структурированный count_kind.",
+          "rows": [
+            {
+              "team": "a",
+              "amount": null
+            },
+            {
+              "team": "b",
+              "amount": -2
+            },
+            {
+              "team": "b",
+              "amount": 2
+            }
+          ],
+          "expected_groups": [
+            {
+              "team": "a",
+              "sum": 0,
+              "count": 0
+            },
+            {
+              "team": "b",
+              "sum": 0,
+              "count": 2
+            }
+          ],
+          "examples": [
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 0,
+                    "count": 0
+                  },
+                  {
+                    "team": "b",
+                    "sum": 0,
+                    "count": 2
+                  }
+                ],
+                "count_kind": "non_null",
+                "null_policy": "skip_amount_keep_group"
+              },
+              "expected_score": 4
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 0,
+                    "count": 0
+                  },
+                  {
+                    "team": "b",
+                    "sum": 0,
+                    "count": 2
+                  }
+                ],
+                "count_kind": "non_null"
+              },
+              "expected_score": 3
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "a",
+                    "sum": 0,
+                    "count": 0
+                  },
+                  {
+                    "team": "b",
+                    "sum": 0,
+                    "count": 2
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 2
+            },
+            {
+              "answer": {
+                "groups": [
+                  {
+                    "team": "wrong",
+                    "sum": 999,
+                    "count": 999
+                  }
+                ],
+                "count_kind": "all_rows"
+              },
+              "expected_score": 0
+            }
+          ]
+        }
+      ],
+      "candidate_tests": []
+    },
+    {
+      "family": "X4",
+      "grade": "middle",
+      "version": "python-v1",
+      "skills": [
+        "language_algorithms",
+        "http_api"
+      ],
+      "condition": "solve(data) обходит подготовленные локальные pages со start. Верните {items,calls}, где calls — курсоры реально запрошенных страниц в порядке. has_more=false запрещает следующий запрос даже при заполненном next. Страницы могут перекрываться; сохраняйте только первое появление id. Базовая цепочка конечна.",
+      "diagnosis": "Назовите нарушение контракта завершения или повторов данных; ответ фиксируется до решения.",
+      "transfer": "При detect_cycles=true API может вернуть уже посещённый курсор. До повторного запроса остановитесь с error=cursor_cycle; items и calls содержат только уже полученные страницы. Базовое решение с safety-cap не заменяет проверку этого свойства.",
+      "verification": "Задайте 2–3 JSON-случая вход→ожидаемый результат. Обязательные классы: first_page и duplicates; дополнительный: after_end. Обе корректные реализации должны принять все случаи. Произвольный тестовый код не принимается.",
+      "rubric": {
+        "language_algorithms": {
+          "0": "Нет корректного обхода",
+          "1": "Причина распознана без решения",
+          "2": "База верна; перенос или проверка не выполнены",
+          "3": "База и перенос верны; все свои случаи верны и находят first_page и duplicates",
+          "4": "Дополнительно найдён after_end; решение не изменяет вход и сохраняет стабильный порядок"
+        },
+        "http_api": {
+          "0": "Не соблюдается базовый контракт",
+          "1": "Причина распознана",
+          "2": "Базовый контракт верен, перенос неполон",
+          "3": "Соблюдены завершение, calls и перенос",
+          "4": "Дополнительно корректная обработка пустой промежуточной и конечной страницы"
+        }
+      },
+      "provenance": "Подготовлено агентом по docs/02 §2.3.1 и §2.6.1; взаимная проверка командой ещё не проведена.",
+      "review_status": "pending",
+      "cases": [
+        {
+          "id": "ordinary",
+          "phase": "base",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  },
+                  {
+                    "id": "2",
+                    "value": 2
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 1
+              },
+              {
+                "id": "2",
+                "value": 2
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "empty",
+          "phase": "base",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [],
+            "calls": [
+              "a"
+            ]
+          }
+        },
+        {
+          "id": "boundary",
+          "phase": "base",
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": false,
+                "next": "c"
+              },
+              "c": {
+                "items": [
+                  {
+                    "id": "9",
+                    "value": 9
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 0
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "id": "transfer_ordinary",
+          "phase": "transfer",
+          "input": {
+            "start": "a",
+            "detect_cycles": true,
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "2",
+                    "value": 2
+                  }
+                ],
+                "has_more": true,
+                "next": "a"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 1
+              },
+              {
+                "id": "2",
+                "value": 2
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ],
+            "error": "cursor_cycle"
+          }
+        },
+        {
+          "id": "transfer_empty",
+          "phase": "transfer",
+          "input": {
+            "start": "a",
+            "detect_cycles": true,
+            "pages": {
+              "a": {
+                "items": [],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [],
+            "calls": [
+              "a"
+            ]
+          }
+        },
+        {
+          "id": "transfer_boundary",
+          "phase": "transfer",
+          "input": {
+            "start": "a",
+            "detect_cycles": true,
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": true,
+                "next": "a"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 0
+              }
+            ],
+            "calls": [
+              "a"
+            ],
+            "error": "cursor_cycle"
+          }
+        }
+      ],
+      "solutions": [
+        {
+          "id": "reference",
+          "kind": "reference",
+          "source": "def solve(data):\n    cursor, calls, items, ids, cursors = data['start'], [], [], set(), set()\n    while True:\n        if data.get('detect_cycles') and cursor in cursors:\n            return {'items': items, 'calls': calls, 'error': 'cursor_cycle'}\n        cursors.add(cursor)\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            if item['id'] not in ids:\n                items.append(item)\n                ids.add(item['id'])\n        if not page['has_more']:\n            break\n        cursor = page['next']\n    return {'items': items, 'calls': calls}\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary"
+          ]
+        },
+        {
+          "id": "alternative",
+          "kind": "alternative",
+          "source": "def solve(data):\n    calls, unique = [], {}\n    def visit(cursor):\n        if data.get('detect_cycles') and cursor in calls:\n            return 'cursor_cycle'\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            unique.setdefault(item['id'], item)\n        return visit(page['next']) if page['has_more'] else None\n    error = visit(data['start'])\n    result = {'items': list(unique.values()), 'calls': calls}\n    if error:\n        result['error'] = error\n    return result\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary"
+          ]
+        },
+        {
+          "id": "first_page",
+          "kind": "mistake",
+          "source": "def solve(data):\n    page = data['pages'][data['start']]\n    unique = {}\n    for item in page['items']:\n        unique.setdefault(item['id'], item)\n    return {'items':list(unique.values()), 'calls':[data['start']]}\n",
+          "expected_passes": [
+            "empty",
+            "transfer_empty"
+          ],
+          "error_class": "first_page"
+        },
+        {
+          "id": "duplicates",
+          "kind": "mistake",
+          "source": "def solve(data):\n    cursor, calls, items, ids, cursors = data['start'], [], [], set(), set()\n    while True:\n        if data.get('detect_cycles') and cursor in cursors:\n            return {'items': items, 'calls': calls, 'error': 'cursor_cycle'}\n        cursors.add(cursor)\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            if True:\n                items.append(item)\n                ids.add(item['id'])\n        if not page['has_more']:\n            break\n        cursor = page['next']\n    return {'items': items, 'calls': calls}\n",
+          "expected_passes": [
+            "empty",
+            "transfer_ordinary",
+            "transfer_empty",
+            "transfer_boundary"
+          ],
+          "error_class": "duplicates"
+        },
+        {
+          "id": "after_end",
+          "kind": "mistake",
+          "source": "def solve(data):\n    cursor, calls, items, ids, cursors = data['start'], [], [], set(), set()\n    while True:\n        if data.get('detect_cycles') and cursor in cursors:\n            return {'items': items, 'calls': calls, 'error': 'cursor_cycle'}\n        cursors.add(cursor)\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            if item['id'] not in ids:\n                items.append(item)\n                ids.add(item['id'])\n        if not page['has_more']:\n            break\n        cursor = page['next']\n    return {'items': items, 'calls': calls + ['__after_end__']}\n",
+          "expected_passes": [
+            "transfer_ordinary",
+            "transfer_boundary"
+          ],
+          "error_class": "after_end"
+        },
+        {
+          "id": "unadapted",
+          "kind": "unadapted",
+          "source": "def solve(data):\n    cursor, calls, items, ids, cursors = data['start'], [], [], set(), set()\n    while True:\n        if len(calls) >= 4:\n            return {'items': items, 'calls': calls, 'error': 'iteration_limit'}\n        cursors.add(cursor)\n        calls.append(cursor)\n        page = data['pages'][cursor]\n        for item in page['items']:\n            if item['id'] not in ids:\n                items.append(item)\n                ids.add(item['id'])\n        if not page['has_more']:\n            break\n        cursor = page['next']\n    return {'items': items, 'calls': calls}\n",
+          "expected_passes": [
+            "ordinary",
+            "empty",
+            "boundary",
+            "transfer_empty"
+          ]
+        }
+      ],
+      "structured_cases": [],
+      "candidate_tests": [
+        {
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 1
+                  },
+                  {
+                    "id": "2",
+                    "value": 2
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 1
+              },
+              {
+                "id": "2",
+                "value": 2
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ]
+          }
+        },
+        {
+          "input": {
+            "start": "a",
+            "pages": {
+              "a": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": true,
+                "next": "b"
+              },
+              "b": {
+                "items": [
+                  {
+                    "id": "1",
+                    "value": 0
+                  }
+                ],
+                "has_more": false,
+                "next": "c"
+              },
+              "c": {
+                "items": [
+                  {
+                    "id": "9",
+                    "value": 9
+                  }
+                ],
+                "has_more": false,
+                "next": "__unused__"
+              }
+            }
+          },
+          "expected": {
+            "items": [
+              {
+                "id": "1",
+                "value": 0
+              }
+            ],
+            "calls": [
+              "a",
+              "b"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

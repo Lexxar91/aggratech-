@@ -1,0 +1,16 @@
+.git
+.agents
+.codex
+.aws
+.venv
+__pycache__
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.env
+.pki
+artifacts
+*.pdf
+*.log
+*.key
+*.pem

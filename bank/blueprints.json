@@ -1,0 +1,129 @@
+{
+  "version": "blueprint-v1",
+  "grades": [
+    "junior",
+    "middle"
+  ],
+  "families": [
+    {
+      "id": "X1",
+      "form": "X",
+      "phase": "A",
+      "skills": [
+        "language_algorithms",
+        "sql_data"
+      ],
+      "material_status": "prepared_review_pending"
+    },
+    {
+      "id": "X2",
+      "form": "X",
+      "phase": "A",
+      "skills": [
+        "http_api",
+        "security_validation"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "X3",
+      "form": "X",
+      "phase": "A",
+      "skills": [
+        "sql_data",
+        "debug_reliability"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "X4",
+      "form": "X",
+      "phase": "A",
+      "skills": [
+        "language_algorithms",
+        "http_api"
+      ],
+      "material_status": "prepared_review_pending"
+    },
+    {
+      "id": "X5",
+      "form": "X",
+      "phase": "B",
+      "skills": [
+        "sql_data",
+        "debug_reliability"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "X6",
+      "form": "X",
+      "phase": "B",
+      "skills": [
+        "http_api",
+        "security_validation"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "Y1",
+      "form": "Y",
+      "phase": "A",
+      "skills": [
+        "language_algorithms",
+        "sql_data"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "Y2",
+      "form": "Y",
+      "phase": "A",
+      "skills": [
+        "http_api",
+        "security_validation"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "Y3",
+      "form": "Y",
+      "phase": "A",
+      "skills": [
+        "sql_data",
+        "debug_reliability"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "Y4",
+      "form": "Y",
+      "phase": "A",
+      "skills": [
+        "language_algorithms",
+        "http_api"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "Y5",
+      "form": "Y",
+      "phase": "B",
+      "skills": [
+        "sql_data",
+        "debug_reliability"
+      ],
+      "material_status": "planned"
+    },
+    {
+      "id": "Y6",
+      "form": "Y",
+      "phase": "B",
+      "skills": [
+        "http_api",
+        "security_validation"
+      ],
+      "material_status": "planned"
+    }
+  ]
+}

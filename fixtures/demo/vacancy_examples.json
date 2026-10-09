@@ -1,0 +1,45 @@
+{
+  "version": "vacancy-examples-v1",
+  "source": "team-prepared synthetic descriptions, not market data",
+  "examples": [
+    {
+      "id": "api-validation",
+      "grade": "junior",
+      "title": "Backend Junior: API и валидация",
+      "description": "Разрабатывать небольшие API-операции на Python, проверять входы и права доступа, получать данные из SQL и обрабатывать страницы внешнего API.",
+      "priorities": {"http_api": 2, "security_validation": 2},
+      "trace": [
+        {"requirement": "Корректно обходить страницы API", "skill": "http_api", "families": ["X4", "Y4"], "action": "Решение и проверка завершения; Y4 — эквивалентная область HTTP, другая тема", "rubric": "family-grade version; current X4 materials available"},
+        {"requirement": "Проверять права и входы", "skill": "security_validation", "families": ["X2", "Y2"], "action": "Диагностика и перенос", "rubric": "materials planned for stage 3"},
+        {"requirement": "Группировать данные", "skill": "sql_data", "families": ["X1", "Y1"], "action": "Отдельный структурированный ответ", "rubric": "X1 sql_data"}
+      ],
+      "assembly": "standard junior blueprint X or Y; employer does not remove mandatory coverage"
+    },
+    {
+      "id": "sql-reports",
+      "grade": "middle",
+      "title": "Backend Middle: SQL и отчёты",
+      "description": "Разбирать расхождения отчётов, учитывать NULL, JOIN и актуальные версии записей, сохранять корректность при обновлениях данных.",
+      "priorities": {"sql_data": 2},
+      "trace": [
+        {"requirement": "Агрегировать актуальные записи", "skill": "sql_data", "families": ["X1", "Y1"], "action": "Группы, COUNT(amount), NULL и выбор записи", "rubric": "X1 middle sql_data; Y1 planned"},
+        {"requirement": "Найти причину неверного отчёта", "skill": "debug_reliability", "families": ["X3", "Y3"], "action": "Диагностика и проверка переноса", "rubric": "materials planned for stage 3"},
+        {"requirement": "Границы и последняя запись", "skill": "sql_data", "families": ["X5", "Y5"], "action": "Подтверждение в B; закрытые материалы не раскрываются", "rubric": "materials planned for stage 3"}
+      ],
+      "assembly": "standard middle blueprint X or Y; priority affects matching only"
+    },
+    {
+      "id": "integration-failures",
+      "grade": "middle",
+      "title": "Backend Middle: интеграции и сбои",
+      "description": "Интегрировать HTTP API, корректно завершать пагинацию, ограничивать повторы и сохранять права доступа и неизменность команд.",
+      "priorities": {"http_api": 2, "debug_reliability": 2},
+      "trace": [
+        {"requirement": "Соблюдать HTTP-контракт", "skill": "http_api", "families": ["X4", "Y4"], "action": "Пагинация/повторы и 2–3 тестовых случая", "rubric": "X4 middle; Y4 planned"},
+        {"requirement": "Проверять команду и доступ", "skill": "security_validation", "families": ["X6", "Y6"], "action": "Отдельное подтверждение в B", "rubric": "materials planned for stage 3"},
+        {"requirement": "Диагностировать сбой данных", "skill": "debug_reliability", "families": ["X3", "Y3"], "action": "Диагностика и перенос", "rubric": "materials planned for stage 3"}
+      ],
+      "assembly": "standard middle blueprint; no runtime-generated tasks"
+    }
+  ]
+}

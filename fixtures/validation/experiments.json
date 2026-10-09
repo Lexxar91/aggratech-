@@ -1,0 +1,45 @@
+{
+  "version": "stage1-protocol-v1",
+  "experiments": [
+    {
+      "id": "bank-technical",
+      "status": "not run on runner",
+      "hypothesis": "X1/X4 reference, alternatives, mistakes and transfer follow their declared rubrics",
+      "materials": "bank/private/stage1.json",
+      "scope": "4 family-grade versions; not all 24",
+      "versions": {"bank": "stage1-python-v1", "runtime": "CPython 3.14.4", "grader": "hash recorded by bank_quality"},
+      "reference": "prepared expected JSON cases; team review pending",
+      "metric": "expected/actual mismatch and technical error counts",
+      "success": "no mismatches, no infrastructure errors; does not prove human validity",
+      "owner": "developer B; reviewer A",
+      "limitations": ["no independent expert", "runner VM not provided", "team review pending"]
+    },
+    {
+      "id": "matching-control",
+      "status": "planned for stage 7",
+      "hypothesis": "B2 improves relevance compared to B0/B1 on fixed independent team labels",
+      "versions": {"matching": "docs/03 formula; implementation version to be fixed before control", "dataset": "not yet prepared", "labels": "not yet prepared"},
+      "population": "80 candidates, 8 control needs; two backend categories",
+      "reference": "two team members label the entire input pool before viewing rankings; disagreements retained",
+      "metrics": ["Precision@10", "Recall@20", "nDCG@10", "pair differences per need", "time p50/p95"],
+      "success": "report actual results for every need including worsening; superiority not assumed",
+      "control_time": "2026-10-07T12:00:00Z",
+      "seed": 20261007,
+      "owner": "developer B; labels A+B",
+      "limitations": ["synthetic candidates", "team labels", "unlabelled pairs do not mean irrelevant", "incomplete labels prevent main quality metrics"]
+    },
+    {
+      "id": "human-small-pilot",
+      "status": "not recruited; not conducted",
+      "hypothesis": "same-grade X/Y decisions are repeatable and instructions fit 30+15 minutes",
+      "population": "goal: 4 external volunteers, 2 per grade",
+      "reference": "two team members independently classify a separate non-X/Y work sample before seeing system results",
+      "variants": "X then Y or Y then X on the same grade; 2 full cycles per participant",
+      "metrics": ["completion", "active time", "X/Y decision agreement", "skill differences", "team-label disagreement", "X4/Y4 time and detected error classes"],
+      "versions": {"bank": "must be fixed after admission at stage 3", "rubrics": "docs/02 plus family versions", "participants": "not yet available"},
+      "success": "record actual people, results and limits; no claimed certification or target-quality attainment",
+      "owner": "A schedules; B protocol; A+B preliminary labels",
+      "limitations": ["small sample", "not independent expert calibration", "fatigue/order/learning may affect result"]
+    }
+  ]
+}

@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local TLS keys and execution artifacts
+.pki/
+artifacts/
+ФСП спец.трек ТЗ.pdf
+.env

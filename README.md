@@ -1,1 +1,200 @@
-# aggratech-
+# Aggratech
+
+Этапы 1–2: API, PostgreSQL, сохраняемая очередь, **docker-limited runner для
+хакатонного демо**, регистрация, подтверждение email, восстановление пароля,
+ролевые профили, приватность и PDF. Assessment и matching — следующие этапы.
+
+## Запуск жюри через Docker Compose
+
+Нужны Docker Engine с Linux-контейнерами, cgroup v2 и включённым стандартным
+seccomp, Docker Compose plugin, доступ к daemon и интернет для первоначальной
+загрузки образов/зависимостей. VM, Python, PostgreSQL, uv и OpenSSL на хосте
+устанавливать не нужно. На Docker Desktop Linux-контейнеры работают через его
+собственную среду; отдельную runner VM проект не требует.
+
+Образы Python 3.14.4, PostgreSQL 17, Mailpit и Docker CLI закреплены по digest,
+зависимости — в `uv.lock`. Пароли Compose — локальные демонстрационные,
+БД не публикуется на хост. Запускать из корня проекта:
+
+```bash
+test -f .env || cp .env.example .env
+docker compose up --build -d
+curl --fail http://127.0.0.1:18000/health/live
+curl --fail http://127.0.0.1:18000/health/ready
+docker compose exec worker python -m app.tools.runner_check
+```
+
+`runner_check` должен вернуть `status=completed`, `outputs=[42]` и фиксированный
+runtime image. Compose сам применяет миграцию, загружает Python-образ и создаёт
+mTLS-сертификаты в отдельных named volumes. Приватный ключ CA после генерации
+удаляется. Только worker получает клиентский ключ, только контроллер — серверный.
+Сертификаты демо действуют 7 дней. При их истечении перезапустить окружение:
+`docker compose down`, затем `docker compose up -d`; генератор заменит bundles,
+если до истечения осталось меньше суток. Это не production-управление PKI.
+
+Клиент: http://127.0.0.1:18000, OpenAPI: http://127.0.0.1:18000/docs,
+демонстрационная почта: http://127.0.0.1:18025.
+`live` работает без БД; `ready` проверяет соединение и наличие миграции.
+Миграция — отдельный одноразовый сервис, не действие каждого API-процесса.
+
+## Кабинеты и письма (этап 2)
+
+Откройте клиент по `http://127.0.0.1:18000/#register`, выберите роль и пароль
+от 12 символов. Письмо появляется в Mailpit; откройте ссылку и нажмите
+«Подтвердить email». Ссылка одноразовая (60 минут). Сброс пароля доступен
+со страницы входа; ссылка действует 30 минут и отзывает все сессии аккаунта.
+
+Кандидат вручную сохраняет профиль, контакты, зарплату в рублях/месяц gross,
+предпочтения, заявленные технологии и согласие profile-v1. По умолчанию карточка
+закрыта; включить видимость можно в настройках приватности. Работодателю
+доступна только безопасная карточка, при согласии и отсутствии блокировки.
+Закрытые контакты не включаются в неё или PDF работодателя. Собственный PDF
+содержит контакты и кириллицу. Категории и подтверждённые навыки не присваиваются.
+Работодатель заполняет свой профиль компании. Все изменения хранятся в PostgreSQL.
+
+Access JWT (15 минут) хранится только в памяти страницы. Refresh (7 дней) —
+HttpOnly/Secure/SameSite=Strict cookie, с ротацией и серверным отзывом при replay.
+Cookie-операции требуют разрешённый Origin и CSRF. Локальное демо открывать через
+127.0.0.1 или localhost: браузер принимает Secure cookies для loopback.
+Внешнее развёртывание требует HTTPS и явной настройки origins.
+JWT-ключ создаётся автоматически в отдельном `app-secret` volume, API читает
+его без права записи. Перезапуск сохраняет ключ, профили и сессии; удаление
+volumes удаляет данные. Письма демонстрационные: Mailpit не доставляет их наружу.
+
+## Пакет проверок этапа 2
+
+```bash
+docker compose --profile check build checks
+docker compose --profile check run --rm checks
+```
+
+Пакет использует отдельную PostgreSQL, проверяет auth, роли, владельцев, CSRF,
+PDF с извлечением текста и браузерный сценарий в Chromium с настоящими письмами
+Mailpit и перезапуском процесса API. Затем запускает Ruff lint/format и mypy.
+Браузер находится только в образе проверок. SMTP-доставка допускает повтор письма
+при аварии между отправкой и фиксацией; action token остаётся одноразовым.
+
+## Проверки runner и банка (этап 1)
+
+После запуска приложения:
+
+```bash
+docker compose --profile check build checks
+docker compose --profile check run --rm checks pytest -q -m runner -p no:cacheprovider
+docker compose exec runner-controller python -m runner.verify_isolation
+docker compose exec worker python -m app.tools.bank_quality --output /tmp/bank-stage1
+mkdir -p artifacts/bank-stage1
+docker compose exec -T worker cat /tmp/bank-stage1/report.json > artifacts/bank-stage1/report.json
+docker compose exec -T worker cat /tmp/bank-stage1/report.md > artifacts/bank-stage1/report.md
+```
+
+Общий пакет применяет миграции к отдельной настоящей PostgreSQL и запускает
+проверки приложения, Ruff lint/format и строгий mypy. Отдельная команда с
+`-m runner` проверяет реальные контейнеры задач. Проверяются
+убийство и восстановление worker, конкурентный захват, повторы и атомарность
+эффекта. `test-db` имеет временное хранилище; прикладная БД не очищается.
+`verify_isolation` проверяет реальные Docker inspect: отсутствие socket у API
+и worker, отдельную сеть контроллера, параметры живой задачи и её удаление.
+
+`bank_quality` исполняет материалы X1/X4 обоих грейдов через тот же mTLS runner.
+Код 0 и `technical_status=passed` означают успешную техническую проверку первых
+двух семейств. `admission_status=not_admitted` сохраняется: полный банк и review
+команды относятся к последующим критериям допуска. При недоступности runner
+отчёт имеет `incomplete`, код 1; заглушек и локального исполнения в API нет.
+Повторный отчёт сохранять в новой папке — прежний не перезаписывается.
+
+Пример очереди:
+
+```bash
+docker compose exec api python -m app.tools.queue_check --key stage1-demo
+# После обработки worker повторить — тот же job_id, status=succeeded, effects=1.
+docker compose exec api python -m app.tools.queue_check --key stage1-demo
+```
+
+При падении worker захваченное задание возвращается после lease; число попыток
+ограничено, устаревший claim_token не создаёт повторный эффект. `docker compose
+stop worker` позволяет вручную проверить ожидание; `docker compose start worker`
+возобновляет обработку.
+
+## Граница docker-limited и риски
+
+Это **ограниченная контейнерная изоляция для демо, не эквивалент gVisor/VM и
+не заявление о production-безопасности**. Задача и приложение используют одно
+ядро Docker-хоста. Уязвимость ядра/runtime или компрометация контроллера могут
+затронуть хост. Docker socket даёт контроллеру широкие права на daemon; внешняя
+поверхность управления ограничена единственным mTLS-маршрутом `/execute`, который
+принимает только исходник Python и JSON-входы. Произвольных Docker-команд,
+пользовательских образов, mounts, runtime, privileged и изменения лимитов нет.
+
+Контроллер не публикует порт на хост, работает в отдельной внутренней сети,
+не получает БД, секретов приложения или исходников оценщика. API не подключён
+к этой сети. Socket получает **только runner-controller**, никогда API, worker
+или контейнер задачи. Контроллер — доверенный процесс с UID 0 для доступа к
+socket; задача — UID/GID 65534. Одноразовый генератор PKI имеет только CHOWN и
+DAC_OVERRIDE для подготовки volumes и не получает socket.
+
+Контейнер задачи: network=none, read-only root, tmpfs 16 MiB с
+noexec/nosuid/nodev, drop ALL capabilities, no-new-privileges, стандартный seccomp
+Docker, privileged=false, 0.5 CPU, RAM 128 MiB без swap, 32 процесса.
+Wall timeout — 5 секунд после старта attach; ввод — 128 KiB, исходник — 32 KiB,
+совокупный stdout/stderr — 64 KiB. Пользователь не меняет политику.
+Образ — чистый закреплённый CPython, без секретов, БД, томов хоста, банка и
+исходников проверяющего кода. Только код и JSON-входы приходят через stdin.
+Python `-I -B` сам по себе не является песочницей. Установка пакетов, реальные
+HTTP-запросы и запуск произвольных веб-приложений не поддерживаются.
+
+Задача удаляется после результата, ошибки, превышения вывода и тайм-аута.
+При аварии самого контроллера принудительное удаление может задержаться до его
+перезапуска: при старте он очищает оставшиеся контейнеры с собственным label.
+Недоступность daemon или невозможность очистки — инфраструктурная ошибка,
+не неверный ответ кандидата. Не открывать runner/daemon для публичных пользователей.
+
+## Проверка другим участником
+
+Другой участник использует отдельную копию проекта, включающую текущие
+незакоммиченные файлы этапа, и новые named volumes, выполняет инструкцию запуска
+и пакет проверок, сохраняет отчёт. Если проверяет на том же
+Docker-хосте, сохраните прежний проект и задайте отдельные имя и порты:
+
+```bash
+export COMPOSE_PROJECT_NAME=aggratech-review
+export APP_HTTP_PORT=18100
+export MAILPIT_HTTP_PORT=18125
+docker compose up --build -d
+```
+
+Named volumes и cleanup задач ограничены именем проекта; API и Mailpit доступны
+на выбранных портах. Команды проверок выполняйте с теми же переменными.
+
+Подтверждение для журнала: дата, участник, ОС/Docker/Compose, применённая к пустой
+БД миграция `0002_auth_profiles`, результаты live/ready, `outputs=[42]`, pytest,
+inspect и отчёта банка; замечания к инструкции. Секреты и ключи не передавать.
+
+Review X1/X4: в `bank/private/stage1.json` сверить условия/рубрики и expected
+для junior/middle, базовые и переносные случаи, обе корректные реализации и
+типичные ошибки. Для X4 — остановку пагинации, пустую промежуточную страницу,
+дедупликацию, перенос max_items/cursor_cycle и обнаружение трёх классов ошибок
+подготовленными тестами. Записать результат и замечания; технический прогон
+не заменяет review и не измеряет сложность для людей. Проверка объективности
+и сложности по решению пользователя отнесена к финальному этапу 9.
+
+## Материалы и обслуживание
+
+`bank/blueprints.json` — матрица 12 семейств X/Y; `bank/private/stage1.json` —
+первые X1/X4. `fixtures/demo` — три исходных описания вакансий,
+`fixtures/validation` — паспорта, разделение данных и протокол добровольцев.
+Материалы банка не раздаются через web-каталог. Seed не заменяет реальные
+прохождения. Статус, стоимость, проверки и риски — в `docs/07_execution_plan.md`.
+
+`docker compose down` сохраняет БД и сертификаты. `docker compose down -v`
+удаляет данные текущего проекта и допустим только при намеренном сбросе.
+При `ready=503` проверить `db` и `migrate` через `docker compose logs --tail=30`.
+Занятые 18000/18025 заменить переменными APP_HTTP_PORT/MAILPIT_HTTP_PORT
+и задать отдельный COMPOSE_PROJECT_NAME. Docker permission denied требует
+настройки доступа к daemon по правилам машины. Для rootless Docker нестандартный
+путь socket требует настройки и отдельной проверки; такой режим не заявлен
+проверенным. Локальная разработка: Python 3.14.4, uv 0.12.23, `uv sync --locked`.
+
+Основания: [Docker limits](https://docs.docker.com/engine/containers/resource_constraints/),
+[SQLAlchemy locking](https://docs.sqlalchemy.org/en/20/core/selectable.html#sqlalchemy.sql.expression.Select.with_for_update),
+[uv locked sync](https://docs.astral.sh/uv/concepts/projects/sync/).

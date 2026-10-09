@@ -1,0 +1,16 @@
+{
+  "version": "validation-partitions-v1",
+  "status": "planned; no measured results",
+  "control_time": "2026-10-07T12:00:00Z",
+  "categories": ["backend-junior", "backend-middle"],
+  "development": {"candidate_count": 40, "need_count": 4},
+  "control": {"candidate_count": 80, "need_count": 8},
+  "demo": {"purpose": "presentation only; never quality measurements"},
+  "separation": [
+    "related candidate variants stay in one partition",
+    "related needs stay in one partition",
+    "labels fixed by two team members before viewing rankings",
+    "changed rules make the previous control set development data",
+    "seed history and jury fixtures never count as real assessment attempts"
+  ]
+}

@@ -1,0 +1,229 @@
+name: aggratech-stage1
+
+x-app: &app
+  build:
+    context: .
+    target: base
+  image: aggratech-stage1:app
+  environment:
+    APP_DATABASE_URL: postgresql+asyncpg://aggratech:local-development@db:5432/aggratech
+    APP_JOB_LEASE_SECONDS: ${APP_JOB_LEASE_SECONDS:-60}
+    APP_JOB_MAX_ATTEMPTS: ${APP_JOB_MAX_ATTEMPTS:-3}
+    APP_WORKER_POLL_SECONDS: ${APP_WORKER_POLL_SECONDS:-1}
+    APP_PUBLIC_ORIGIN: http://127.0.0.1:${APP_HTTP_PORT:-18000}
+    APP_ALLOWED_ORIGINS: '["http://localhost:${APP_HTTP_PORT:-18000}"]'
+  read_only: true
+  tmpfs:
+    - /tmp:size=32m,noexec,nosuid,nodev
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+  networks:
+    - app
+
+services:
+  db:
+    image: postgres:17@sha256:ae69c452f483507a6b99fb654cf93aad7fe156ffd2c56247707eef4e36d3c12b
+    environment:
+      POSTGRES_DB: aggratech
+      POSTGRES_USER: aggratech
+      POSTGRES_PASSWORD: local-development
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U aggratech -d aggratech"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+    networks:
+      - app
+
+  mailpit:
+    image: axllent/mailpit:v1.29.5@sha256:c5a6d0ba4d08187f70f305471da5fd9ad424fdfc2f25a2308226a786335dfa9f
+    ports:
+      - "127.0.0.1:${MAILPIT_HTTP_PORT:-18025}:8025"
+    networks:
+      - app
+
+  migrate:
+    <<: *app
+    command: ["alembic", "upgrade", "head"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  app-secret:
+    build:
+      context: .
+      target: base
+    image: aggratech-stage1:app
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    user: "0:0"
+    command: ["python", "-m", "app.tools.create_app_secret"]
+    network_mode: none
+    volumes:
+      - app-secret:/run/app-secret
+    cap_add: [CHOWN, DAC_OVERRIDE]
+
+  api:
+    <<: *app
+    volumes:
+      - app-secret:/run/app-secret:ro
+    ports:
+      - "127.0.0.1:${APP_HTTP_PORT:-18000}:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      app-secret:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=5)"]
+      interval: 5s
+      timeout: 6s
+      retries: 10
+
+  worker:
+    <<: *app
+    command: ["python", "-m", "app.worker"]
+    environment:
+      APP_DATABASE_URL: postgresql+asyncpg://aggratech:local-development@db:5432/aggratech
+      APP_JOB_LEASE_SECONDS: ${APP_JOB_LEASE_SECONDS:-60}
+      APP_JOB_MAX_ATTEMPTS: ${APP_JOB_MAX_ATTEMPTS:-3}
+      APP_WORKER_POLL_SECONDS: ${APP_WORKER_POLL_SECONDS:-1}
+      APP_PUBLIC_ORIGIN: http://127.0.0.1:${APP_HTTP_PORT:-18000}
+      APP_RUNNER_URL: https://runner-controller:9443
+      APP_RUNNER_CA: /run/runner-client/ca.crt
+      APP_RUNNER_CLIENT_CERTIFICATE: /run/runner-client/client.crt
+      APP_RUNNER_CLIENT_KEY: /run/runner-client/client.key
+    volumes:
+      - runner-client:/run/runner-client:ro
+    networks:
+      - app
+      - runner-control
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      runner-controller:
+        condition: service_healthy
+
+  runner-pki:
+    build:
+      context: .
+      target: runner-controller
+    image: aggratech-stage1:runner-controller
+    command: ["python", "-m", "runner.bootstrap"]
+    network_mode: none
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,noexec,nosuid,nodev
+    volumes:
+      - runner-server:/certificates/server
+      - runner-client:/certificates/client
+    cap_drop: [ALL]
+    cap_add: [CHOWN, DAC_OVERRIDE]
+    security_opt: ["no-new-privileges:true"]
+
+  sandbox-image:
+    image: python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727
+    command: ["python", "-I", "-B", "-c", "print('Fixed sandbox image ready')"]
+    network_mode: none
+    user: "65534:65534"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  runner-controller:
+    build:
+      context: .
+      target: runner-controller
+    image: aggratech-stage1:runner-controller
+    environment:
+      RUNNER_MODE: docker-limited
+      RUNNER_COMPOSE_PROJECT: ${COMPOSE_PROJECT_NAME:-aggratech-stage1}
+      RUNNER_BIND: 0.0.0.0
+      RUNNER_SERVER_CERTIFICATE: /run/runner-server/server.crt
+      RUNNER_SERVER_KEY: /run/runner-server/server.key
+      RUNNER_CLIENT_CA: /run/runner-server/ca.crt
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,noexec,nosuid,nodev
+    volumes:
+      # Единственный процесс, которому нужен socket. Никогда не передаётся задаче.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner-server:/run/runner-server:ro
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    networks:
+      - runner-control
+    depends_on:
+      runner-pki:
+        condition: service_completed_successfully
+      sandbox-image:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 9443), timeout=3).close()"]
+      interval: 5s
+      timeout: 4s
+      retries: 10
+
+  test-db:
+    profiles: ["check"]
+    image: postgres:17@sha256:ae69c452f483507a6b99fb654cf93aad7fe156ffd2c56247707eef4e36d3c12b
+    environment:
+      POSTGRES_DB: aggratech_test
+      POSTGRES_USER: aggratech
+      POSTGRES_PASSWORD: test-only
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U aggratech -d aggratech_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+    networks:
+      - app
+
+  checks:
+    <<: *app
+    profiles: ["check"]
+    build:
+      context: .
+      target: check
+    image: aggratech-stage1:check
+    tmpfs:
+      - /tmp:size=256m,nosuid,nodev
+    environment:
+      APP_DATABASE_URL: postgresql+asyncpg://aggratech:test-only@test-db:5432/aggratech_test
+      APP_JWT_SECRET: test-only-signing-key-never-for-deployment-123456789
+      TEST_DATABASE_URL: postgresql+asyncpg://aggratech:test-only@test-db:5432/aggratech_test
+      APP_RUNNER_URL: https://runner-controller:9443
+      APP_RUNNER_CA: /run/runner-client/ca.crt
+      APP_RUNNER_CLIENT_CERTIFICATE: /run/runner-client/client.crt
+      APP_RUNNER_CLIENT_KEY: /run/runner-client/client.key
+    volumes:
+      - runner-client:/run/runner-client:ro
+    networks:
+      - app
+      - runner-control
+    depends_on:
+      test-db:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+      runner-controller:
+        condition: service_healthy
+    command: ["sh", "-c", "alembic upgrade head && pytest -q -m 'not runner' -p no:cacheprovider && ruff check . --no-cache && ruff format --check . --no-cache && mypy --cache-dir=/dev/null"]
+
+volumes:
+  app-secret:
+  postgres-data:
+  runner-server:
+  runner-client:
+
+networks:
+  app:
+  runner-control:
+    internal: true
