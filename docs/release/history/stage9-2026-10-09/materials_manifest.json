@@ -1,0 +1,191 @@
+{
+  "status": "pending_independent_review",
+  "admission_status": "not_admitted",
+  "bank_version": "backend-xy-stage3-v1",
+  "grader_version": "backend-bank-grader-v1",
+  "grader_hash": "52e13ec4f8b97b4a1c658779e8485bff6a94c085ba92ea468e7219765d73ef63",
+  "runtime_evaluator_hash": "0715e40743bd95a80860fa01e4ec68ebeb06acb65f4fb5e426335515f2ef1c79",
+  "authors": [
+    "codex-stage3-author"
+  ],
+  "files": {
+    "bank/private/full.json": "50c9ab8d4519a465128e97788b76a92a7abadf9e3419c4eb95c8afc2b93bdb3e",
+    "bank/blueprints.json": "08a48eb890b97093b57e94ded24a56b69f98dbedae2239808dd0cfa9d3f6ac75",
+    "bank/vacancy_mappings.json": "2aa052323734d18dc62150571598a0435f043cba4eca9c23659b02d986852fcd"
+  },
+  "versions": [
+    {
+      "family": "X1",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "7b7852535cb87f7a81685ad918c6b86821436af2dbc9727b103c605d64392056",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X1",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "c0e5eee0d68eb4c819110e91bf18a3609c5a985c4be9af2150f782372eb01a04",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X2",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "7e47e27fd94efa35d746c401d0d9ca18b4cd9b369be745cd7a7827daf437d158",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X2",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "74788ab231307d9127691a64151ae544916d737ee8f04f65305aaf97731dcb86",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X3",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "d5e2d4a05f60aa4b893d007953a6595a5380a66d91d61ffc5533b9e97d9464fc",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X3",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "a215f37b30878d9b1c66168252902844836ea83dcca683f35e0729b417c7c71c",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X4",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "c0e29697f1241f439089da63140d5f15927b2f1f4720cb542c03fd8c89ce1908",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X4",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "5f9bc220355e0aa89e9d6247bd0ca82676eef8a1ce043ac3a8324ec4f1d246de",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X5",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "258144e307be19cb45a489d9c4bca636394a61887be2c513c9a0458a340689c6",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X5",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "fd3f6082d3dac00722652973246a8b9d58370e75ddd24caeee3842639404df6e",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X6",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "99ae48c897821b09458f7506692631f91572423f5d74ddd4678ef25c4eb029a0",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "X6",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "8c7c09455426bf3894a7ee9468cf75fe63cf26acd193ffdcbd0586fa1988ded5",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y1",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "49724f86fbeb0714fe5001530489eedc6aadb80bb449ed729b572a592ecbc90a",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y1",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "a7148adf4b6f22d76086a916c9dc182cb7003c608871b714f0944eb3fcf5b72f",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y2",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "40f8f2c176e4582519be7d42ef88973bec8d5dd225d36433a5edf8f473dcd7d5",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y2",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "13787431d36b4edadcf1f2e196e6192ca17462a8c6c5441b83649f8ad500987e",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y3",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "f6042a6dd2198774bf41fc6a1f42aac3739b4f771adc89e0f17dfee69a3e2e82",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y3",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "7884277b935a1225a42cb3201e40efb84b18d582e60bda7e5803dc693998d584",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y4",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "f4df93b79872fcb140c0ac867e713f219db6c1321e1148f8fdebd66a7cfecf4d",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y4",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "44e2450929de2f73745683c6ab720929830b5d8b9e555eb7d50c06680a60bcd5",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y5",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "794c48442b6983ebdbdbf432b0b249e4f001de71bdb7496dc4e5e13613b72d2c",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y5",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "9d5ebacde2861dde6816d2d47edbce0d7d235921ff87ae21fdc468c71242a4d0",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y6",
+      "grade": "junior",
+      "version": "stage3-v1",
+      "material_hash": "30a08363b73bac23671bdc6623a4d487cd4b58500cb0e43071355d48034cac2b",
+      "review_status": "not_conducted"
+    },
+    {
+      "family": "Y6",
+      "grade": "middle",
+      "version": "stage3-v1",
+      "material_hash": "ee248c9c16917320f36b48e03abeedf630577ca23fd6e9874dad43a7c4f4aa2c",
+      "review_status": "not_conducted"
+    }
+  ],
+  "technical_report_at_preflight": {
+    "checks": 758,
+    "technical_status": "passed",
+    "hashes_current": true
+  }
+}

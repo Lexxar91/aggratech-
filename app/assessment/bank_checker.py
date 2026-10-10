@@ -45,6 +45,8 @@ def grader_hash() -> str:
         "app/assessment/bank_models.py",
         "app/assessment/bank_quality.py",
         "app/assessment/candidate_tests.py",
+        "app/assessment/grading.py",
+        "app/assessment/policy.py",
         "app/assessment/structured_evaluator.py",
         "app/assessment/runner.py",
         "uv.lock",

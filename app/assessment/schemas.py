@@ -37,6 +37,7 @@ class CycleInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     grade: Grade
     mode: Mode = "demo"
+    form: Literal["X", "Y"] | None = None
 
 
 class TaskAnswer(BaseModel):
@@ -71,6 +72,11 @@ class SaveAnswer(BaseModel):
 
 class PublicTask(BaseModel):
     family: str
+    family_id: str | None = None
+    task_id: str | None = None
+    language: Literal["python", "sql", "structured"] = "structured"
+    title: str = ""
+    common_contract: str | None = None
     phase: str
     step: str
     revision: int
@@ -106,12 +112,26 @@ class ResultView(BaseModel):
     methodology: str
     assessed_at: datetime | None = None
     scope: str = "Backend: Python, SQL/data, HTTP/API; самостоятельный режим"
+    requirements: list[RequirementResult] = Field(default_factory=list)
+    limitations: str | None = None
+
+
+class RequirementResult(BaseModel):
+    """Публичное основание без тестовых параметров, правильных ответов и рубрик."""
+
+    task_id: str
+    family_id: str
+    skill: str
+    action: str
+    status: str
+    passed: bool | None = None
 
 
 class CycleView(BaseModel):
     id: UUID
     grade: str
     mode: str
+    form: str = ""
     state: str
     a_deadline: datetime
     b_start_deadline: datetime | None
@@ -122,6 +142,20 @@ class CycleView(BaseModel):
     bank_hash: str
     created_at: datetime
     completed_at: datetime | None
+
+
+class AssessmentAvailability(BaseModel):
+    """Безопасная информация о доступных режимах и принятой методике."""
+
+    bank_version: str | None
+    methodology: str | None
+    credit_available: bool
+    demo_available: bool
+    cards_per_form: int
+    a_tasks: int
+    b_tasks: int
+    acceptance: str | None
+    message: str
 
 
 class AppealInput(BaseModel):

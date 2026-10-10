@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.assessment.models import AssessmentAppeal, AssessmentCycle
 from app.assessment.service import answers, audit, finalize_result, queue_answer
+from app.assessment.v3_models import V3_METHODOLOGY
 from app.core.errors import ApiError
 
 
@@ -37,19 +38,36 @@ async def intervene(
             "expired",
         }:
             raise ValueError("extension_not_applicable")
+        restore = "B_ready"
+        if (
+            cycle.methodology == V3_METHODOLOGY
+            and cycle.state == "expired"
+            and cycle.terminal_reason in {"incomplete_A", "incomplete_B"}
+        ):
+            restore = cycle.terminal_reason[-1]
         field = {
             "A": "a_deadline",
             "B": "b_deadline",
             "B_ready": "b_start_deadline",
-            "expired": "b_start_deadline",
+            "expired": "a_deadline"
+            if restore == "A"
+            else "b_deadline"
+            if restore == "B"
+            else "b_start_deadline",
         }[cycle.state]
         deadline = getattr(cycle, field)
         if deadline is None:
             raise ValueError("deadline_missing")
         setattr(cycle, field, max(now, deadline) + timedelta(seconds=seconds))
         if cycle.state == "expired":
-            cycle.state = "B_ready"
+            cycle.state = restore
             cycle.terminal_reason = None
+            if cycle.methodology == V3_METHODOLOGY:
+                cycle.completed_at = None
+                cycle.result = {}
+                for row in await answers(db, cycle.id):
+                    if row.grading_status in {"incomplete", "not_submitted"}:
+                        row.grading_status = "pending"
         cycle.technical_exempt = True
     elif action == "retry":
         rows = [
@@ -64,8 +82,10 @@ async def intervene(
             row.grading_status = "pending"
             row.grading_detail = {}
             await queue_answer(db, row, now)
-        if cycle.state == "technical_error":
+        if cycle.state == "technical_error" or cycle.methodology == V3_METHODOLOGY:
             cycle.state = "grading"
+            cycle.outcome = "insufficient"
+            cycle.result = {}
         cycle.technical_exempt = True
     elif action in {"uphold", "invalidate", "review"}:
         if action == "review":

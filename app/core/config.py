@@ -21,6 +21,9 @@ class Settings(BaseSettings):
     assessment_bank: Path = Path("bank/private/full.json")
     assessment_report: Path = Path("bank/private/technical_report.json")
     assessment_reviews: Path | None = None
+    assessment_acceptance: Path | None = Path(
+        "bank/private/v3_operator_acceptance.json"
+    )
     runner_url: str | None = None
     runner_ca: Path | None = None
     runner_client_certificate: Path | None = None

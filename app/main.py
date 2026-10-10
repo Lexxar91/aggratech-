@@ -164,7 +164,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     application.mount(
         "/",
-        StaticFiles(directory=Path(__file__).parent / "web", html=True),
+        StaticFiles(
+            directory=Path(__file__).resolve().parent.parent / "frontend" / "dist",
+            html=True,
+            check_dir=False,
+        ),
         name="web",
     )
     return application

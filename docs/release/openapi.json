@@ -1060,6 +1060,33 @@
         ]
       }
     },
+    "/api/v1/assessment/availability": {
+      "get": {
+        "tags": [
+          "assessment"
+        ],
+        "summary": "Availability",
+        "description": "Показывает фактическую доступность банка, не его закрытые материалы.",
+        "operationId": "availability_api_v1_assessment_availability_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssessmentAvailability"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/assessment/survey": {
       "get": {
         "tags": [
@@ -3692,6 +3719,81 @@
         ],
         "title": "ApplicationView"
       },
+      "AssessmentAvailability": {
+        "properties": {
+          "bank_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bank Version"
+          },
+          "methodology": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Methodology"
+          },
+          "credit_available": {
+            "type": "boolean",
+            "title": "Credit Available"
+          },
+          "demo_available": {
+            "type": "boolean",
+            "title": "Demo Available"
+          },
+          "cards_per_form": {
+            "type": "integer",
+            "title": "Cards Per Form"
+          },
+          "a_tasks": {
+            "type": "integer",
+            "title": "A Tasks"
+          },
+          "b_tasks": {
+            "type": "integer",
+            "title": "B Tasks"
+          },
+          "acceptance": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acceptance"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "bank_version",
+          "methodology",
+          "credit_available",
+          "demo_available",
+          "cards_per_form",
+          "a_tasks",
+          "b_tasks",
+          "acceptance",
+          "message"
+        ],
+        "title": "AssessmentAvailability",
+        "description": "Безопасная информация о доступных режимах и принятой методике."
+      },
       "AssessmentScope": {
         "properties": {
           "language": {
@@ -3934,6 +4036,21 @@
             ],
             "title": "Mode",
             "default": "demo"
+          },
+          "form": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "X",
+                  "Y"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Form"
           }
         },
         "additionalProperties": false,
@@ -3958,6 +4075,11 @@
           "mode": {
             "type": "string",
             "title": "Mode"
+          },
+          "form": {
+            "type": "string",
+            "title": "Form",
+            "default": ""
           },
           "state": {
             "type": "string",
@@ -5370,6 +5492,54 @@
             "type": "string",
             "title": "Family"
           },
+          "family_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Family Id"
+          },
+          "task_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Task Id"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "python",
+              "sql",
+              "structured"
+            ],
+            "title": "Language",
+            "default": "structured"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "default": ""
+          },
+          "common_contract": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Common Contract"
+          },
           "phase": {
             "type": "string",
             "title": "Phase"
@@ -5638,6 +5808,51 @@
         ],
         "title": "RequiredTechnology"
       },
+      "RequirementResult": {
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "title": "Task Id"
+          },
+          "family_id": {
+            "type": "string",
+            "title": "Family Id"
+          },
+          "skill": {
+            "type": "string",
+            "title": "Skill"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "passed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Passed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task_id",
+          "family_id",
+          "skill",
+          "action",
+          "status"
+        ],
+        "title": "RequirementResult",
+        "description": "Публичное основание без тестовых параметров, правильных ответов и рубрик."
+      },
       "ResetConfirmation": {
         "properties": {
           "token": {
@@ -5733,6 +5948,24 @@
             "type": "string",
             "title": "Scope",
             "default": "Backend: Python, SQL/data, HTTP/API; самостоятельный режим"
+          },
+          "requirements": {
+            "items": {
+              "$ref": "#/components/schemas/RequirementResult"
+            },
+            "type": "array",
+            "title": "Requirements"
+          },
+          "limitations": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limitations"
           }
         },
         "type": "object",

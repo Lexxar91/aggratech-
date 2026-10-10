@@ -1,11 +1,13 @@
 {
-  "bank_version": "backend-xy-stage3-v1",
-  "bank_hash": "50c9ab8d4519a465128e97788b76a92a7abadf9e3419c4eb95c8afc2b93bdb3e",
-  "grader_version": "backend-bank-grader-v1",
-  "grader_hash": "52e13ec4f8b97b4a1c658779e8485bff6a94c085ba92ea468e7219765d73ef63",
   "technical_status": "passed",
-  "checks": 758,
-  "versions_checked": 24,
-  "admission_status": "not_admitted",
-  "human_difficulty": "not measured; final stage"
+  "admission_status": "admitted",
+  "bank_hash": "95696fdadd45e145f52064c82972e77661e0d89c1dc6aed34773420b965a6d1f",
+  "source_hash": "5705b3a6d2d5c4a0da11064b1fc4fed69e40fe034d4f24f609f411168d1ec458",
+  "grader_hash": "60fbf28f3c2397b9a32c616efefffceb585b9ac56740dcf165ad02739f01a8e3",
+  "cards": 28,
+  "checks": 28764,
+  "acceptance": "operator_content_acceptance",
+  "independent_review": "not_recorded",
+  "human_calibration": "not_measured_by_this_run",
+  "technical_errors": []
 }

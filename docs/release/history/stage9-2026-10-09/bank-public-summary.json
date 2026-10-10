@@ -1,0 +1,11 @@
+{
+  "bank_version": "backend-xy-stage3-v1",
+  "bank_hash": "50c9ab8d4519a465128e97788b76a92a7abadf9e3419c4eb95c8afc2b93bdb3e",
+  "grader_version": "backend-bank-grader-v1",
+  "grader_hash": "52e13ec4f8b97b4a1c658779e8485bff6a94c085ba92ea468e7219765d73ef63",
+  "technical_status": "passed",
+  "checks": 758,
+  "versions_checked": 24,
+  "admission_status": "not_admitted",
+  "human_difficulty": "not measured; final stage"
+}

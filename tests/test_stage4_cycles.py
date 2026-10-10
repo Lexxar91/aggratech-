@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from app.assessment import jobs, router, service
 from app.assessment.admin import intervene
+from app.assessment.bank_models import FullBankVersion
 from app.assessment.grading import FamilyGrade
 from app.assessment.models import AssessmentAnswer, AssessmentCycle, FamilyExposure
 from app.assessment.runner import RunnerUnavailable
@@ -109,11 +110,10 @@ async def finish_fixture(
         cycle = await db.get(AssessmentCycle, cycle_id)
         assert cycle
         for row in await service.answers(db, cycle_id):
+            version = service.material(cycle, row.family)
+            assert isinstance(version, FullBankVersion)
             row.grading_status = "completed"
-            row.scores = {
-                s: 4 if successful else 2
-                for s in service.material(cycle, row.family).skills
-            }
+            row.scores = {s: 4 if successful else 2 for s in version.skills}
         await db.flush()
         await service.finalize_result(db, cycle, utc_now())
         await db.execute(update(BackgroundJob).values(status="succeeded"))

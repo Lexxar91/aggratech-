@@ -17,6 +17,7 @@ from app.assessment.runner import (
 )
 from app.assessment.runtime_bank import admitted_bank
 from app.assessment.schemas import TaskAnswer
+from app.assessment.v3_models import V3Card
 from app.core.config import Settings
 from app.core.errors import ApiError
 
@@ -25,8 +26,12 @@ NOW = datetime(2026, 10, 9, tzinfo=UTC)
 
 
 def prepared_answer(
-    version: FullBankVersion, phase: str, index: int = 0, kind: str = "reference"
+    version: FullBankVersion | V3Card,
+    phase: str,
+    index: int = 0,
+    kind: str = "reference",
 ) -> TaskAnswer:
+    assert isinstance(version, FullBankVersion), "Legacy helper requires v1 materials"
     task = selected_task(version, phase, index)
     structured = next(e.answer for e in task.examples if e.kind == kind) if task else {}
     source = next((s.source for s in version.solutions if s.kind == kind), "")

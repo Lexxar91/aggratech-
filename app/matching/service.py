@@ -15,6 +15,8 @@ from app.assessment.models import (
     AssessmentSurvey,
 )
 from app.assessment.policy import METHODOLOGY
+from app.assessment.runtime_bank import credit_admission_valid
+from app.assessment.v3_models import V3_METHODOLOGY
 from app.candidate_profile.models import (
     CandidateEmployerBlock,
     CandidateProfile,
@@ -38,6 +40,8 @@ from app.matching.models import (
     NeedVersion,
 )
 from app.matching.schemas import Candidate, Need, Ranking, Recommendation
+
+PRODUCT_METHODS = frozenset([METHODOLOGY, V3_METHODOLOGY])
 
 
 class SnapshotEntry(BaseModel):
@@ -183,11 +187,7 @@ async def published_cycle(db: AsyncSession, user_id: UUID) -> AssessmentCycle | 
             AssessmentPublication.grade == AssessmentCycle.grade,
         )
     )
-    if (
-        row is None
-        or row.admission.get("review_passed") is not True
-        or row.admission.get("origin") != "live_credit"
-    ):
+    if row is None or not credit_admission_valid(row):
         return None
     return row
 
@@ -287,7 +287,7 @@ async def build_snapshot(db: AsyncSession, row: EmployerNeed) -> MatchingSnapsho
     now = datetime.now(UTC)
     need = Need.model_validate(row.definition)
     candidates = await product_candidates(db, row.employer_id, now)
-    ranking = compute(need, candidates, now, frozenset([METHODOLOGY]))
+    ranking = compute(need, candidates, now, PRODUCT_METHODS)
     snapshot = MatchingSnapshot(
         id=uuid4(),
         need_id=row.id,
@@ -332,8 +332,7 @@ async def snapshot_view(
                 and original.outcome == "confirmed"
                 and original.review_state == "clear"
                 and original.state == "completed"
-                and original.admission.get("review_passed") is True
-                and original.admission.get("origin") == "live_credit"
+                and credit_admission_valid(original)
                 and original.bank_hash
                 == recommendation.evidence_snapshot.get("bank_sha256")
                 and original.evaluator_hash

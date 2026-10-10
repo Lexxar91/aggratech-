@@ -1,5 +1,9 @@
+import asyncio
+import hashlib
+import json
 import ssl
 from math import isfinite
+from pathlib import Path
 from typing import Literal
 
 import httpx
@@ -11,6 +15,85 @@ PYTHON_IMAGE = (
     "python:3.14.4-slim@sha256:"
     "2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727"
 )
+POSTGRES_IMAGE = (
+    "postgres:18-bookworm@sha256:"
+    "afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c"
+)
+POSTGRES_VERSION = "18.6"
+ExecutionStatus = Literal[
+    "completed", "candidate_error", "timeout", "output_limit", "runtime_error"
+]
+
+
+def runtime_executor_hash() -> str:
+    """Связывает ответ mTLS controller с установленными адаптерами и кодом."""
+    paths = (
+        "app/assessment/runner.py",
+        "app/core/config.py",
+        "runner/sandbox.py",
+        "runner/server.py",
+        "runner/v3_python.py",
+        "runner/v3_sql.py",
+        "runner/v3_adapters.py",
+    )
+    value = {p: hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths}
+    return hashlib.sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
+class V3ExecutionRequest(BaseModel):
+    """Закрытый runner получает только ответ и сценарии, без эталонных ожиданий."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    task_id: str = Field(pattern=r"^[XY][1-6](?:-(?:PY|SQL))?-[JM]$")
+    language: Literal["python", "sql"]
+    source: str = Field(min_length=1, max_length=32768)
+    scenarios: list[dict[str, JsonValue]] = Field(min_length=1, max_length=16)
+
+    @field_validator("source")
+    @classmethod
+    def bounded_source(cls, value: str) -> str:
+        """Ограничивает именно объём передаваемых байтов."""
+        if len(value.encode()) > 32768:
+            raise ValueError("source_too_large")
+        return value
+
+    @field_validator("scenarios")
+    @classmethod
+    def no_closed_expectations(
+        cls, values: list[dict[str, JsonValue]]
+    ) -> list[dict[str, JsonValue]]:
+        """Ожидания, рубрики и решения не являются частью протокола исполнения."""
+        if any(
+            set(value) & {"expected", "assertions", "rubric", "reference", "solutions"}
+            for value in values
+        ):
+            raise ValueError("closed_material_in_execution_request")
+
+        def finite(value: JsonValue) -> None:
+            if isinstance(value, float) and not isfinite(value):
+                raise ValueError("non_finite_input")
+            if isinstance(value, (list, dict)):
+                for item in value.values() if isinstance(value, dict) else value:
+                    finite(item)
+
+        for value in values:
+            finite(value)
+        return values
+
+
+class V3ExecutionResult(BaseModel):
+    """Наблюдения стенда отделены от сравнения с закрытыми ожиданиями."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    status: Literal[
+        "completed", "candidate_error", "timeout", "output_limit", "runtime_error"
+    ]
+    outputs: list[JsonValue] = Field(default_factory=list, max_length=16)
+    runtime_image: str
+    duration_ms: float = Field(ge=0)
+    executor_hash: str | None = None
 
 
 class ExecutionRequest(BaseModel):
@@ -121,3 +204,39 @@ class RunnerClient:
     async def close(self) -> None:
         """Закрывает соединения независимо от результата проверки."""
         await self.client.aclose()
+
+    async def execute_v3(self, request: V3ExecutionRequest) -> V3ExecutionResult:
+        """Исполняет v3 на фиксированном runtime, не передавая выбор образа клиенту."""
+        try:
+            async with self.client.stream(
+                "POST",
+                "/execute-v3",
+                content=request.model_dump_json(),
+                headers={"Content-Type": "application/json"},
+                timeout=60,
+            ) as response:
+                response.raise_for_status()
+                chunks: list[bytes] = []
+                size = 0
+                async for chunk in response.aiter_bytes():
+                    size += len(chunk)
+                    if size > 131072:
+                        raise RunnerUnavailable("runner_response_too_large")
+                    chunks.append(chunk)
+                result = V3ExecutionResult.model_validate_json(b"".join(chunks))
+        except (httpx.HTTPError, ValueError) as error:
+            raise RunnerUnavailable(
+                "runner_v3_unavailable_or_invalid_response"
+            ) from error
+        expected_image = (
+            PYTHON_IMAGE if request.language == "python" else POSTGRES_IMAGE
+        )
+        if result.runtime_image != expected_image:
+            raise RunnerUnavailable("unexpected_runtime_image")
+        if result.executor_hash != await asyncio.to_thread(runtime_executor_hash):
+            raise RunnerUnavailable("runner_executor_version_mismatch")
+        if result.status == "completed" and len(result.outputs) != len(
+            request.scenarios
+        ):
+            raise RunnerUnavailable("runner_output_count_mismatch")
+        return result

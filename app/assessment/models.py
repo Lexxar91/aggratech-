@@ -81,7 +81,8 @@ class AssessmentAnswer(Base):
     cycle_id: Mapped[UUID] = mapped_column(
         ForeignKey("assessment_cycles.id"), primary_key=True
     )
-    family: Mapped[str] = mapped_column(String(4), primary_key=True)
+    # v1 хранит family; v3 хранит task_id. Общая история показов — FamilyExposure.
+    family: Mapped[str] = mapped_column(String(32), primary_key=True)
     phase: Mapped[str] = mapped_column(String(1))
     parameter_index: Mapped[int]
     step: Mapped[str] = mapped_column(String(16), default="base")

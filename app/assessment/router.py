@@ -1,5 +1,6 @@
 """API assessment: роль, подтверждённый email, владение и закрытые этапы."""
 
+import asyncio
 from typing import Annotated
 from uuid import UUID
 
@@ -8,21 +9,79 @@ from sqlalchemy import select
 
 from app.assessment import service
 from app.assessment.models import AssessmentAppeal, AssessmentCycle, AssessmentSurvey
+from app.assessment.runtime_bank import admitted_bank
 from app.assessment.schemas import (
     AppealInput,
     AppealView,
+    AssessmentAvailability,
     CycleInput,
     CycleView,
     ResultView,
     SaveAnswer,
     SurveyInput,
 )
+from app.assessment.v3_models import V3Bank
 from app.auth.dependencies import Candidate, Db, Principal, require_verified_candidate
 from app.core.config import Settings
+from app.core.errors import ApiError
 from app.notifications.queue import utc_now
 
 router = APIRouter(prefix="/assessment", tags=["assessment"])
 VerifiedCandidate = Annotated[Principal, Depends(require_verified_candidate)]
+
+
+@router.get("/availability", response_model=AssessmentAvailability)
+async def availability(
+    principal: Candidate, request: Request
+) -> AssessmentAvailability:
+    """Показывает фактическую доступность банка, не его закрытые материалы."""
+    settings: Settings = request.app.state.settings
+    try:
+        bank, _ = await asyncio.to_thread(admitted_bank, settings, "demo")
+    except ApiError:
+        return AssessmentAvailability(
+            bank_version=None,
+            methodology=None,
+            credit_available=False,
+            demo_available=False,
+            cards_per_form=0,
+            a_tasks=0,
+            b_tasks=0,
+            acceptance=None,
+            message=(
+                "Актуальный технический допуск недоступен; "
+                "прохождение временно закрыто."
+            ),
+        )
+    credit = True
+    try:
+        await asyncio.to_thread(admitted_bank, settings, "credit")
+    except ApiError:
+        credit = False
+    v3 = isinstance(bank, V3Bank)
+    return AssessmentAvailability(
+        bank_version=bank.bank_version,
+        methodology=bank.methodology
+        if isinstance(bank, V3Bank)
+        else "backend-assessment-v1",
+        credit_available=credit,
+        demo_available=True,
+        cards_per_form=7 if v3 else 6,
+        a_tasks=5 if v3 else 4,
+        b_tasks=2,
+        acceptance="operator_content_acceptance"
+        if v3 and credit
+        else "independent_review"
+        if credit
+        else None,
+        message=(
+            "v3: материалы приняты оператором; технический "
+            "допуск проверен. Точность и сопоставимость на "
+            "людях этим допуском не измерены."
+        )
+        if v3 and credit
+        else "Доступен демонстрационный режим. Зачётный допуск отсутствует.",
+    )
 
 
 @router.get("/survey", response_model=SurveyInput | None)

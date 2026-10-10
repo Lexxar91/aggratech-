@@ -7,11 +7,14 @@ x-app: &app
   image: aggratech-stage1:app
   environment:
     APP_DATABASE_URL: postgresql+asyncpg://aggratech:local-development@db:5432/aggratech
-    APP_JOB_LEASE_SECONDS: ${APP_JOB_LEASE_SECONDS:-60}
+    APP_JOB_LEASE_SECONDS: ${APP_JOB_LEASE_SECONDS:-300}
     APP_JOB_MAX_ATTEMPTS: ${APP_JOB_MAX_ATTEMPTS:-3}
     APP_WORKER_POLL_SECONDS: ${APP_WORKER_POLL_SECONDS:-1}
     APP_PUBLIC_ORIGIN: http://127.0.0.1:${APP_HTTP_PORT:-18000}
     APP_ALLOWED_ORIGINS: '["http://localhost:${APP_HTTP_PORT:-18000}"]'
+    APP_ASSESSMENT_BANK: bank/private/v3.json
+    APP_ASSESSMENT_REPORT: bank/private/v3_technical_report.json
+    APP_ASSESSMENT_ACCEPTANCE: bank/private/v3_operator_acceptance.json
   read_only: true
   tmpfs:
     - /tmp:size=32m,noexec,nosuid,nodev
@@ -90,10 +93,13 @@ services:
     command: ["python", "-m", "app.worker"]
     environment:
       APP_DATABASE_URL: postgresql+asyncpg://aggratech:local-development@db:5432/aggratech
-      APP_JOB_LEASE_SECONDS: ${APP_JOB_LEASE_SECONDS:-60}
+      APP_JOB_LEASE_SECONDS: ${APP_JOB_LEASE_SECONDS:-300}
       APP_JOB_MAX_ATTEMPTS: ${APP_JOB_MAX_ATTEMPTS:-3}
       APP_WORKER_POLL_SECONDS: ${APP_WORKER_POLL_SECONDS:-1}
       APP_PUBLIC_ORIGIN: http://127.0.0.1:${APP_HTTP_PORT:-18000}
+      APP_ASSESSMENT_BANK: bank/private/v3.json
+      APP_ASSESSMENT_REPORT: bank/private/v3_technical_report.json
+      APP_ASSESSMENT_ACCEPTANCE: bank/private/v3_operator_acceptance.json
       APP_RUNNER_URL: https://runner-controller:9443
       APP_RUNNER_CA: /run/runner-client/ca.crt
       APP_RUNNER_CLIENT_CERTIFICATE: /run/runner-client/client.crt
@@ -135,6 +141,17 @@ services:
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]
 
+  sql-sandbox-image:
+    image: postgres:18-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c
+    entrypoint: ["/usr/lib/postgresql/18/bin/postgres", "--version"]
+    network_mode: none
+    user: "65534:65534"
+    read_only: true
+    tmpfs:
+      - /var/lib/postgresql:size=1m,nosuid,nodev,noexec
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
   runner-controller:
     build:
       context: .
@@ -162,6 +179,8 @@ services:
       runner-pki:
         condition: service_completed_successfully
       sandbox-image:
+        condition: service_completed_successfully
+      sql-sandbox-image:
         condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 9443), timeout=3).close()"]

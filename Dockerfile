@@ -1,3 +1,10 @@
+FROM node:22.22.1-bookworm-slim@sha256:4f77a690f2f8946ab16fe1e791a3ac0667ae1c3575c3e4d0d4589e9ed5bfaf3d AS frontend-build
+WORKDIR /frontend
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY frontend ./
+RUN npm run build
+
 FROM python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727 AS base
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 UV_PYTHON_DOWNLOADS=never UV_CACHE_DIR=/tmp/uv-cache
 WORKDIR /opt/aggratech
@@ -5,6 +12,8 @@ RUN pip install --no-cache-dir uv==0.12.23
 COPY pyproject.toml uv.lock ./
 RUN uv sync --locked --no-dev --no-install-project
 COPY app ./app
+COPY runner ./runner
+COPY --from=frontend-build /frontend/dist ./frontend/dist
 COPY migrations ./migrations
 COPY bank ./bank
 COPY fixtures ./fixtures

@@ -1,0 +1,8 @@
+{
+  "type": "operator_content_acceptance",
+  "source_hash": "5705b3a6d2d5c4a0da11064b1fc4fed69e40fe034d4f24f609f411168d1ec458",
+  "source_path": "bank/sources/backend_junior_middle_bank_v3.md",
+  "authorization": "Пользователь разрешил интеграцию и операторское принятие содержимого банка v3: банк проверен людьми и считается эталоном условий, контрактов, ключей и рубрик. Зачётное использование разрешено после успешных технических проверок. Источник: согласованная цель интеграции v3 в текущем сеансе Codex.",
+  "accepted_at": "2026-10-10",
+  "independent_expert_review": "not_recorded"
+}

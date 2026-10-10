@@ -1,191 +1,288 @@
 {
-  "status": "pending_independent_review",
-  "admission_status": "not_admitted",
-  "bank_version": "backend-xy-stage3-v1",
-  "grader_version": "backend-bank-grader-v1",
-  "grader_hash": "52e13ec4f8b97b4a1c658779e8485bff6a94c085ba92ea468e7219765d73ef63",
-  "runtime_evaluator_hash": "0715e40743bd95a80860fa01e4ec68ebeb06acb65f4fb5e426335515f2ef1c79",
-  "authors": [
-    "codex-stage3-author"
-  ],
-  "files": {
-    "bank/private/full.json": "50c9ab8d4519a465128e97788b76a92a7abadf9e3419c4eb95c8afc2b93bdb3e",
-    "bank/blueprints.json": "08a48eb890b97093b57e94ded24a56b69f98dbedae2239808dd0cfa9d3f6ac75",
-    "bank/vacancy_mappings.json": "2aa052323734d18dc62150571598a0435f043cba4eca9c23659b02d986852fcd"
+  "status": "technical_passed_operator_accepted",
+  "admission_status": "admitted",
+  "bank_version": "3.0",
+  "methodology": "backend-assessment-v3-packages-1",
+  "bank_hash": "95696fdadd45e145f52064c82972e77661e0d89c1dc6aed34773420b965a6d1f",
+  "source_hash": "5705b3a6d2d5c4a0da11064b1fc4fed69e40fe034d4f24f609f411168d1ec458",
+  "grader_version": "backend-v3-grader-1",
+  "grader_hash": "60fbf28f3c2397b9a32c616efefffceb585b9ac56740dcf165ad02739f01a8e3",
+  "acceptance_hash": "64d7dd6ffca1be9b831084796695bb7fa18425c3368b90f5dc000b257e41e687",
+  "acceptance_basis": "explicit_user_operator_content_acceptance",
+  "independent_expert_review": "not_recorded_for_v3",
+  "human_calibration": "not_measured_by_this_run",
+  "runtime_images": {
+    "python": "python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727",
+    "sql": "postgres:18-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c"
   },
-  "versions": [
+  "files": {
+    "bank/private/v3.json": "b7e2812f3239c8f732b725c475ef94bd955c238c9f0fe0ab1a5c50769ad517ea",
+    "bank/private/v3_technical_report.json": "4e76a585b42a743a73dfed8cd360ab67bfc2a2884a3e6acbf397f1a94f716e36",
+    "bank/private/v3_operator_acceptance.json": "0e3b53115512549de50e4a3085f52f00ae5694a83108d3249d25d756dfa6a907",
+    "bank/sources/backend_junior_middle_bank_v3.md": "5705b3a6d2d5c4a0da11064b1fc4fed69e40fe034d4f24f609f411168d1ec458",
+    "bank/v3_runtime_policy.json": "2abf7de230ff7114e917f9470abbf38a9c680a6b55e72d52547f6312f801874c",
+    "bank/v3_traceability.md": "6102cec8faebff96fe3257784785e6c3b3413d8893a5dfadeeb514271cb6534b"
+  },
+  "cards": [
     {
-      "family": "X1",
+      "task_id": "X1-PY-J",
+      "family_id": "X1",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "7b7852535cb87f7a81685ad918c6b86821436af2dbc9727b103c605d64392056",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "python",
+      "material_hash": "f75ecbdd5755b03f24bf213f983efa448dd5f937ffd8817e8a94ab5e635bda56"
     },
     {
-      "family": "X1",
-      "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "c0e5eee0d68eb4c819110e91bf18a3609c5a985c4be9af2150f782372eb01a04",
-      "review_status": "not_conducted"
-    },
-    {
-      "family": "X2",
+      "task_id": "X1-SQL-J",
+      "family_id": "X1",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "7e47e27fd94efa35d746c401d0d9ca18b4cd9b369be745cd7a7827daf437d158",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "sql",
+      "material_hash": "e0182e8786b96204e19adee3eeae9b620d3404df0895861975b9ede1af11f65d"
     },
     {
-      "family": "X2",
+      "task_id": "X1-PY-M",
+      "family_id": "X1",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "74788ab231307d9127691a64151ae544916d737ee8f04f65305aaf97731dcb86",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "python",
+      "material_hash": "9b872293b8d7625c031b736649fbd38e0b83af04b88dd66fa24229e6563f6614"
     },
     {
-      "family": "X3",
+      "task_id": "X1-SQL-M",
+      "family_id": "X1",
+      "grade": "middle",
+      "form": "X",
+      "session": "A",
+      "language": "sql",
+      "material_hash": "3089dbcea1845ec4a1316a373d252744d2680da7a608eaa87b64a58e8947bfbb"
+    },
+    {
+      "task_id": "X2-J",
+      "family_id": "X2",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "d5e2d4a05f60aa4b893d007953a6595a5380a66d91d61ffc5533b9e97d9464fc",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "python",
+      "material_hash": "1d2641bc9e6314e6f9fa678db9f791fb4cb1504c74736680cc0a70dc535a9e8e"
     },
     {
-      "family": "X3",
+      "task_id": "X2-M",
+      "family_id": "X2",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "a215f37b30878d9b1c66168252902844836ea83dcca683f35e0729b417c7c71c",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "python",
+      "material_hash": "85aa00f1e875de9e4c11a0408b00fab2eafb8c7d0777c587d1858db6beb5e6c2"
     },
     {
-      "family": "X4",
+      "task_id": "X3-J",
+      "family_id": "X3",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "c0e29697f1241f439089da63140d5f15927b2f1f4720cb542c03fd8c89ce1908",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "sql",
+      "material_hash": "dbd142d101fa5dd2ea149198e4c20a40a9a0ff01f39e3b09bd51956f59c57632"
     },
     {
-      "family": "X4",
+      "task_id": "X3-M",
+      "family_id": "X3",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "5f9bc220355e0aa89e9d6247bd0ca82676eef8a1ce043ac3a8324ec4f1d246de",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "sql",
+      "material_hash": "61ff09bebfb044d5984e1a3d5379f52264d6cee475750946f08bf80acb17f38e"
     },
     {
-      "family": "X5",
+      "task_id": "X4-J",
+      "family_id": "X4",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "258144e307be19cb45a489d9c4bca636394a61887be2c513c9a0458a340689c6",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "python",
+      "material_hash": "750d599c36b3cbcce2e531219edfd1a41dec13db97b24a415139137d2a5c03b7"
     },
     {
-      "family": "X5",
+      "task_id": "X4-M",
+      "family_id": "X4",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "fd3f6082d3dac00722652973246a8b9d58370e75ddd24caeee3842639404df6e",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "A",
+      "language": "python",
+      "material_hash": "8c68741302fa81d9aa43918a7e3c7482be1fb32f8f533dd4c976b368a634ceee"
     },
     {
-      "family": "X6",
+      "task_id": "X5-J",
+      "family_id": "X5",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "99ae48c897821b09458f7506692631f91572423f5d74ddd4678ef25c4eb029a0",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "B",
+      "language": "sql",
+      "material_hash": "fda00d5eb701ad9cfd706dec3ac54e447934219a79995b7bed445c94ad71e712"
     },
     {
-      "family": "X6",
+      "task_id": "X5-M",
+      "family_id": "X5",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "8c7c09455426bf3894a7ee9468cf75fe63cf26acd193ffdcbd0586fa1988ded5",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "B",
+      "language": "sql",
+      "material_hash": "0c043f07a2da8fba6e1aada28498ee955eecb72f7894c065f8ef7de78c19bfe2"
     },
     {
-      "family": "Y1",
+      "task_id": "X6-J",
+      "family_id": "X6",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "49724f86fbeb0714fe5001530489eedc6aadb80bb449ed729b572a592ecbc90a",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "B",
+      "language": "python",
+      "material_hash": "8165fbc234314d1b453b7f466fb6ea316b42cb3729b66a23abba9dd5464359d7"
     },
     {
-      "family": "Y1",
+      "task_id": "X6-M",
+      "family_id": "X6",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "a7148adf4b6f22d76086a916c9dc182cb7003c608871b714f0944eb3fcf5b72f",
-      "review_status": "not_conducted"
+      "form": "X",
+      "session": "B",
+      "language": "python",
+      "material_hash": "de315e63c18d7435620a7910102f244f9690dbc011f881efc0150694f0825abc"
     },
     {
-      "family": "Y2",
+      "task_id": "Y1-PY-J",
+      "family_id": "Y1",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "40f8f2c176e4582519be7d42ef88973bec8d5dd225d36433a5edf8f473dcd7d5",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "python",
+      "material_hash": "68767036016de0a8512ff27efcab93a8c013552c471a77e9e11c1715fe1bd72e"
     },
     {
-      "family": "Y2",
-      "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "13787431d36b4edadcf1f2e196e6192ca17462a8c6c5441b83649f8ad500987e",
-      "review_status": "not_conducted"
-    },
-    {
-      "family": "Y3",
+      "task_id": "Y1-SQL-J",
+      "family_id": "Y1",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "f6042a6dd2198774bf41fc6a1f42aac3739b4f771adc89e0f17dfee69a3e2e82",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "sql",
+      "material_hash": "463658b23299f1319c5548823c4b2fa1ccc3f3413fafd01e2a7d638ffb922b29"
     },
     {
-      "family": "Y3",
+      "task_id": "Y1-PY-M",
+      "family_id": "Y1",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "7884277b935a1225a42cb3201e40efb84b18d582e60bda7e5803dc693998d584",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "python",
+      "material_hash": "bf73ecfd7a9225f017a242ed4aa267537edbda845f84287e2e5db5848fa8c0f6"
     },
     {
-      "family": "Y4",
+      "task_id": "Y1-SQL-M",
+      "family_id": "Y1",
+      "grade": "middle",
+      "form": "Y",
+      "session": "A",
+      "language": "sql",
+      "material_hash": "e7ee787b3aa09881b56fbb13d69e4aae9413c76b9c7d9ed48c3b5891363649f3"
+    },
+    {
+      "task_id": "Y2-J",
+      "family_id": "Y2",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "f4df93b79872fcb140c0ac867e713f219db6c1321e1148f8fdebd66a7cfecf4d",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "python",
+      "material_hash": "16cda5f70dcfd266b8435d1cd35e48c0891663021024d7a941a8c8495e44d8a4"
     },
     {
-      "family": "Y4",
+      "task_id": "Y2-M",
+      "family_id": "Y2",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "44e2450929de2f73745683c6ab720929830b5d8b9e555eb7d50c06680a60bcd5",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "python",
+      "material_hash": "ceb7087bcfede579e8c548d0e260e4f17b68316381908a42b5efabb80b57548e"
     },
     {
-      "family": "Y5",
+      "task_id": "Y3-J",
+      "family_id": "Y3",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "794c48442b6983ebdbdbf432b0b249e4f001de71bdb7496dc4e5e13613b72d2c",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "sql",
+      "material_hash": "5b72462c0da4a5e904f6a519dd14894940c300f077ab39e256f23a2be707158f"
     },
     {
-      "family": "Y5",
+      "task_id": "Y3-M",
+      "family_id": "Y3",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "9d5ebacde2861dde6816d2d47edbce0d7d235921ff87ae21fdc468c71242a4d0",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "sql",
+      "material_hash": "98048f794bfd5351e8852bb9da74430ae56e620bd85feb44748efa5fb5ec8326"
     },
     {
-      "family": "Y6",
+      "task_id": "Y4-J",
+      "family_id": "Y4",
       "grade": "junior",
-      "version": "stage3-v1",
-      "material_hash": "30a08363b73bac23671bdc6623a4d487cd4b58500cb0e43071355d48034cac2b",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "python",
+      "material_hash": "2ffdd3715db54e9858abaac846a476cf08d904ea2d070a2d6cd9bbf96da9c023"
     },
     {
-      "family": "Y6",
+      "task_id": "Y4-M",
+      "family_id": "Y4",
       "grade": "middle",
-      "version": "stage3-v1",
-      "material_hash": "ee248c9c16917320f36b48e03abeedf630577ca23fd6e9874dad43a7c4f4aa2c",
-      "review_status": "not_conducted"
+      "form": "Y",
+      "session": "A",
+      "language": "python",
+      "material_hash": "5152b130f45507aed51d2bbc890f3681b2a1ea557600d398fa2cac18983b3432"
+    },
+    {
+      "task_id": "Y5-J",
+      "family_id": "Y5",
+      "grade": "junior",
+      "form": "Y",
+      "session": "B",
+      "language": "sql",
+      "material_hash": "1f7711812d1e99c015f8954542a3c94fd90204dea4918eaf476ae6c7bde1965b"
+    },
+    {
+      "task_id": "Y5-M",
+      "family_id": "Y5",
+      "grade": "middle",
+      "form": "Y",
+      "session": "B",
+      "language": "sql",
+      "material_hash": "d4aa5e6867e85d6e8884ddb6d888c4b245cb77b0361e8232d7b7fc8523660b5d"
+    },
+    {
+      "task_id": "Y6-J",
+      "family_id": "Y6",
+      "grade": "junior",
+      "form": "Y",
+      "session": "B",
+      "language": "python",
+      "material_hash": "48f90c8f6f60214aebcb8ebd7ce71d48e071ad059d598ccefc9ea75db8c37509"
+    },
+    {
+      "task_id": "Y6-M",
+      "family_id": "Y6",
+      "grade": "middle",
+      "form": "Y",
+      "session": "B",
+      "language": "python",
+      "material_hash": "7521a2d371d785200300958370471daf23a1bb80583b679f485be01466571f33"
     }
   ],
-  "technical_report_at_preflight": {
-    "checks": 758,
+  "technical_report": {
     "technical_status": "passed",
+    "rows": 504,
+    "checks": 28764,
+    "technical_errors": [],
     "hashes_current": true
-  }
+  },
+  "legacy_history": "history/stage9-2026-10-09/materials_manifest.json"
 }

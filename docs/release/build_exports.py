@@ -31,11 +31,13 @@ def markup(text: str) -> str:
 
 
 def footer(canvas: Canvas, document: SimpleDocTemplate) -> None:
-    """Помечает каждый лист как RC без человеческого допуска банка."""
+    """Отделяет техническую поставку v3 от статистической калибровки на людях."""
     canvas.saveState()
     canvas.setFont(FONT, 8)
     canvas.setFillColor(colors.HexColor("#475569"))
-    canvas.drawString(36, 20, "Aggratech RC · 09.10.2026 · банк not_admitted")
+    canvas.drawString(
+        36, 20, "Aggratech v3 · 11.10.2026 · точность на людях не измерена"
+    )
     canvas.drawRightString(document.pagesize[0] - 36, 20, str(document.page))
     canvas.restoreState()
 
@@ -118,6 +120,7 @@ def main() -> None:
         "validation_report.md",
         "human_checks.md",
         "demo_script.md",
+        "../09_bank_v3_integration.md",
     ):
         if story:
             story.append(PageBreak())

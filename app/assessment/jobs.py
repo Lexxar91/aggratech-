@@ -1,6 +1,7 @@
 """Фоновая оценка с владением очередью и восстановлением того же снимка ответов."""
 
 import asyncio
+from datetime import timedelta
 from uuid import UUID
 
 from sqlalchemy import and_, or_, select
@@ -12,6 +13,9 @@ from app.assessment.runner import RunnerClient, RunnerUnavailable
 from app.assessment.runtime_bank import evaluator_hash
 from app.assessment.schemas import TaskAnswer
 from app.assessment.service import advance_deadlines, audit, finalize_result, material
+from app.assessment.v3_admission import evaluator_hash_v3
+from app.assessment.v3_grading import grade_v3
+from app.assessment.v3_models import V3Card, V3TaskGrade
 from app.core.config import Settings
 from app.notifications.models import BackgroundJob
 from app.notifications.queue import ClaimedJob, owned_job, utc_now
@@ -83,13 +87,37 @@ async def process_assessment(
         transfer = TaskAnswer.model_validate(row.transfer or {})
         index = row.parameter_index
         expected_hash = cycle.evaluator_hash
+    if isinstance(version, V3Card):
+        # Несколько ограниченных batch-запусков могут превышать прежний lease 60 s.
+        # Продлеваем только действующего владельца, не оживляя чужую/истёкшую работу.
+        async with sessions.begin() as db:
+            owned = await owned_job(db, job, utc_now())
+            if owned is None:
+                return
+            owned.lease_until = utc_now() + timedelta(
+                seconds=max(300, settings.job_lease_seconds)
+            )
     result = FamilyGrade()
+    v3_result: V3TaskGrade | None = None
     error: str | None = None
     runner: RunnerClient | None = None
     try:
-        if expected_hash != await asyncio.to_thread(evaluator_hash):
+        if expected_hash != await asyncio.to_thread(
+            evaluator_hash_v3 if isinstance(version, V3Card) else evaluator_hash
+        ):
             raise RunnerUnavailable("evaluator_version_unavailable")
-        if any(
+        if isinstance(version, V3Card):
+            runner = RunnerClient(settings)
+            v3_result = await grade_v3(
+                version,
+                base.source,
+                transfer.source,
+                version.seeds[index % len(version.seeds)],
+                runner.execute_v3,
+            )
+            if v3_result.status == "environment_error":
+                error = "assessment_infrastructure_unavailable"
+        elif any(
             (
                 base.source,
                 base.structured,
@@ -118,13 +146,21 @@ async def process_assessment(
         if cycle is None or row is None or row.grade_generation != generation:
             owned.status = "succeeded"
         else:
-            row.grading_status = "technical_error" if error else "completed"
-            row.scores = {} if error else dict(result.scores)
-            row.grading_detail = (
-                {"error": error}
-                if error
-                else result.model_dump(mode="json", exclude={"scores"})
-            )
+            if isinstance(version, V3Card):
+                v3_result = v3_result or V3TaskGrade(status="environment_error")
+                row.grading_status = v3_result.status
+                row.scores = dict(v3_result.scores)
+                row.grading_detail = v3_result.model_dump(
+                    mode="json", exclude={"scores"}
+                )
+            else:
+                row.grading_status = "technical_error" if error else "completed"
+                row.scores = {} if error else dict(result.scores)
+                row.grading_detail = (
+                    {"error": error}
+                    if error
+                    else result.model_dump(mode="json", exclude={"scores"})
+                )
             owned.status = "failed" if error else "succeeded"
             owned.last_error_code = error
             audit(

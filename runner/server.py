@@ -6,8 +6,17 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 from pydantic import ValidationError
 
-from app.assessment.runner import ExecutionRequest, RunnerUnavailable
+from app.assessment.runner import (
+    ExecutionRequest,
+    ExecutionResult,
+    RunnerUnavailable,
+    V3ExecutionRequest,
+    V3ExecutionResult,
+    runtime_executor_hash,
+)
 from runner.sandbox import SandboxPolicy, execute, recover_tasks
+from runner.v3_python import execute_python_v3
+from runner.v3_sql import execute_sql_v3
 
 
 def reject_constant(value: str) -> object:
@@ -40,10 +49,11 @@ def build_handler(policy: SandboxPolicy) -> type[BaseHTTPRequestHandler]:
         def do_POST(self) -> None:
             """Принимает запрос только после проверки клиентского TLS-сертификата."""
             self.connection.settimeout(10)
-            if self.path != "/execute":
+            if self.path not in ("/execute", "/execute-v3"):
                 self.reply(404, {"code": "not_found"})
                 return
             try:
+                result: ExecutionResult | V3ExecutionResult
                 if self.headers.get("Transfer-Encoding"):
                     raise ValueError("unsupported_transfer_encoding")
                 if self.headers.get_content_type() != "application/json":
@@ -54,8 +64,22 @@ def build_handler(policy: SandboxPolicy) -> type[BaseHTTPRequestHandler]:
                 body = self.rfile.read(length)
                 if len(body) != length:
                     raise ValueError("incomplete_request")
-                request = parse_request(body)
-                result = asyncio.run(execute(request, policy))
+                if self.path == "/execute-v3":
+                    value = json.loads(
+                        body,
+                        parse_constant=reject_constant,
+                        object_pairs_hook=unique_object,
+                    )
+                    v3_request = V3ExecutionRequest.model_validate(value)
+                    result = asyncio.run(
+                        execute_python_v3(v3_request)
+                        if v3_request.language == "python"
+                        else execute_sql_v3(v3_request)
+                    )
+                    result.executor_hash = runtime_executor_hash()
+                else:
+                    request = parse_request(body)
+                    result = asyncio.run(execute(request, policy))
             except ValueError, ValidationError, RecursionError:
                 self.reply(422, {"code": "invalid_execution_request"})
                 return

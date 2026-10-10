@@ -1,6 +1,7 @@
 """Транзакционные переходы assessment с общим учётом показанных семейств."""
 
 import asyncio
+import hashlib
 import secrets
 from datetime import datetime, timedelta
 from uuid import UUID, uuid4
@@ -21,7 +22,7 @@ from app.assessment.models import (
     FamilyExposure,
 )
 from app.assessment.policy import METHODOLOGY, check_calendar, decide
-from app.assessment.runtime_bank import admitted_bank, evaluator_hash
+from app.assessment.runtime_bank import admitted_bank, credit_admission_valid
 from app.assessment.schemas import (
     AppealView,
     CycleInput,
@@ -32,6 +33,9 @@ from app.assessment.schemas import (
     SurveyInput,
     TaskAnswer,
 )
+from app.assessment.v3_admission import OperatorAcceptance, V3QualityReport
+from app.assessment.v3_grading import family_evidence
+from app.assessment.v3_models import V3_METHODOLOGY, V3Bank, V3Card
 from app.candidate_profile.service import own_profile
 from app.core.config import Settings
 from app.core.errors import ApiError
@@ -104,11 +108,13 @@ async def answers(db: AsyncSession, cycle_id: UUID) -> list[AssessmentAnswer]:
     )
 
 
-def material(cycle: AssessmentCycle, family: str) -> FullBankVersion:
+def material(cycle: AssessmentCycle, family: str) -> FullBankVersion | V3Card:
     """Восстанавливает сохранённые байты задания, не текущую изменяемую версию банка."""
     value = cycle.materials.get(family)
     if value is None:
         raise ApiError(404, "task_unavailable", "Задание недоступно.")
+    if cycle.methodology == V3_METHODOLOGY:
+        return V3Card.model_validate(value)
     return FullBankVersion.model_validate(value)
 
 
@@ -128,7 +134,11 @@ async def create_cycle(
     for row in previous:
         await advance_deadlines(db, row, now)
         if row.state in ACTIVE:
-            if row.grade == data.grade and row.mode == data.mode:
+            if (
+                row.grade == data.grade
+                and row.mode == data.mode
+                and (data.form is None or data.form == row.form)
+            ):
                 return row
             raise ApiError(409, "cycle_active", "Сначала завершите текущий цикл.")
     if await db.get(AssessmentSurvey, user_id) is None:
@@ -160,11 +170,63 @@ async def create_cycle(
         raise ApiError(
             409, "bank_exhausted", "Нужны новые задания для следующей попытки."
         )
+    if data.form is not None and data.form not in available:
+        raise ApiError(
+            409,
+            "form_exhausted",
+            "Семейства выбранной формы уже показаны; выберите другую форму.",
+        )
     seed = secrets.randbits(31)
-    form = available[seed % len(available)]
-    chosen = [
-        v for v in bank.versions if v.grade == data.grade and v.family.startswith(form)
-    ]
+    form = data.form or available[seed % len(available)]
+    chosen: list[FullBankVersion | V3Card]
+    admission: dict[str, object]
+    if isinstance(bank, V3Bank) and isinstance(report, V3QualityReport):
+        chosen = [c for c in bank.cards if c.grade == data.grade and c.form == form]
+        admission = report.model_dump(
+            mode="json", exclude={"results", "technical_errors", "checks"}
+        )
+        admission.update(
+            {
+                "review_passed": False,
+                "acceptance_type": "operator_content_acceptance",
+                "technical_report_hash": hashlib.sha256(
+                    settings.assessment_report.read_bytes()
+                ).hexdigest(),
+            }
+        )
+        if data.mode == "credit":
+            if settings.assessment_acceptance is None:
+                raise ApiError(409, "bank_not_admitted", "Нет записи принятия банка.")
+            acceptance = OperatorAcceptance.model_validate_json(
+                settings.assessment_acceptance.read_bytes()
+            )
+            admission["operator_acceptance"] = acceptance.model_dump(mode="json")
+        methodology: str = V3_METHODOLOGY
+    else:
+        if isinstance(bank, V3Bank) or isinstance(report, V3QualityReport):
+            raise ApiError(
+                409, "bank_not_admitted", "Версии материалов и отчёта не совпадают."
+            )
+        chosen = [
+            v
+            for v in bank.versions
+            if v.grade == data.grade and v.family.startswith(form)
+        ]
+        admission = {
+            "technical_status": report.technical_status,
+            "bank_hash": report.bank_hash,
+            "bank_version": report.bank_version,
+            "blueprint_hash": report.blueprint_hash,
+            "mappings_hash": report.mappings_hash,
+            "grader_version": report.grader_version,
+            "grader_hash": report.grader_hash,
+            "runtime_image": report.runtime_image,
+            "admission_status": report.admission_status,
+            "review_passed": data.mode == "credit"
+            and report.admission_status == "admitted",
+        }
+        methodology = METHODOLOGY
+    admission["origin"] = "live_demo" if data.mode == "demo" else "live_credit"
     row = AssessmentCycle(
         id=uuid4(),
         user_id=user_id,
@@ -177,16 +239,16 @@ async def create_cycle(
         created_at=now,
         a_deadline=now + timedelta(minutes=30),
         seed=seed,
-        methodology=METHODOLOGY,
-        evaluator_hash=await asyncio.to_thread(evaluator_hash),
+        methodology=methodology,
+        evaluator_hash=report.grader_hash,
         bank_hash=report.bank_hash,
-        admission={
-            "technical_status": report.technical_status,
-            "bank_hash": report.bank_hash,
-            "review_passed": data.mode == "credit",
-            "origin": "live_demo" if data.mode == "demo" else "live_credit",
+        admission=admission,
+        materials={
+            (v.task_id if isinstance(v, V3Card) else v.family): v.model_dump(
+                mode="json"
+            )
+            for v in chosen
         },
-        materials={v.family: v.model_dump(mode="json") for v in chosen},
         result={},
         technical_exempt=False,
     )
@@ -196,8 +258,10 @@ async def create_cycle(
         db.add(
             AssessmentAnswer(
                 cycle_id=row.id,
-                family=v.family,
-                phase="A" if v.family[1] in "1234" else "B",
+                family=v.task_id if isinstance(v, V3Card) else v.family,
+                phase=v.session
+                if isinstance(v, V3Card)
+                else ("A" if v.family[1] in "1234" else "B"),
                 parameter_index=seed % 3,
                 step="base",
                 draft={},
@@ -240,7 +304,20 @@ async def submit_phase(
         return
     if cycle.state != phase:
         raise ApiError(409, "phase_closed", "Этап недоступен или уже закрыт.")
-    for row in await answers(db, cycle.id):
+    phase_answers = await answers(db, cycle.id)
+    if cycle.methodology == V3_METHODOLOGY and any(
+        r.phase == phase and r.finalized_at is None for r in phase_answers
+    ):
+        raise ApiError(
+            409,
+            "answers_incomplete",
+            (
+                "Сначала отправьте первоначальное решение и "
+                "перенос каждого задания. Черновик не считается "
+                "отправленным ответом."
+            ),
+        )
+    for row in phase_answers:
         if row.phase != phase:
             continue
         if row.finalized_at is None:
@@ -269,6 +346,29 @@ async def advance_deadlines(
     db: AsyncSession, cycle: AssessmentCycle, now: datetime
 ) -> None:
     """Лимиты проверяются сервером; просроченная B даёт недостаточность данных."""
+    if cycle.methodology == V3_METHODOLOGY and (
+        cycle.state == "A"
+        and now >= cycle.a_deadline
+        or cycle.state == "B"
+        and cycle.b_deadline is not None
+        and now >= cycle.b_deadline
+    ):
+        for row in await answers(db, cycle.id):
+            if row.phase == cycle.state and row.grading_status == "pending":
+                row.grading_status = (
+                    "incomplete" if row.base or row.draft else "not_submitted"
+                )
+        cycle.terminal_reason = "incomplete_" + cycle.state
+        cycle.state = "expired"
+        cycle.outcome = "insufficient"
+        cycle.completed_at = now
+        cycle.result = {
+            "total": None,
+            "skills": [],
+            "requirements": await requirement_results(db, cycle),
+        }
+        audit(db, cycle, "assessment_incomplete", now)
+        return
     if cycle.state == "A" and now >= cycle.a_deadline:
         await submit_phase(db, cycle, "A", cycle.a_deadline)
     if (
@@ -279,6 +379,16 @@ async def advance_deadlines(
         cycle.state = "expired"
         cycle.outcome = "insufficient"
         cycle.terminal_reason = "b_not_started"
+        if cycle.methodology == V3_METHODOLOGY:
+            cycle.completed_at = now
+            for row in await answers(db, cycle.id):
+                if row.phase == "B":
+                    row.grading_status = "not_submitted"
+            cycle.result = {
+                "total": None,
+                "skills": [],
+                "requirements": await requirement_results(db, cycle),
+            }
         audit(db, cycle, "assessment_b_expired", now)
     if cycle.state == "B" and cycle.b_deadline and now >= cycle.b_deadline:
         await submit_phase(db, cycle, "B", cycle.b_deadline)
@@ -318,6 +428,16 @@ async def save_answer(
             409, "answer_revision_conflict", "Обновите страницу: ответ уже изменён."
         )
     row.draft = data.answer.model_dump(mode="json")
+    if (
+        finalize
+        and cycle.methodology == V3_METHODOLOGY
+        and not data.answer.source.strip()
+    ):
+        raise ApiError(
+            422,
+            "source_required",
+            "Введите Python-код или SQL; пустой ответ не является решением.",
+        )
     row.revision += 1
     if finalize:
         if row.step == "base":
@@ -327,7 +447,11 @@ async def save_answer(
             row.transfer = dict(row.draft)
             row.step = "done"
             row.finalized_at = now
-        row.draft = {}
+        row.draft = (
+            dict(row.base or {})
+            if cycle.methodology == V3_METHODOLOGY and row.step == "transfer"
+            else {}
+        )
         audit(db, cycle, "assessment_answer_fixed", now, family=family, step=data.step)
 
 
@@ -335,31 +459,99 @@ async def finalize_result(
     db: AsyncSession, cycle: AssessmentCycle, now: datetime
 ) -> None:
     """Объединяет независимые семейства только после B и завершения всех проверок."""
-    if cycle.b_submitted_at is None or cycle.state == "invalidated":
+    if cycle.b_submitted_at is None or cycle.state in {"invalidated", "expired"}:
         return
     rows = await answers(db, cycle.id)
-    if any(r.grading_status != "completed" for r in rows):
+    if cycle.methodology == V3_METHODOLOGY:
+        if any(
+            r.grading_status in {"technical_error", "environment_error"} for r in rows
+        ):
+            cycle.state = "technical_error"
+            cycle.outcome = "insufficient"
+            cycle.technical_exempt = True
+            cycle.result = {
+                "total": None,
+                "skills": [],
+                "requirements": await requirement_results(db, cycle),
+            }
+            return
+        if any(r.grading_status == "pending" for r in rows):
+            return
+    if cycle.methodology != V3_METHODOLOGY and any(
+        r.grading_status != "completed" for r in rows
+    ):
         if any(r.grading_status == "technical_error" for r in rows):
             cycle.state = "technical_error"
         return
-    evidence: dict[str, dict[str, int]] = {}
+    collected: list[tuple[str, dict[str, int]]] = []
     for row in rows:
         if row.scores:
-            evidence[row.family] = {
-                k: v
-                for k, v in row.scores.items()
-                if isinstance(v, int) and not isinstance(v, bool)
-            }
+            card = material(cycle, row.family)
+            collected.append(
+                (
+                    card.family_id if isinstance(card, V3Card) else row.family,
+                    {
+                        k: v
+                        for k, v in row.scores.items()
+                        if isinstance(v, int) and not isinstance(v, bool)
+                    },
+                )
+            )
+    evidence = family_evidence(collected)
     outcome, total, skills = decide(
         cycle.grade,
         evidence,
-        b_completed=True,
-        review_required=cycle.review_state != "clear",
+        b_completed=all(r.grading_status == "completed" for r in rows),
+        review_required=cycle.review_state != "clear"
+        or any(r.grading_status in {"review_required", "invalid_item"} for r in rows),
     )
+    critical: set[str] = set()
+    if cycle.methodology == V3_METHODOLOGY:
+        for row in rows:
+            flags = row.grading_detail.get("critical_violations", [])
+            if isinstance(flags, list):
+                critical.update(flag for flag in flags if isinstance(flag, str))
+    violations = sorted(critical)
+    if violations and outcome == "confirmed":
+        outcome = "not_confirmed"
     cycle.outcome = outcome
-    cycle.result = {"total": total, "skills": skills}
+    result: dict[str, object] = {"total": total, "skills": skills}
+    if cycle.methodology == V3_METHODOLOGY:
+        result.update(
+            {
+                "requirements": await requirement_results(db, cycle),
+                "critical_violations": violations,
+            }
+        )
+    # SELECT оснований может вызвать autoflush; JSONB присваиваем целиком после него.
+    cycle.result = result
     cycle.completed_at = cycle.completed_at or now
     cycle.state = "completed"
+
+
+async def requirement_results(
+    db: AsyncSession, cycle: AssessmentCycle
+) -> list[dict[str, object]]:
+    """Раскрывает действие и результат без рубрики, эталона и закрытых случаев."""
+    result: list[dict[str, object]] = []
+    for row in await answers(db, cycle.id):
+        card = material(cycle, row.family)
+        if not isinstance(card, V3Card):
+            continue
+        observed = row.grading_detail.get("requirement_results", {})
+        for requirement in card.requirements:
+            value = observed.get(requirement.id) if isinstance(observed, dict) else None
+            result.append(
+                {
+                    "task_id": card.task_id,
+                    "family_id": card.family_id,
+                    "skill": requirement.skill,
+                    "action": requirement.action,
+                    "status": row.grading_status,
+                    "passed": value if isinstance(value, bool) else None,
+                }
+            )
+    return result
 
 
 def result_view(cycle: AssessmentCycle) -> ResultView:
@@ -376,6 +568,13 @@ def result_view(cycle: AssessmentCycle) -> ResultView:
                 "review_required": "требуется проверка",
             }[outcome]
         )
+    elif not credit_admission_valid(cycle):
+        label = (
+            "Неподтверждённый результат: требования выполнены; "
+            "зачётное происхождение не подтверждено"
+            if outcome == "confirmed"
+            else "Неподтверждённый результат: " + label
+        )
     return ResultView.model_validate(
         {
             "outcome": outcome,
@@ -384,11 +583,19 @@ def result_view(cycle: AssessmentCycle) -> ResultView:
             "label": label,
             "verified": cycle.mode == "credit"
             and outcome == "confirmed"
-            and cycle.admission.get("review_passed") is True,
+            and credit_admission_valid(cycle),
             "total": cycle.result.get("total"),
             "skills": cycle.result.get("skills", []),
             "methodology": cycle.methodology,
             "assessed_at": cycle.completed_at,
+            "requirements": cycle.result.get("requirements", []),
+            "limitations": (
+                "Веса и пороги — принятые продуктовые правила. "
+                "Точность оценки и сопоставимость форм/грейдов "
+                "этим прохождением не измеряются."
+            )
+            if cycle.methodology == V3_METHODOLOGY
+            else None,
         }
     )
 
@@ -404,6 +611,40 @@ async def cycle_view(
             continue
         v = material(cycle, row.family)
         phase = "transfer" if row.step == "transfer" else "base"
+        if isinstance(v, V3Card):
+            await db.execute(
+                insert(FamilyExposure)
+                .values(
+                    user_id=cycle.user_id,
+                    family=v.family_id,
+                    cycle_id=cycle.id,
+                    shown_at=now,
+                )
+                .on_conflict_do_nothing(index_elements=["user_id", "family"])
+            )
+            tasks.append(
+                PublicTask(
+                    family=row.family,
+                    family_id=v.family_id,
+                    task_id=v.task_id,
+                    language=v.language,
+                    title=v.title,
+                    common_contract=v.common_contract,
+                    phase=row.phase,
+                    step=row.step,
+                    revision=row.revision,
+                    condition=v.condition
+                    + ("\n\nПеренос:\n" + v.transfer if phase == "transfer" else ""),
+                    diagnosis_prompt="",
+                    diagnosis_options=[],
+                    verification_options=[],
+                    input=None,
+                    python_required=v.language == "python",
+                    draft=TaskAnswer.model_validate(row.draft),
+                    finalized=row.finalized_at is not None,
+                )
+            )
+            continue
         structured = selected_task(v, phase, row.parameter_index)
         code_cases = [c for c in v.cases if c.phase == phase]
         chosen_input: JsonValue = (
@@ -424,6 +665,8 @@ async def cycle_view(
         tasks.append(
             PublicTask(
                 family=row.family,
+                family_id=row.family,
+                language="python" if v.solutions else "structured",
                 phase=row.phase,
                 step=row.step,
                 revision=row.revision,
@@ -458,6 +701,7 @@ async def cycle_view(
         id=cycle.id,
         grade=cycle.grade,
         mode=cycle.mode,
+        form=cycle.form,
         state=cycle.state,
         a_deadline=cycle.a_deadline,
         b_start_deadline=cycle.b_start_deadline,
@@ -465,7 +709,8 @@ async def cycle_view(
         tasks=tasks,
         result=result_view(cycle),
         technical_issue=any(
-            r.grading_status == "technical_error" for r in await answers(db, cycle.id)
+            r.grading_status in {"technical_error", "environment_error"}
+            for r in await answers(db, cycle.id)
         ),
         bank_hash=cycle.bank_hash,
         created_at=cycle.created_at,
@@ -489,7 +734,7 @@ async def publish(
             "result_not_publishable",
             "Опубликовать можно завершённый успешный результат без открытого review.",
         )
-    if cycle.mode == "credit" and cycle.admission.get("review_passed") is not True:
+    if cycle.mode == "credit" and not credit_admission_valid(cycle):
         raise ApiError(409, "bank_not_admitted", "Зачётный допуск банка отсутствует.")
     newer = await db.scalar(
         select(AssessmentCycle.id).where(
@@ -566,9 +811,7 @@ async def published_result(
     row = await db.scalar(
         query.order_by(AssessmentPublication.published_at.desc()).limit(1)
     )
-    if row is None or (
-        row.mode == "credit" and row.admission.get("review_passed") is not True
-    ):
+    if row is None or row.mode == "credit" and not credit_admission_valid(row):
         return None
     return result_view(row)
 

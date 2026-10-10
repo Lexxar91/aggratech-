@@ -1552,7 +1552,7 @@
     "bank_version": "backend-xy-stage3-v1",
     "bank_hash": "50c9ab8d4519a465128e97788b76a92a7abadf9e3419c4eb95c8afc2b93bdb3e",
     "grader_version": "backend-bank-grader-v1",
-    "grader_hash": "52e13ec4f8b97b4a1c658779e8485bff6a94c085ba92ea468e7219765d73ef63",
+    "grader_hash": "3ef1c9535d1bdffeb8763ee166cc36c255b17d0eca6290dc9443e17be708901d",
     "admission_status": "not_admitted"
   },
   "validation_rules": "docs/03 matching + docs/04 validation; human review deferred stage9",
