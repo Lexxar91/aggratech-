@@ -62,12 +62,7 @@ class SnapshotView(BaseModel):
     algorithm_version: str
     catalog_version: str
     entries: list[SnapshotEntry] = Field(default_factory=list)
-    notice: str = (
-        "Только опубликованные зачётные категории. Демо и "
-        "fixture не включаются. Методика экспериментальная; "
-        "область Python / SQL / "
-        "HTTP."
-    )
+    notice: str = "Подбор по проверенным навыкам, уровню и условиям работы."
 
 
 _TEMPLATE_DATA = json.loads(

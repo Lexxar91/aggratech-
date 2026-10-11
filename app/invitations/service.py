@@ -8,7 +8,6 @@ from uuid import UUID, uuid4
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.assessment.policy import METHODOLOGY
 from app.auth.models import User
 from app.candidate_profile.access import ContactGrant
 from app.candidate_profile.models import CandidateEmployerBlock, CandidateProfile
@@ -17,7 +16,13 @@ from app.employer.models import EmployerProfile
 from app.invitations.models import Invitation
 from app.invitations.schemas import Acceptance, InvitationView, SendInput
 from app.matching.schemas import Need
-from app.matching.service import company, compute, owned_need, product_candidates
+from app.matching.service import (
+    PRODUCT_METHODS,
+    company,
+    compute,
+    owned_need,
+    product_candidates,
+)
 from app.notifications.models import AuditEvent
 from app.notifications.queue import enqueue, utc_now
 
@@ -195,7 +200,7 @@ async def send(
         for c in await product_candidates(db, employer.id, clock)
         if c.candidate_id == str(profile.id)
     ]
-    ranking = compute(effective, candidates, clock, frozenset([METHODOLOGY]))
+    ranking = compute(effective, candidates, clock, PRODUCT_METHODS)
     if not ranking.recommendations or ranking.recommendations[0].group == "excluded":
         raise ApiError(
             409,

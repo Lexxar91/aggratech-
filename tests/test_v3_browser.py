@@ -12,7 +12,7 @@ from threading import Thread
 from uuid import uuid4
 
 import pytest
-from playwright.async_api import Browser, Page, expect
+from playwright.async_api import Browser, Page, Route, expect
 from pypdf import PdfReader
 
 from app.assessment.v3_models import V3Bank
@@ -161,15 +161,32 @@ async def pdf_text(
 
 
 async def finish_credit(
-    page: Page, origin: str, bank: V3Bank, grade: str, form: str, *, restart: bool
+    page: Page,
+    origin: str,
+    bank: V3Bank,
+    grade: str,
+    form: str,
+    *,
+    restart: bool,
+    fail_security: bool = False,
 ) -> str:
     await page.goto(origin + "/#assessment")
     await page.locator('[name="industry"]').fill("Техническая приёмка")
     await page.locator('[name="grade"]').select_option(grade)
-    await page.locator('[name="form"]').select_option(form)
-    await page.locator('[name="mode"]').select_option("credit")
+    await expect(page.locator('[name="form"], [name="mode"]')).to_have_count(0)
     await page.locator('[name="instructions_accepted"]').check()
-    await page.get_by_role("button", name="Начать прохождение", exact=True).click()
+    async with page.expect_response(
+        lambda response: (
+            response.url.endswith("/assessment/cycles")
+            and response.request.method == "POST"
+        )
+    ) as created:
+        await page.get_by_role(
+            "button", name="Начать проверку навыков", exact=True
+        ).click()
+    created_data = await (await created.value).json()
+    assert created_data["mode"] == "credit"
+    form = created_data["form"]
     await page.wait_for_url("**/#assessment/*")
     cycle_id = page.url.rsplit("/", 1)[-1]
     cards = [c for c in bank.cards if c.grade == grade and c.form == form]
@@ -177,21 +194,33 @@ async def finish_credit(
     for phase in ("A", "B"):
         if phase == "B":
             await expect(
-                page.get_by_role("button", name="Начать B (15 минут)")
+                page.get_by_role(
+                    "button", name="Начать дополнительные задания (15 минут)"
+                )
             ).to_be_visible(timeout=600000)
-            await page.get_by_role("button", name="Начать B (15 минут)").click()
+            await page.get_by_role(
+                "button", name="Начать дополнительные задания (15 минут)"
+            ).click()
         for index, card in enumerate(c for c in cards if c.session == phase):
             solution = next(s for s in card.solutions if s.kind == "reference")
+            if fail_security and card.family_id == f"{form}2":
+                solution = next(s for s in card.solutions if s.kind == "mistake")
             task = page.locator(f'[id="task-{card.task_id}"]')
+            disclosure = task.locator("xpath=..")
+            if await disclosure.get_attribute("open") is None:
+                await disclosure.locator(".task-summary").click()
             await task.locator('[name="source"]').fill(solution.base)
             if restart and phase == "A" and index == 0:
+                await task.locator('[name="source"]').fill(
+                    "# retained draft\n" + solution.base
+                )
                 await task.get_by_role("button", name="Сохранить черновик").click()
                 await expect(page.locator("#feedback")).to_contain_text(
                     "Черновик сохранён"
                 )
                 await page.reload()
                 await expect(task.locator('[name="source"]')).to_have_value(
-                    solution.base
+                    "# retained draft\n" + solution.base
                 )
                 marker = Path("/review-artifacts/restart-requested")
                 await asyncio.to_thread(marker.write_text, cycle_id)
@@ -209,22 +238,62 @@ async def finish_credit(
                     pytest.fail("Compose API/worker restart was not performed")
                 await page.reload()
                 await expect(task.locator('[name="source"]')).to_have_value(
-                    solution.base
+                    "# retained draft\n" + solution.base
                 )
-            await task.get_by_role(
-                "button", name="Зафиксировать базу и открыть перенос"
-            ).click()
+            await task.locator('[name="source"]').fill(solution.base)
+            async with page.expect_response(
+                lambda response: (
+                    "/fix" in response.url and response.request.method == "POST"
+                )
+            ) as fixed:
+                await task.get_by_role(
+                    "button", name="Отправить решение и перейти ко второй части"
+                ).click()
+            fixed_response = await fixed.value
+            submitted = fixed_response.request.post_data_json
+            assert isinstance(submitted, dict)
+            assert submitted["answer"]["source"] == solution.base
+            assert fixed_response.status == 200
             await expect(
-                task.get_by_role("button", name="Зафиксировать перенос", exact=True)
+                task.get_by_role(
+                    "button",
+                    name="Отправить решение второй части",
+                    exact=True,
+                    include_hidden=True,
+                )
+            ).to_be_attached()
+            if await disclosure.get_attribute("open") is None:
+                await disclosure.locator(".task-summary").click()
+            await expect(
+                task.get_by_role(
+                    "button", name="Отправить решение второй части", exact=True
+                )
             ).to_be_visible()
             await task.locator('[name="source"]').fill(solution.transfer)
             await task.get_by_role(
-                "button", name="Зафиксировать перенос", exact=True
+                "button", name="Отправить решение второй части", exact=True
             ).click()
             await expect(task).to_contain_text("Ответ зафиксирован")
-        await page.get_by_role("button", name=f"Сдать {phase}", exact=True).click()
+        await page.get_by_role(
+            "button",
+            name="Завершить основные задания" if phase == "A" else "Завершить проверку",
+            exact=True,
+        ).click()
+    if fail_security:
+        await expect(page.locator("main")).to_contain_text(
+            f"Уровень {grade.title()} пока не подтверждён", timeout=600000
+        )
+        await expect(page.locator("main")).to_contain_text("не выполнено")
+        await expect(page.locator("main")).to_contain_text("Следующий шаг")
+        await expect(page.locator("main")).not_to_contain_text(
+            "Демонстрационный / неподтверждённый результат"
+        )
+        await expect(
+            page.get_by_role("button", name="Опубликовать результат", exact=True)
+        ).to_have_count(0)
+        return cycle_id
     await expect(
-        page.get_by_role("button", name="Опубликовать категорию", exact=True)
+        page.get_by_role("button", name="Опубликовать результат", exact=True)
     ).to_be_visible(timeout=600000)
     # Читаем ответ действия React до навигации, а не старый GET из polling.
     async with page.expect_response(
@@ -235,7 +304,7 @@ async def finish_credit(
         )
     ) as completed:
         await page.get_by_role(
-            "button", name="Опубликовать категорию", exact=True
+            "button", name="Опубликовать результат", exact=True
         ).click()
     response = await completed.value
     result = await response.json()
@@ -247,11 +316,11 @@ async def finish_credit(
     assert result["assessed_at"] and "Python" in result["scope"]
     assert "reference" not in json.dumps(result)
     await expect(page.locator("#feedback")).to_contain_text("Выбор результата сохранён")
-    await expect(page.locator("main")).to_contain_text(bank.methodology)
-    await expect(page.locator("main")).to_contain_text("Область оценки:")
+    await expect(page.locator("main")).not_to_contain_text(bank.methodology)
+    await expect(page.locator("main")).to_contain_text(f"Ваш уровень — {grade.title()}")
     await expect(page.locator("main")).to_contain_text("Дата:")
     await expect(
-        page.get_by_text("Основания по проверяемым действиям", exact=True)
+        page.get_by_text("Что выполнено и что нужно доработать", exact=True)
     ).to_be_visible()
     await page.goto(origin + "/#assessment")
     await expect(page.locator("main")).to_contain_text("Требования выполнены")
@@ -309,6 +378,7 @@ async def test_v3_credit_ui_matching_consent_pdf_and_restart(
         await employer.locator('[name="task_description"]').fill("Python и SQL")
         await employer.locator('[name="grade_junior"]').check()
         await employer.locator('[name="grade_middle"]').check()
+        await employer.locator('[name="skill_required_http_api"]').check()
         await employer.locator('[name="salary_from"]').fill("170000")
         await employer.locator('[name="salary_to"]').fill("190000")
         await employer.get_by_role(
@@ -382,6 +452,73 @@ async def test_v3_credit_ui_matching_consent_pdf_and_restart(
         after = await pdf_text(employer, "PDF", card_selector=selector)
         assert "v3-private@example.com" not in after and "+79995556677" not in after
         assert "Тестовая Анна" not in after
+        await employer.get_by_role("link", name="Мои вакансии", exact=True).click()
+        await employer.get_by_role("link", name="Создать вакансию", exact=True).click()
+        for name, content in {
+            "title": "Разработчик API",
+            "description": "Поддержка Python API",
+            "salary_from": "170000",
+            "salary_to": "190000",
+            "conditions": "Полный день и удалённая работа",
+            "representative_contact": "hr@example.com",
+        }.items():
+            await employer.locator(f'[name="{name}"]').fill(content)
+        await employer.get_by_role("button", name="Опубликовать вакансию").click()
+        await employer.wait_for_url("**/#vacancy/*")
+        vacancy_id = employer.url.rsplit("/", 1)[-1]
+        await junior.goto(origin + "/#vacancy/" + vacancy_id)
+        await junior.locator('[name="share_email"]').check()
+        await junior.locator('[name="application_consent"]').check()
+        await junior.get_by_role("button", name="Подать отклик", exact=True).click()
+        await junior.wait_for_url("**/#application/*")
+        application_url = junior.url
+        await employer.goto(application_url)
+        await expect(employer.locator("main")).to_contain_text("v3-private@example.com")
+        await employer.get_by_role("button", name="Принять отклик").click()
+        await expect(employer.get_by_role("heading", level=1)).to_have_text(
+            "Отклик: Принят"
+        )
+        application_pdf = await pdf_text(employer, "PDF кандидата")
+        assert (
+            "v3-private@example.com" in application_pdf
+            and "+79995556677" not in application_pdf
+        )
+        assert (
+            "семейств" not in application_pdf
+            and bank.methodology not in application_pdf
+        )
+        await junior.reload()
+        await junior.get_by_role("button", name="Отозвать отклик").click()
+        await expect(junior.get_by_role("heading", level=1)).to_have_text(
+            "Отклик: Отозван"
+        )
+        await employer.reload()
+        await expect(employer.locator("main")).not_to_contain_text(
+            "v3-private@example.com"
+        )
+        await employer.goto(ranking_url)
+        withdrawn_pdf = await pdf_text(employer, "PDF", card_selector=selector)
+        assert "v3-private@example.com" not in withdrawn_pdf
+        assert "+79995556677" not in withdrawn_pdf
+        for page in (junior, employer):
+            await page.set_viewport_size({"width": 390, "height": 844})
+            assert await page.evaluate(
+                "document.documentElement.scrollWidth <= innerWidth"
+            )
+            await page.keyboard.press("Tab")
+            assert await page.evaluate("document.activeElement.tagName !== 'BODY'")
+            text = await page.locator("body").inner_text()
+            assert all(
+                term not in text
+                for term in (
+                    "Хакатонное демо",
+                    "fixture",
+                    "live_credit",
+                    "семейств",
+                    "not_admitted",
+                    bank.methodology,
+                )
+            )
         await junior.goto(origin + "/#profile")
         await junior.locator('[name="visible_to_employers"]').uncheck()
         await junior.get_by_role("button", name="Сохранить приватность").click()
@@ -403,6 +540,9 @@ async def test_v3_credit_ui_matching_consent_pdf_and_restart(
                     "draft_restart": True,
                     "matching": "actual_credit_v3",
                     "consent_pdf_privacy": True,
+                    "vacancy_application_withdrawal": True,
+                    "current_editor_submission": True,
+                    "mobile_keyboard": True,
                     "human_pilot": False,
                 },
                 indent=2,
@@ -411,3 +551,158 @@ async def test_v3_credit_ui_matching_consent_pdf_and_restart(
     finally:
         for context in contexts:
             await context.close()
+
+
+async def test_starter_cabinets_and_real_refusal(
+    browser: Browser, review_origin: str
+) -> None:
+    """Проверяет заполненную БД через UI и реальный отказ без подмены оценок."""
+    origin = review_origin
+    expect.set_options(timeout=30000)
+    context = await browser.new_context(accept_downloads=True)
+    try:
+        page = await context.new_page()
+        for role, routes in (
+            (
+                "candidate",
+                (
+                    "profile",
+                    "assessment",
+                    "vacancies",
+                    "applications",
+                    "invitations",
+                    "fsp",
+                ),
+            ),
+            ("employer", ("profile", "needs", "invitations", "vacancies")),
+        ):
+            await page.goto(origin + "/#login")
+            await page.locator('[name="email"]').fill(f"{role}01@aggratech.example.com")
+            await page.locator('[name="password"]').fill("StartProduct2026!")
+            await page.get_by_role("button", name="Войти", exact=True).click()
+            await expect(page.get_by_role("heading", level=1)).to_contain_text(
+                "Кабинет"
+            )
+            for route in routes:
+                await page.goto(origin + "/#" + route)
+                await expect(page.locator("main h1")).to_be_visible()
+                await expect(page.locator("main")).not_to_contain_text(
+                    "Загружаем данные"
+                )
+                text = await page.locator("body").inner_text()
+                assert all(
+                    term not in text
+                    for term in (
+                        "Хакатонное демо",
+                        "fixture",
+                        "admission_status",
+                        "not_admitted",
+                        "семейств",
+                        "ревизи",
+                        "demo",
+                        "credit",
+                        "Методика:",
+                        "production",
+                        "assessment",
+                    )
+                ), (role, route)
+                if role == "candidate" and route == "profile":
+                    await expect(page.locator("main")).to_contain_text(
+                        "Ваш уровень — Junior"
+                    )
+                    text = await pdf_text(page, "Скачать мой PDF")
+                    assert "Анна Смирнова" in text and "Junior" in text
+                if role == "employer" and route == "needs":
+                    await expect(
+                        page.locator("main a[href^='#needs/']")
+                    ).not_to_have_count(0)
+                    await page.locator("main a[href^='#needs/']").first.click()
+                    await page.get_by_role(
+                        "button", name="Создать подборку", exact=True
+                    ).click()
+                    await page.wait_for_url("**/#recommendations/*")
+                    await expect(
+                        page.locator('input[name^="compare_"]')
+                    ).not_to_have_count(0)
+                    await page.locator('input[name^="compare_"]').nth(0).check()
+                    await page.locator('input[name^="compare_"]').nth(1).check()
+                    await page.get_by_role(
+                        "button", name="Сравнить две выбранные карточки", exact=True
+                    ).click()
+                    await expect(
+                        page.get_by_role("heading", name="Сравнение", exact=True)
+                    ).to_be_visible()
+                    await expect(page.locator("main")).not_to_contain_text(
+                        "+79990000001"
+                    )
+            await page.get_by_role("button", name="Выйти", exact=True).click()
+            await expect(
+                page.get_by_role("heading", name="Вход", exact=True)
+            ).to_be_visible()
+        await register_ui(
+            page, origin, f"refusal-{uuid4().hex[:12]}@example.com", "candidate"
+        )
+        await prepare_profile(page, origin, "Проверка причин отказа")
+        bank = V3Bank.model_validate_json(
+            await asyncio.to_thread(Path("bank/private/v3.json").read_bytes)
+        )
+        cycle = await finish_credit(
+            page, origin, bank, "junior", "X", restart=False, fail_security=True
+        )
+        (Path("/review-artifacts") / "starter-ui.json").write_text(
+            json.dumps(
+                {
+                    "status": "passed",
+                    "starter_cabinets": True,
+                    "actual_refusal_cycle": cycle,
+                    "human_pilot": False,
+                }
+            )
+        )
+    finally:
+        await context.close()
+
+
+async def test_ui_refreshes_after_technical_recovery(
+    browser: Browser, review_origin: str
+) -> None:
+    """Моделирует только переход экрана; итог берёт из реального стартового цикла."""
+    origin = review_origin
+    context = await browser.new_context()
+    try:
+        page = await context.new_page()
+        await page.goto(origin + "/#login")
+        await page.locator('[name="email"]').fill("candidate01@aggratech.example.com")
+        await page.locator('[name="password"]').fill("StartProduct2026!")
+        await page.get_by_role("button", name="Войти", exact=True).click()
+        await expect(page.get_by_role("heading", level=1)).to_contain_text("Кабинет")
+        async with page.expect_response(
+            lambda r: r.url == origin + "/api/v1/assessment/cycles"
+        ) as history:
+            await page.goto(origin + "/#assessment")
+        cycle_id = (await (await history.value).json())[0]["id"]
+        first = True
+
+        async def transition(route: Route) -> None:
+            nonlocal first
+            response = await route.fetch()
+            assert response.status == 200
+            data = await response.json()
+            if first:
+                first = False
+                data["state"] = "technical_error"
+                data["technical_issue"] = True
+                data["result"]["verified"] = False
+                data["result"]["outcome"] = "insufficient"
+            await route.fulfill(response=response, json=data)
+
+        await page.route(origin + f"/api/v1/assessment/cycles/{cycle_id}", transition)
+        await page.goto(origin + f"/#assessment/{cycle_id}")
+        await expect(page.locator("main")).to_contain_text(
+            "Проверка временно прервана из-за сбоя"
+        )
+        await expect(page.locator("main")).to_contain_text(
+            "Ваш уровень — Junior", timeout=15000
+        )
+    finally:
+        await context.close()

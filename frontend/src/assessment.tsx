@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { send } from "./api";
 import type { Schema } from "./api";
+import { Markdown, TaskStatement } from "./markdown";
+import { taskExample } from "./task-examples";
 import {
   Action,
   Badge,
@@ -26,20 +28,18 @@ import {
 } from "./ui";
 
 type Cycle = Schema<"CycleView">;
-export function Result({ result }: { result: Schema<"ResultView"> }) {
+export function Result({ result, state }: { result: Schema<"ResultView">; state?: string }) {
+  const level = result.grade === "middle" ? "Middle" : "Junior";
+  const title = result.verified ? `Ваш уровень — ${level}` : state === "technical_error" ? "Проверка временно прервана из-за сбоя" : result.outcome === "not_confirmed" ? `Уровень ${level} пока не подтверждён` : result.outcome === "review_required" ? "Решения требуют дополнительной проверки" : result.outcome === "confirmed" ? result.mode === "demo" ? "Тренировочное прохождение завершено" : "Не удалось подтвердить результат. Обратитесь в поддержку." : state === "expired" || result.assessed_at ? "Недостаточно завершённых решений для подтверждения уровня" : "Проверка ещё не завершена";
   return (
     <Section title="Результат">
       <div className="result-header">
         <Badge>{statusNames[result.outcome] ?? result.outcome}</Badge>
         <Badge>{result.grade.toUpperCase()}</Badge>
       </div>
-      <p>{result.label}</p>
-      {!result.verified && (
-        <Notice warning>
-          Демонстрационный / неподтверждённый результат. Не является
-          подтверждением квалификации и не включается в подтверждённую подборку.
-        </Notice>
-      )}
+      <p className="result-title">{title}</p>
+      {result.mode === "demo" && <Notice warning>Это тренировочное прохождение. Для публикации уровня пройдите проверку навыков.</Notice>}
+      {result.outcome === "not_confirmed" && <Notice warning>Для подтверждения важны все проверяемые навыки. Общий балл не заменяет выполнение обязательных требований.</Notice>}
       {result.total !== null && (
         <p className="score">
           {result.total}
@@ -54,29 +54,25 @@ export function Result({ result }: { result: Schema<"ResultView"> }) {
             <small>
               {(
                 {
-                  met: "Порог выполнен",
-                  not_met: "Ниже порога",
+                  met: "Требования выполнены",
+                  not_met: "Нужно доработать",
                   not_checked: "Недостаточно данных",
-                  below: "Ниже порога",
+                  below: "Нужно доработать",
                   insufficient: "Недостаточно данных",
                 } as Record<string, string>
               )[skill.status] ?? skill.status}{" "}
-              · семейств: {skill.families}
+
             </small>
           </div>
         ))}
       </div>
-      <p className="muted">
-        Область оценки: {result.scope}. Методика: {result.methodology}. Дата:{" "}
-        {date(result.assessed_at)}
-      </p>
-      {result.limitations && <Notice>{result.limitations}</Notice>}
+      <p className="muted">Проверенные навыки: Python, SQL и HTTP/API. Дата: {date(result.assessed_at)}</p>
       {!!result.requirements?.length && (
-        <details>
-          <summary>Основания по проверяемым действиям</summary>
+        <details open={result.outcome === "not_confirmed"}>
+          <summary>Что выполнено и что нужно доработать</summary>
           {result.requirements.map((item, index) => (
             <p key={`${item.task_id}-${index}`}>
-              <strong>{item.task_id}</strong> · {item.action}: {item.passed === true ? "выполнено" : item.passed === false ? "не выполнено" : "нет завершённого доказательства"} ({item.status})
+              <strong>Задание {item.task_number ?? 1}. {item.task_title || "Проверка навыка"}</strong> · {item.task_id === "Y6-J" && item.skill === "security_validation" ? "Ограничение фактического размера и очистка временных данных" : item.action}: {item.passed === true ? "выполнено" : item.passed === false ? "не выполнено" : "нет завершённого доказательства"}
             </p>
           ))}
         </details>
@@ -111,24 +107,24 @@ function AssessmentStart() {
     <>
       <Heading
         title="Проверка навыков Backend"
-        subtitle="Опрос, два этапа и прозрачный результат."
+        subtitle="Выберите уровень, который хотите подтвердить. Затем выполните задания."
       />
       <div className="actions">
         <Link to="profile">К профилю</Link>
       </div>
-      <Notice warning={!availability.data.credit_available}>{availability.data.message}</Notice>
+      {!availability.data.credit_available && <Notice warning>Проверка навыков временно недоступна. Попробуйте позже.</Notice>}
       <Section title="Как проходит проверка">
         <div className="steps">
           <div>
-            <strong>01 / Опрос</strong>
+            <strong>01 / Подготовка</strong>
             <p>Выберите Junior или Middle и подтвердите правила.</p>
           </div>
           <div>
-            <strong>02 / Этап A · 30 минут</strong>
-            <p>{availability.data.a_tasks} заданий. Сначала первоначальное решение, затем перенос.</p>
+            <strong>02 / Основные задания · 30 минут</strong>
+            <p>{availability.data.a_tasks} заданий. У каждого задания две части: исходное и изменённое условие.</p>
           </div>
           <div>
-            <strong>03 / Этап B · 15 минут</strong>
+            <strong>03 / Дополнительные задания · 15 минут</strong>
             <p>Два задания. Начните в течение 24 часов после A.</p>
           </div>
         </div>
@@ -139,15 +135,16 @@ function AssessmentStart() {
           можно обжаловать.
         </p>
         <p className="muted">
-          Повтор того же грейда — через 7 дней, смена опубликованного — через 30
-          дней; не более двух завершённых циклов за 30 дней. Для новой попытки
-          нужны непоказанные семейства. Ограничения проверяет сервер.
+          Повтор того же уровня — через 7 дней, смена опубликованного — через 30
+          дней; не более двух завершённых прохождений за 30 дней. Для новой попытки
+          нужны задания, которые вы ещё не видели.
         </p>
       </Section>
-      <Section title="Опрос и выбор грейда">
+      <Section title="Подготовка к проверке">
         <Form
-          label={availability.data.credit_available ? "Начать прохождение" : "Начать демо-цикл"}
+          label="Начать проверку навыков"
           onSubmit={async (data) => {
+            if (!availability.data?.credit_available) throw new Error("Проверка навыков временно недоступна.");
             const input: Schema<"SurveyInput"> = {
               industry: value(data, "industry"),
               stack: list(data, "stack"),
@@ -159,8 +156,7 @@ function AssessmentStart() {
             await send("/assessment/survey", input, "PUT");
             const cycle: Cycle = await send("/assessment/cycles", {
               grade: value(data, "grade"),
-              mode: value(data, "mode"),
-              form: value(data, "form") || null,
+              mode: "credit",
             });
             location.hash = `#assessment/${cycle.id}`;
           }}
@@ -187,19 +183,9 @@ function AssessmentStart() {
               max={50}
               required
             />
-            <Field name="grade" label="Грейд" value="junior">
+            <Field name="grade" label="Уровень" value="junior">
               <option value="junior">Junior</option>
               <option value="middle">Middle</option>
-            </Field>
-            <Field name="mode" label="Режим" value={availability.data.credit_available ? "credit" : "demo"}>
-              {availability.data.credit_available && <option value="credit">Зачётный</option>}
-              {availability.data.demo_available && <option value="demo">Демонстрационный, без подтверждения квалификации</option>}
-              {!availability.data.demo_available && <option value="">Прохождение недоступно</option>}
-            </Field>
-            <Field name="form" label="Форма" value="">
-              <option value="">Любая доступная</option>
-              <option value="X">X</option>
-              <option value="Y">Y</option>
             </Field>
           </div>
           <Check
@@ -216,7 +202,7 @@ function AssessmentStart() {
         {cycles.data.map((cycle) => (
           <div className="list-row" key={cycle.id}>
             <a href={`#assessment/${cycle.id}`}>
-              {cycle.grade} · {cycle.mode} · {cycle.state} ·{" "}
+              {cycle.grade === "middle" ? "Middle" : "Junior"} · {statusNames[cycle.state] ?? "Проверка"} ·{" "}
               {statusNames[cycle.result.outcome]}
             </a>
             <small>{date(cycle.created_at)}</small>
@@ -229,7 +215,7 @@ function AssessmentStart() {
           <div className="list-row" key={appeal.id}>
             <Link to={`assessment/${appeal.cycle_id}`}>Прохождение</Link>
             <p>
-              {appeal.state}: {appeal.resolution ?? "Решение ожидается"}
+              {appeal.state === "open" ? "Рассматривается" : "Рассмотрена"}: {appeal.resolution ?? "Решение ожидается"}
             </p>
           </div>
         ))}
@@ -263,13 +249,13 @@ function Timer({
     <div
       className="timer"
       role="timer"
-      aria-label={start ? "До срока начала B" : "До срока сдачи"}
+      aria-label={start ? "До начала дополнительной части" : "До срока сдачи"}
     >
-      <span>{start ? "Начните B в течение" : "Осталось времени"}</span>
+      <span>{start ? "Начните дополнительную часть в течение" : "Осталось времени"}</span>
       <strong>{display}</strong>
       <small>
-        Серверный срок: {date(deadline)}.{" "}
-        {seconds === 0 && "Обновите состояние: срок истёк."}
+        До: {date(deadline)}.{" "}
+        {seconds === 0 && "Время истекло. Статус обновится автоматически."}
       </small>
     </div>
   );
@@ -282,7 +268,7 @@ function AssessmentCycle({ id }: { id: string }) {
   } = useLoad<Cycle>(`/assessment/cycles/${id}`);
   const feedback = useFeedback();
   useEffect(() => {
-    if (!cycle || !["grading_A", "grading_B", "grading"].includes(cycle.state))
+    if (!cycle || ["completed", "expired", "invalidated"].includes(cycle.state))
       return;
     const timer = setInterval(reload, 4000);
     return () => clearInterval(timer);
@@ -301,16 +287,14 @@ function AssessmentCycle({ id }: { id: string }) {
     <>
       <Heading
         title="Проверка навыков Backend"
-        subtitle={`${cycle.grade} · ${cycle.mode} · ${statusNames[cycle.state] ?? cycle.state}`}
+        subtitle={`${cycle.grade === "middle" ? "Middle" : "Junior"} · ${statusNames[cycle.state] ?? "Проверка решений"}`}
       />
       <div className="actions">
         <Link to="assessment">Все прохождения</Link>
         <Link to="profile">К профилю</Link>
         <Action onClick={reload}>Обновить состояние</Action>
       </div>
-      <Notice warning={cycle.mode === "demo"}>
-        {cycle.mode === "demo" ? "Демонстрационный цикл: результат не подтверждает квалификацию." : "Зачётный цикл: результат рассчитывается по допущенным материалам и указанной версии методики."}
-      </Notice>
+      <ol className="assessment-progress" aria-label="Ход проверки">{["Подготовка", "Задания", "Проверка решений", "Результат"].map((step, index) => <li key={step} aria-current={(cycle.state === "completed" ? 3 : cycle.state === "grading" ? 2 : 1) === index ? "step" : undefined}>{step}</li>)}</ol>
       {deadline && (
         <Timer deadline={deadline} start={cycle.state === "B_ready"} />
       )}
@@ -329,9 +313,10 @@ function AssessmentCycle({ id }: { id: string }) {
         />
       ))}
       {["A", "B"].includes(cycle.state) && (
-        <Section title={`Завершение этапа ${cycle.state}`}>
+        <Section title="Завершение части проверки">
           <p>
-            {cycle.result.methodology === "backend-assessment-v3-packages-1" ? "Сначала зафиксируйте первоначальное решение и перенос каждого задания. Черновики не являются отправленными ответами; истечение времени завершает сеанс без оценки неотправленного решения." : "Будут отправлены сохранённые черновики. Перед сдачей сохраните все изменения; после сдачи этап редактировать нельзя."}
+            Отправьте обе части каждого задания. После завершения решения изменить нельзя. Неотправленные черновики не оцениваются.
+
           </p>
           <Action
             onClick={async () => {
@@ -339,12 +324,12 @@ function AssessmentCycle({ id }: { id: string }) {
               reload();
             }}
           >
-            {cycle.result.methodology === "backend-assessment-v3-packages-1" ? `Сдать ${cycle.state}` : `Сдать ${cycle.state} с сохранёнными черновиками`}
+            {cycle.state === "A" ? "Завершить основные задания" : "Завершить проверку"}
           </Action>
         </Section>
       )}
       {cycle.state === "B_ready" && (
-        <Section title="Этап B готов">
+        <Section title="Основные задания отправлены">
           <p>
             Можно сделать перерыв 5–10 минут или начать сразу. После начала у
             вас будет 15 минут.
@@ -355,7 +340,7 @@ function AssessmentCycle({ id }: { id: string }) {
               reload();
             }}
           >
-            Начать B (15 минут)
+            Начать дополнительные задания (15 минут)
           </Action>
         </Section>
       )}
@@ -364,7 +349,7 @@ function AssessmentCycle({ id }: { id: string }) {
           Ответы проверяются. Страница обновляет состояние автоматически.
         </Notice>
       )}
-      <Result result={cycle.result} />
+      <Result result={cycle.result} state={cycle.state} />
       {cycle.state === "completed" && cycle.result.outcome === "confirmed" && (
         <Action
           onClick={async () => {
@@ -372,11 +357,10 @@ function AssessmentCycle({ id }: { id: string }) {
             feedback("Выбор результата сохранён.");
           }}
         >
-          {cycle.mode === "demo"
-            ? "Опубликовать демо-результат в своём профиле"
-            : "Опубликовать категорию"}
+          Опубликовать результат
         </Action>
       )}
+      {cycle.state === "completed" && cycle.result.outcome === "not_confirmed" && <Section title="Следующий шаг"><p>Доработайте указанные навыки. Повторная проверка того же уровня доступна не раньше {date(new Date(new Date(cycle.completed_at ?? cycle.created_at).getTime() + 7 * 86400000).toISOString())}. Действуют ограничения: две завершённые проверки за 30 дней и наличие новых заданий.</p><Link to="assessment">К выбору уровня и истории</Link></Section>}
       <Section title="Сообщить о проблеме">
         <Form
           label="Отправить апелляцию"
@@ -462,6 +446,12 @@ function Task({
     }
   }
   return (
+    <details className="task-disclosure" open={(task.number ?? 1) === 1}>
+      <summary className="task-summary">
+        <span className="task-index">{String(task.number ?? 1).padStart(2, "0")}</span>
+        <span className="task-summary-title">Задание {task.number ?? 1}. {task.title || "Проверка навыка"}</span>
+        <Badge>{task.language === "sql" ? "SQL" : "Python"} · {task.finalized ? "Решение отправлено" : task.step === "base" ? "Первая часть" : "Вторая часть"}</Badge>
+      </summary>
     <form
       ref={ref}
       id={`task-${task.family}`}
@@ -472,21 +462,20 @@ function Task({
         void save(true);
       }}
     >
-      <h3>
-        {task.family} · {task.step}{task.title ? ` · ${task.title}` : ""}
-      </h3>
-      <p className="preserve-lines">{task.condition}</p>
-      {task.common_contract && <details><summary>Обязательные общие контракты и адаптеры</summary><p className="preserve-lines">{task.common_contract}</p></details>}
+      <div className="task-workspace">
+      <div className="task-condition">
+      <TaskStatement condition={task.condition} language={task.language} example={taskExample(task.task_id ?? "")} />
       <p>{task.diagnosis_prompt}</p>
       {task.input !== null && <details open>
         <summary>Данные задания</summary>
         <pre>{JSON.stringify(task.input, null, 2)}</pre>
       </details>}
+      </div>
       {task.finalized ? (
         <Notice>Ответ зафиксирован.</Notice>
       ) : (
         <fieldset disabled={busy}>
-          {task.task_id ? <Field name="source" label={task.language === "sql" ? "SQL: solution.sql" : "Python: solution.py"} type="textarea" value={task.draft.source} /> : task.python_required && (
+          {task.task_id ? <Field name="source" label={task.language === "sql" ? "Редактор SQL-решения" : "Редактор Python-решения"} type="textarea" value={task.draft.source} /> : task.python_required && (
             <>
               <Field
                 name="source"
@@ -508,7 +497,7 @@ function Task({
           )}
           {task.structured_condition && (
             <>
-              <p>{task.structured_condition}</p>
+              <Markdown text={task.structured_condition} />
               <pre>
                 {JSON.stringify(
                   {
@@ -541,8 +530,9 @@ function Task({
           <p className="muted" role="status">
             {dirty
               ? "Есть несохранённые изменения"
-              : `Черновик сохранён · ревизия ${revision}`}
+              : "Черновик сохранён"}
           </p>
+          <p>После отправки изменить это решение нельзя. Будет отправлен текущий текст из редактора.</p>
           <div className="actions">
             <button
               type="button"
@@ -554,12 +544,14 @@ function Task({
             </button>
             <button type="submit" className="primary" disabled={busy}>
               {task.step === "base"
-                ? "Зафиксировать базу и открыть перенос"
-                : "Зафиксировать перенос"}
+                ? "Отправить решение и перейти ко второй части"
+                : "Отправить решение второй части"}
             </button>
           </div>
         </fieldset>
       )}
+      </div>
     </form>
+    </details>
   );
 }

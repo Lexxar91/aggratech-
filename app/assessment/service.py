@@ -44,8 +44,8 @@ from app.notifications.queue import enqueue
 
 ACTIVE = {"A", "B_ready", "B", "grading", "technical_error"}
 LABELS = {
-    "confirmed": "Грейд подтверждён в пределах теста",
-    "not_confirmed": "Грейд пока не подтверждён",
+    "confirmed": "Уровень подтверждён",
+    "not_confirmed": "Уровень пока не подтверждён",
     "insufficient": "Недостаточно данных",
     "review_required": "Требуется проверка достоверности",
 }
@@ -174,7 +174,7 @@ async def create_cycle(
         raise ApiError(
             409,
             "form_exhausted",
-            "Семейства выбранной формы уже показаны; выберите другую форму.",
+            "Эти задания уже были показаны. Начните проверку с новым вариантом.",
         )
     seed = secrets.randbits(31)
     form = data.form or available[seed % len(available)]
@@ -313,7 +313,7 @@ async def submit_phase(
             "answers_incomplete",
             (
                 "Сначала отправьте первоначальное решение и "
-                "перенос каждого задания. Черновик не считается "
+                "вторую часть каждого задания. Черновик не считается "
                 "отправленным ответом."
             ),
         )
@@ -534,7 +534,7 @@ async def requirement_results(
 ) -> list[dict[str, object]]:
     """Раскрывает действие и результат без рубрики, эталона и закрытых случаев."""
     result: list[dict[str, object]] = []
-    for row in await answers(db, cycle.id):
+    for number, row in enumerate(await answers(db, cycle.id), 1):
         card = material(cycle, row.family)
         if not isinstance(card, V3Card):
             continue
@@ -544,6 +544,8 @@ async def requirement_results(
             result.append(
                 {
                     "task_id": card.task_id,
+                    "task_title": card.title,
+                    "task_number": number,
                     "family_id": card.family_id,
                     "skill": requirement.skill,
                     "action": requirement.action,
@@ -560,9 +562,9 @@ def result_view(cycle: AssessmentCycle) -> ResultView:
     label = LABELS[outcome]
     if cycle.mode == "demo":
         label = (
-            "Демонстрационный результат: "
+            "Тренировочное прохождение: "
             + {
-                "confirmed": "требования выполнены; это не верифицированная категория",
+                "confirmed": "требования выполнены; уровень не публикуется",
                 "not_confirmed": "требования пока не выполнены",
                 "insufficient": "недостаточно данных",
                 "review_required": "требуется проверка",
@@ -574,6 +576,23 @@ def result_view(cycle: AssessmentCycle) -> ResultView:
             "зачётное происхождение не подтверждено"
             if outcome == "confirmed"
             else "Неподтверждённый результат: " + label
+        )
+    public_requirements: list[dict[str, object]] = []
+    stored_requirements = cycle.result.get("requirements", [])
+    for item in stored_requirements if isinstance(stored_requirements, list) else []:
+        if not isinstance(item, dict):
+            continue
+        task_id = str(item.get("task_id", ""))
+        keys = sorted(cycle.materials)
+        stored = cycle.materials.get(task_id, {})
+        public_requirements.append(
+            {
+                **item,
+                "task_title": stored.get("title", "Проверка навыка")
+                if isinstance(stored, dict)
+                else "Проверка навыка",
+                "task_number": keys.index(task_id) + 1 if task_id in keys else 1,
+            }
         )
     return ResultView.model_validate(
         {
@@ -588,11 +607,10 @@ def result_view(cycle: AssessmentCycle) -> ResultView:
             "skills": cycle.result.get("skills", []),
             "methodology": cycle.methodology,
             "assessed_at": cycle.completed_at,
-            "requirements": cycle.result.get("requirements", []),
+            "requirements": public_requirements,
             "limitations": (
-                "Веса и пороги — принятые продуктовые правила. "
-                "Точность оценки и сопоставимость форм/грейдов "
-                "этим прохождением не измеряются."
+                "Для подтверждения важны все проверяемые навыки, "
+                "а не только общий балл."
             )
             if cycle.methodology == V3_METHODOLOGY
             else None,
@@ -606,7 +624,7 @@ async def cycle_view(
     """Возвращает только текущие условия; база не раскрывает перенос или семейства B."""
     await advance_deadlines(db, cycle, now)
     tasks: list[PublicTask] = []
-    for row in await answers(db, cycle.id):
+    for number, row in enumerate(await answers(db, cycle.id), 1):
         if row.phase != cycle.state:
             continue
         v = material(cycle, row.family)
@@ -624,6 +642,7 @@ async def cycle_view(
             )
             tasks.append(
                 PublicTask(
+                    number=number,
                     family=row.family,
                     family_id=v.family_id,
                     task_id=v.task_id,
@@ -634,7 +653,11 @@ async def cycle_view(
                     step=row.step,
                     revision=row.revision,
                     condition=v.condition
-                    + ("\n\nПеренос:\n" + v.transfer if phase == "transfer" else ""),
+                    + (
+                        "\n\n## Вторая часть задания\n" + v.transfer
+                        if phase == "transfer"
+                        else ""
+                    ),
                     diagnosis_prompt="",
                     diagnosis_options=[],
                     verification_options=[],
@@ -732,7 +755,7 @@ async def publish(
         raise ApiError(
             409,
             "result_not_publishable",
-            "Опубликовать можно завершённый успешный результат без открытого review.",
+            "Опубликовать можно завершённый успешный результат без открытой проверки.",
         )
     if cycle.mode == "credit" and not credit_admission_valid(cycle):
         raise ApiError(409, "bank_not_admitted", "Зачётный допуск банка отсутствует.")

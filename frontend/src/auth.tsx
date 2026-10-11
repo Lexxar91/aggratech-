@@ -21,7 +21,7 @@ export function AuthPage({ route, token }: { route: string; token?: string }) {
       <div className="auth-card">
         <Heading
           title="Подтверждение email"
-          subtitle="Подтверждение разрешает действия с профилем и прохождение assessment."
+          subtitle="Подтвердите адрес, чтобы сохранять профиль и проходить проверку навыков."
         />
         <Form
           label="Подтвердить email"
@@ -94,8 +94,7 @@ export function AuthPage({ route, token }: { route: string; token?: string }) {
           условиях.
         </p>
         <Notice warning>
-          Хакатонное приложение. Демонстрационные результаты не
-          подтверждают квалификацию.
+          Подтвердите навыки и найдите работу на подходящих условиях.
         </Notice>
       </div>
       <div className="auth-card">

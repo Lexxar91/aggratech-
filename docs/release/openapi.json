@@ -5488,6 +5488,11 @@
       },
       "PublicTask": {
         "properties": {
+          "number": {
+            "type": "integer",
+            "title": "Number",
+            "default": 1
+          },
           "family": {
             "type": "string",
             "title": "Family"
@@ -5813,6 +5818,16 @@
           "task_id": {
             "type": "string",
             "title": "Task Id"
+          },
+          "task_title": {
+            "type": "string",
+            "title": "Task Title",
+            "default": ""
+          },
+          "task_number": {
+            "type": "integer",
+            "title": "Task Number",
+            "default": 1
           },
           "family_id": {
             "type": "string",
@@ -6325,7 +6340,7 @@
           "notice": {
             "type": "string",
             "title": "Notice",
-            "default": "Только опубликованные зачётные категории. Демо и fixture не включаются. Методика экспериментальная; область Python / SQL / HTTP."
+            "default": "Подбор по проверенным навыкам, уровню и условиям работы."
           }
         },
         "type": "object",

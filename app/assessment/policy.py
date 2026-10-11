@@ -91,10 +91,10 @@ def check_calendar(
         raise ApiError(
             409,
             "grade_cooldown",
-            "Смена опубликованного грейда доступна через 30 дней.",
+            "Смена опубликованного уровня доступна через 30 дней.",
         )
     same_grade = [t for g, t in eligible if g == grade]
     if same_grade and now < max(same_grade) + timedelta(days=7):
         raise ApiError(
-            409, "retry_cooldown", "Повтор этого грейда доступен через 7 дней."
+            409, "retry_cooldown", "Повтор этого уровня доступен через 7 дней."
         )

@@ -2355,6 +2355,11 @@ export interface components {
         };
         /** PublicTask */
         PublicTask: {
+            /**
+             * Number
+             * @default 1
+             */
+            number: number;
             /** Family */
             family: string;
             /** Family Id */
@@ -2477,6 +2482,16 @@ export interface components {
         RequirementResult: {
             /** Task Id */
             task_id: string;
+            /**
+             * Task Title
+             * @default
+             */
+            task_title: string;
+            /**
+             * Task Number
+             * @default 1
+             */
+            task_number: number;
             /** Family Id */
             family_id: string;
             /** Skill */
@@ -2680,7 +2695,7 @@ export interface components {
             entries?: components["schemas"]["SnapshotEntry"][];
             /**
              * Notice
-             * @default Только опубликованные зачётные категории. Демо и fixture не включаются. Методика экспериментальная; область Python / SQL / HTTP.
+             * @default Подбор по проверенным навыкам, уровню и условиям работы.
              */
             notice: string;
         };

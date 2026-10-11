@@ -226,4 +226,41 @@ frontend/dist/
 frontend/*.tsbuildinfo
 artifacts/
 ФСП спец.трек ТЗ.pdf
-.env
+
+# Private environment variants; keep safe configuration examples
+.env.*
+!.env.example
+!.env.*.example
+
+# Credentials and private key containers
+/.aws/
+/.ssh/
+/secrets/
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# Local data exports and backups, never submission documents
+/local-data/
+/dumps/
+/backups/
+
+# Personal Compose overrides; the shared compose.yaml stays tracked
+/compose.override.yaml
+/compose.override.yml
+/docker-compose.override.yaml
+/docker-compose.override.yml
+
+# Local editor, operating system and build files
+/.idea/
+/.vscode/
+node_modules/
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo

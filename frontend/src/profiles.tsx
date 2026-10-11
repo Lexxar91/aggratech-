@@ -337,8 +337,7 @@ export function EmployerProfile() {
         </Form>
       </Section>
       <Notice warning>
-        Подтверждённая подборка использует только опубликованные результаты
-        из допущенного банка. Демонстрационные прохождения в неё не включаются.
+        Укажите задачи, навыки и условия работы, чтобы получить подходящую подборку.
       </Notice>
     </>
   );
@@ -353,14 +352,14 @@ export function FspPage() {
   return (
     <>
       <Heading
-        title="ФСП mock"
-        subtitle="Привязка демонстрационных достижений с проверкой принадлежности."
+        title="Достижения ФСП"
+        subtitle="Дополнительные достижения и участие в соревнованиях."
       />
       <Notice warning>
-        {data.notice} Источник: {data.source}. Это не настоящий реестр.
+        Подключён тестовый каталог ФСП. Эти записи не подтверждают квалификацию и не добавляют баллы к проверенным навыкам.
       </Notice>
       <Section title="Привязка">
-        <Badge>{data.status}</Badge>
+        <Badge>{data.status === "linked" ? "Профиль подключён" : data.status === "revoked" ? "Связь отозвана" : "Профиль не подключён"}</Badge>
         <Form
           label="Привязать"
           onSubmit={async (form) => {
@@ -373,11 +372,11 @@ export function FspPage() {
         >
           <Field
             name="external_id"
-            label="ID участника demo"
+            label="Номер участника"
             value={data.external_id}
             required
           />
-          <Field name="claim_code" label="Код принадлежности demo" required />
+          <Field name="claim_code" label="Код подтверждения принадлежности" required />
         </Form>
         <div className="actions">
           <Action
@@ -387,7 +386,7 @@ export function FspPage() {
               reload();
             }}
           >
-            Синхронизировать mock
+            Обновить достижения
           </Action>
           <Action
             disabled={!data.external_id}
@@ -410,12 +409,12 @@ export function FspPage() {
         {(data.achievements ?? []).map((item, index) => (
           <div className="list-row" key={index}>
             <strong>
-              {String(item.title ?? "Демонстрационное достижение")}
+              {String(item.title ?? "Достижение")}
             </strong>
             <span>
               {String(item.date ?? "")} · {String(item.result ?? "")}
             </span>
-            <Badge>Демонстрационная запись</Badge>
+            <Badge>Тестовый каталог ФСП</Badge>
           </div>
         ))}
       </Section>

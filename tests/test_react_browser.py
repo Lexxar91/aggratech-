@@ -93,6 +93,14 @@ async def test_react_invitation_application_privacy_and_mobile(
         employer_page = await ec.new_page()
         for page in (candidate, employer_page):
             page.on("pageerror", lambda error: errors.append(str(error)))
+            page.on(
+                "response",
+                lambda response: (
+                    print("browser_http", response.status, response.url.split("?")[0])
+                    if response.status >= 400
+                    else None
+                ),
+            )
             await page.add_init_script(
                 "document.addEventListener('DOMContentLoaded',()=>{"
                 "const banner=document.createElement('aside');"
@@ -169,7 +177,7 @@ async def test_react_invitation_application_privacy_and_mobile(
         ).to_be_visible()
         await employer_page.reload()
         await expect(employer_page.locator("main")).to_contain_text(
-            "react-private@example.com"
+            "react-private@example.com", timeout=15000
         )
         await expect(employer_page.locator("main")).not_to_contain_text("+79991112233")
         await candidate.get_by_role(

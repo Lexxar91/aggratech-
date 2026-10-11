@@ -29,6 +29,7 @@ import {
   errorText,
 } from "./ui";
 import "./styles.css";
+import fspLogo from "./assets/brand/fsp-logo.svg";
 
 class ErrorBoundary extends Component<
   { children: ReactNode },
@@ -62,7 +63,12 @@ function App() {
   const [hash, setHash] = useState(location.hash.slice(1) || "home");
   const [feedback, setFeedback] = useState({ text: "", error: false });
   useEffect(() => {
-    const change = () => setHash(location.hash.slice(1) || "home");
+    const change = () => {
+      setHash(location.hash.slice(1) || "home");
+      setFeedback((current) =>
+        current.error ? { text: "", error: false } : current,
+      );
+    };
     window.addEventListener("hashchange", change);
     return () => window.removeEventListener("hashchange", change);
   }, []);
@@ -107,13 +113,13 @@ function App() {
         ["assessment", "Проверка навыков и история"],
         ["vacancies", "Вакансии"],
         ["applications", "Мои отклики"],
-        ["invitations", "Приглашения"],
-        ["fsp", "ФСП mock"],
+        ["invitations", "Предложения от компаний"],
+        ["fsp", "Достижения ФСП"],
       ]
     : [
         ["profile", "Компания"],
         ["needs", "Потребности и подбор"],
-        ["invitations", "Приглашения"],
+        ["invitations", "Отправленные приглашения"],
         ["vacancies", "Мои вакансии"],
       ];
   function screen(): ReactNode {
@@ -131,7 +137,7 @@ function App() {
           <div className="card-grid">
             <Section title="Кандидату">
               <p>
-                Сохраните профиль, попробуйте assessment, откликнитесь на
+                Сохраните профиль, подтвердите навыки, откликнитесь на
                 вакансию и выберите, кому показать контакты.
               </p>
               <Link primary to={user ? "profile" : "register"}>
@@ -146,10 +152,9 @@ function App() {
               <Link to={user ? "profile" : "register"}>Начать работу</Link>
             </Section>
           </div>
-          <Notice warning>
-            Это хакатонное приложение, не production-система. Режим прохождения
-            зависит от допуска банка. Технический допуск не доказывает
-            статистическую точность оценки на людях.
+          <Notice>
+            Вы управляете своими контактами. Компания увидит их только после
+            вашего согласия, которое можно отозвать.
           </Notice>
         </>
       );
@@ -196,13 +201,11 @@ function App() {
         </a>
         <header className="topbar">
           <a className="brand" href="#home">
-            <span className="brand-mark" aria-hidden="true">
-              a
-            </span>
-            aggratech<span className="brand-sub">НАВЫКИ И ВОЗМОЖНОСТИ</span>
+            <img className="brand-logo" src={fspLogo} alt="Федерация спортивного программирования" />
+            <span className="brand-name">aggratech<span className="brand-sub">НАВЫКИ И КАРЬЕРА</span></span>
           </a>
           <div className="topbar-actions">
-            <Badge>Хакатонное демо</Badge>
+            <Badge>Навыки и карьера</Badge>
             {user ? (
               <Action
                 onClick={async () => {
@@ -298,8 +301,7 @@ function App() {
               </ErrorBoundary>
             )}
             <footer>
-              Aggratech · Хакатонный прототип. Демонстрационные результаты не
-              подтверждают квалификацию.
+              Aggratech · Проверенные навыки. Прозрачные условия. Контакты под вашим контролем.
             </footer>
           </main>
         </div>

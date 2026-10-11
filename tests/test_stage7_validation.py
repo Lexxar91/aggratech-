@@ -241,7 +241,8 @@ def test_fsp_matched_pair_changes_only_F() -> None:
     assert with_fsp.components.model_dump(
         exclude={"F"}
     ) == without.components.model_dump(exclude={"F"})
-    assert any("F=0" in text for text in without.explanations)
+    assert without.components.F == 0
+    assert any("нет подтверждённой истории" in text for text in without.explanations)
 
 
 def test_explanations_trace_actual_evidence_without_private_data() -> None:

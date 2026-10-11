@@ -166,7 +166,7 @@ def explain(
         + (
             "внешний тестовый fixture; квалификация сервисом не подтверждена"
             if candidate.origin == "jury_fixture"
-            else "опубликованный самостоятельный assessment; методика экспериментальная"
+            else "опубликованный результат проверки навыков"
         )
     ]
     if algorithm == "B2":
@@ -207,7 +207,18 @@ def explain(
         else "Зарплатные диапазоны пересекаются; весь диапазон не гарантирован."
     )
     if missing:
-        result.append("Нужно уточнить: " + ", ".join(missing) + ".")
+        names = {
+            "salary": "зарплата",
+            "location": "город",
+            "work_formats": "формат работы",
+            "available_from": "дата выхода",
+            "experience": "опыт",
+        }
+        result.append(
+            "Нужно уточнить: "
+            + ", ".join(names.get(item, "условия работы") for item in missing)
+            + "."
+        )
     if algorithm == "B2":
         result.append(
             "ФСП: "
@@ -216,16 +227,18 @@ def explain(
                 if value.F and candidate.origin == "jury_fixture"
                 else "подтверждённое происхождение и принадлежность."
                 if value.F
-                else "нет подтверждённой истории; F=0, остальные веса сохранены."
+                else (
+                    "нет подтверждённой истории; основные навыки учитываются полностью."
+                )
             )
         )
         if candidate.fsp_origin == "fsp_mock":
             result.append(
-                "ФСП mock: демонстрационные записи, не подтверждение "
+                "Тестовый каталог ФСП: записи не являются подтверждением "
                 "реальных достижений."
             )
         result.append(
-            f"Актуальность доказательств U={value.U:g}; штраф условий P={value.P:g}."
+            f"Актуальность проверки: {value.U:g}; учёт условий работы: {value.P:g}."
         )
     return result
 

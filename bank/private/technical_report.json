@@ -4,7 +4,7 @@
   "blueprint_hash": "08a48eb890b97093b57e94ded24a56b69f98dbedae2239808dd0cfa9d3f6ac75",
   "mappings_hash": "2aa052323734d18dc62150571598a0435f043cba4eca9c23659b02d986852fcd",
   "grader_version": "backend-bank-grader-v1",
-  "grader_hash": "3ef1c9535d1bdffeb8763ee166cc36c255b17d0eca6290dc9443e17be708901d",
+  "grader_hash": "50d3eaa1ce1fb38e34959be4449cea6fddbd1eac078689cc1ad86e162e119666",
   "runtime_image": "python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727",
   "technical_status": "passed",
   "technical_admission": "passed",

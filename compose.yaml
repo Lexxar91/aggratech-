@@ -1,10 +1,10 @@
-name: aggratech-stage1
+name: aggratech
 
 x-app: &app
   build:
     context: .
     target: base
-  image: aggratech-stage1:app
+  image: aggratech:app
   environment:
     APP_DATABASE_URL: postgresql+asyncpg://aggratech:local-development@db:5432/aggratech
     APP_JOB_LEASE_SECONDS: ${APP_JOB_LEASE_SECONDS:-300}
@@ -60,7 +60,7 @@ services:
     build:
       context: .
       target: base
-    image: aggratech-stage1:app
+    image: aggratech:app
     read_only: true
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]
@@ -78,6 +78,8 @@ services:
     ports:
       - "127.0.0.1:${APP_HTTP_PORT:-18000}:8000"
     depends_on:
+      populate:
+        condition: service_completed_successfully
       migrate:
         condition: service_completed_successfully
       app-secret:
@@ -110,7 +112,33 @@ services:
       - app
       - runner-control
     depends_on:
+      populate:
+        condition: service_completed_successfully
       migrate:
+        condition: service_completed_successfully
+      runner-controller:
+        condition: service_healthy
+
+  populate:
+    <<: *app
+    command: ["python", "-m", "app.tools.populate_product"]
+    environment:
+      APP_DATABASE_URL: postgresql+asyncpg://aggratech:local-development@db:5432/aggratech
+      APP_ASSESSMENT_BANK: bank/private/v3.json
+      APP_ASSESSMENT_REPORT: bank/private/v3_technical_report.json
+      APP_ASSESSMENT_ACCEPTANCE: bank/private/v3_operator_acceptance.json
+      APP_RUNNER_URL: https://runner-controller:9443
+      APP_RUNNER_CA: /run/runner-client/ca.crt
+      APP_RUNNER_CLIENT_CERTIFICATE: /run/runner-client/client.crt
+      APP_RUNNER_CLIENT_KEY: /run/runner-client/client.key
+    volumes:
+      - runner-client:/run/runner-client:ro
+      - app-secret:/run/app-secret:ro
+    networks: [app, runner-control]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      app-secret:
         condition: service_completed_successfully
       runner-controller:
         condition: service_healthy
@@ -119,7 +147,7 @@ services:
     build:
       context: .
       target: runner-controller
-    image: aggratech-stage1:runner-controller
+    image: aggratech:runner-controller
     command: ["python", "-m", "runner.bootstrap"]
     network_mode: none
     read_only: true
@@ -156,10 +184,10 @@ services:
     build:
       context: .
       target: runner-controller
-    image: aggratech-stage1:runner-controller
+    image: aggratech:runner-controller
     environment:
       RUNNER_MODE: docker-limited
-      RUNNER_COMPOSE_PROJECT: ${COMPOSE_PROJECT_NAME:-aggratech-stage1}
+      RUNNER_COMPOSE_PROJECT: ${COMPOSE_PROJECT_NAME:-aggratech}
       RUNNER_BIND: 0.0.0.0
       RUNNER_SERVER_CERTIFICATE: /run/runner-server/server.crt
       RUNNER_SERVER_KEY: /run/runner-server/server.key
@@ -211,7 +239,7 @@ services:
     build:
       context: .
       target: check
-    image: aggratech-stage1:check
+    image: aggratech:check
     tmpfs:
       - /tmp:size=256m,nosuid,nodev
     environment:
@@ -244,5 +272,11 @@ volumes:
 
 networks:
   app:
+    ipam:
+      config:
+        - subnet: ${APP_NETWORK_SUBNET:-10.254.71.0/24}
   runner-control:
     internal: true
+    ipam:
+      config:
+        - subnet: ${RUNNER_NETWORK_SUBNET:-10.254.72.0/24}

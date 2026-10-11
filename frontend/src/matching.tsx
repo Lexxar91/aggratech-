@@ -3,7 +3,6 @@ import { download, get, send } from "./api";
 import type { Schema } from "./api";
 import {
   Action,
-  Badge,
   Check,
   Empty,
   Field,
@@ -66,8 +65,7 @@ export function NeedsPage({ id }: { id?: string }) {
         subtitle="Задайте требования и получите объяснение каждого результата."
       />
       <Notice warning>
-        Подбор включает только опубликованные зачётные категории из допущенного
-        банка. Демонстрационные результаты и fixture в него не попадают.
+        Найдите специалистов по навыкам, уровню и условиям работы.
       </Notice>
       <div className="need-layout">
         <div>
@@ -85,7 +83,6 @@ export function NeedsPage({ id }: { id?: string }) {
           {needs.data.map((need) => (
             <div className="list-row" key={need.need_id}>
               <a href={`#needs/${need.need_id}`}>{need.title}</a>
-              <Badge>v{need.version}</Badge>
             </div>
           ))}
           <Link to="needs">Новая потребность</Link>
@@ -200,7 +197,7 @@ function NeedEditor({
     <Section
       title={
         current
-          ? `Редактирование · версия ${current.version}`
+          ? "Редактирование потребности"
           : "Новая потребность"
       }
     >
@@ -222,7 +219,7 @@ function NeedEditor({
             payload(data),
             current ? "PATCH" : "POST",
           );
-          feedback(`Потребность сохранена, версия ${saved.version}.`);
+          feedback("Потребность сохранена.");
           reload();
           location.hash = `#needs/${saved.need_id}`;
         }}
@@ -420,7 +417,7 @@ function SnapshotHistory({ needId }: { needId: string }) {
       {data.map((snapshot) => (
         <div key={snapshot.id} className="list-row">
           <Link to={`recommendations/${snapshot.id}`}>
-            Версия потребности {snapshot.need_version}, {date(snapshot.as_of)}
+            Подборка от {date(snapshot.as_of)}
           </Link>
         </div>
       ))}
@@ -458,7 +455,7 @@ export function RecommendationsPage({ id }: { id: string }) {
       a.recommendation!.group !== b.recommendation!.group
     )
       throw new Error(
-        "Выберите карточки одного грейда и одной группы этой подборки.",
+        "Выберите кандидатов одного уровня из одного списка подборки.",
       );
     if (
       a.recommendation!.assessment_scope.method_version !==
@@ -466,24 +463,22 @@ export function RecommendationsPage({ id }: { id: string }) {
       a.recommendation!.assessment_scope.format !==
         b.recommendation!.assessment_scope.format
     )
-      throw new Error("Методики несопоставимы; числовое сравнение недоступно.");
+      throw new Error("Эти результаты нельзя сравнить по баллам. Выберите другую пару кандидатов.");
     setComparison(rows);
   }
   return (
     <>
       <Heading
         title="Подборка"
-        subtitle={`Версия потребности ${snapshot.need_version} · ${date(snapshot.as_of)}`}
+        subtitle={`Подборка от ${date(snapshot.as_of)}`}
       />
       <Link to={`needs/${snapshot.need_id}`}>Потребность</Link>
       <Notice>
-        {snapshot.notice} Алгоритм: {snapshot.algorithm_version}. Каталог:{" "}
-        {snapshot.catalog_version}.
+        Подбор учитывает проверенные навыки и ваши требования. Контакты открываются только с согласия кандидата.
       </Notice>
       {!snapshot.entries?.length && (
         <Empty>
-          Доступных подтверждённых профилей нет. Демо и fixture не используются
-          в подборе.
+          По этим условиям пока нет кандидатов. Попробуйте расширить требования или изменить условия работы.
         </Empty>
       )}
       {(["junior", "middle"] as const).flatMap((grade) =>
@@ -562,13 +557,13 @@ export function RecommendationsPage({ id }: { id: string }) {
         </Action>
       </div>
       <p className="muted">
-        Выбрано {selected.length} из 2. Для сравнения нужны один грейд, одна
-        группа и сопоставимая методика.
+        Выбрано {selected.length} из 2. Для сравнения нужны один уровень, одна
+        группа требований.
       </p>
       {comparison && (
         <Section title="Сравнение">
           <div className="table-scroll">
-            <table>
+            <table className="comparison-table">
               <thead>
                 <tr>
                   <th scope="col">Показатель</th>
@@ -660,12 +655,11 @@ function RecommendationCard({
       </p>
       <p>{money(card.salary_min, card.salary_max)}</p>
       <p className="muted">
-        Источник: {rec.origin}; ФСП: {rec.fsp_origin}. Методика:{" "}
-        {rec.assessment_scope.method_version}.
+        Проверены навыки Python, SQL и HTTP/API.
       </p>
       {rec.missing_conditions.length > 0 && (
         <Notice warning>
-          Нужно уточнить: {rec.missing_conditions.join(", ")}
+          Нужно уточнить: {rec.missing_conditions.map(condition => ({salary: "зарплата", location: "город", work_format: "формат работы", work_formats: "формат работы", available_from: "дата выхода", availability: "дата выхода", experience: "опыт"} as Record<string, string>)[condition] ?? "условия работы").join(", ")}
         </Notice>
       )}
       <details>
@@ -673,7 +667,7 @@ function RecommendationCard({
         {rec.explanations.map((text, index) => (
           <p key={index}>{text}</p>
         ))}
-        <pre>{JSON.stringify(rec.components, null, 2)}</pre>
+        <ul>{Object.entries(rec.components).map(([key, score]) => <li key={key}>{({T: "Навыки", K: "Технологии", F: "Достижения ФСП", U: "Актуальность", P: "Поправка на условия"} as Record<string, string>)[key] ?? "Показатель"}: {score}</li>)}</ul>
       </details>
       <label className="check">
         <input

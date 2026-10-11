@@ -28,6 +28,7 @@ USER root
 ENV PLAYWRIGHT_BROWSERS_PATH=/opt/browsers
 RUN uv sync --locked --no-install-project && .venv/bin/playwright install --with-deps chromium && rm -rf /var/lib/apt/lists/*
 COPY tests ./tests
+COPY frontend/src ./frontend/src
 COPY runner ./runner
 USER appuser
 CMD ["pytest", "-q", "-m", "not runner"]

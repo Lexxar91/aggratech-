@@ -3,7 +3,7 @@
   "bank_hash": "95696fdadd45e145f52064c82972e77661e0d89c1dc6aed34773420b965a6d1f",
   "source_hash": "5705b3a6d2d5c4a0da11064b1fc4fed69e40fe034d4f24f609f411168d1ec458",
   "grader_version": "backend-v3-grader-1",
-  "grader_hash": "60fbf28f3c2397b9a32c616efefffceb585b9ac56740dcf165ad02739f01a8e3",
+  "grader_hash": "867b64783c9ac4784feca0921f45c20de30e22792ae7f11210d26c62e90fc220",
   "runtime_images": {
     "python": "python:3.14.4-slim@sha256:2ca02f32b4d9d893863367ce07ec1972819f476dd38d8612f2a9cb6a41cbb727",
     "sql": "postgres:18-bookworm@sha256:afc7e2d441324c0388fa80c3d24f733b4194a4eb7f47dd8ee2b08eb1a24a647c"

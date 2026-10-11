@@ -185,7 +185,7 @@ async def test_untrusted_credit_cannot_publish_or_leak_qualification_to_pdf(
         assert projected.assessment is None
         pdf = await asyncio.to_thread(generate_pdf, projected)
         text = " ".join(p.extract_text() for p in PdfReader(BytesIO(pdf)).pages)
-        assert "категория пока не подтверждена" in text
+        assert "уровень пока не подтверждён" in text
         assert "Грейд подтверждён" not in text
     response = await candidate.post(f"/api/v1/assessment/cycles/{cid}/publish")
     assert response.status_code == 409

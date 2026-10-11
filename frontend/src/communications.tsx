@@ -309,13 +309,12 @@ export function InvitationsPage({ id }: { id?: string }) {
     return (
       <>
         <Heading
-          title="Приглашения"
-          subtitle="Предложения и история общения с компаниями."
+          title={candidate ? "Предложения от компаний" : "Отправленные приглашения"}
+          subtitle={candidate ? "Условия работы и история общения с компаниями." : "Предложения кандидатам и их решения."}
         />
         {!data.length && (
           <Empty>
-            Приглашений пока нет. Демо-категории не дают доступа к
-            подтверждённому подбору.
+            {candidate ? "Предложений пока нет. Опубликуйте результат и включите видимость профиля." : "Вы ещё не отправили приглашения. Откройте подборку и предложите кандидату условия работы."}
           </Empty>
         )}
         <div className="card-grid">
@@ -344,8 +343,7 @@ export function InvitationsPage({ id }: { id?: string }) {
         <p>Действует до {date(row.expires_at)}</p>
         <OfferDetails offer={snapshot.offer} />
         <Notice>
-          {snapshot.notice} Снимок потребности: версия {snapshot.need_version}.
-          Более поздние изменения не переписывают предложение.
+          Условия предложения сохранены на момент отправки. Последующие изменения задачи поиска их не меняют.
         </Notice>
       </Section>
       {["sent", "viewed"].includes(row.status) &&
@@ -676,8 +674,9 @@ export function ApplicationPage({ id }: { id: string }) {
             <Section title={row.candidate_card.display_name}>
               <p>{row.candidate_card.summary}</p>
               <Notice>
-                {row.candidate_card.assessment?.label ||
-                  "Подтверждённая квалификация не опубликована."}
+                {row.candidate_card.assessment?.verified
+                  ? `Уровень — ${row.candidate_card.assessment.grade === "middle" ? "Middle" : "Junior"}`
+                  : "Результат проверки навыков не опубликован."}
               </Notice>
               <Action
                 onClick={() =>

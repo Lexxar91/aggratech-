@@ -147,6 +147,14 @@ async def save_profile(
     return await view_profile(db, profile)
 
 
+async def save_privacy(db: AsyncSession, user_id: UUID, data: Privacy) -> ProfileView:
+    """Сохраняет текущие права без раскрытия контактов."""
+    row = await own_profile(db, user_id, lock=True)
+    row.privacy = data.model_dump()
+    row.version += 1
+    return await view_profile(db, row)
+
+
 async def contacts(
     db: AsyncSession, profile: CandidateProfile, data: ContactsInput | None = None
 ) -> ContactsView:

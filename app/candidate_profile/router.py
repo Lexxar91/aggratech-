@@ -57,10 +57,7 @@ async def update_contacts(
 @router.patch("/candidate/privacy", response_model=ProfileView)
 async def update_privacy(data: Privacy, db: Db, principal: Candidate) -> ProfileView:
     """Сохраняет текущие права без раскрытия контактов."""
-    row = await service.own_profile(db, principal.user.id, lock=True)
-    row.privacy = data.model_dump()
-    row.version += 1
-    return await service.view_profile(db, row)
+    return await service.save_privacy(db, principal.user.id, data)
 
 
 @router.get("/candidate/profile.pdf")

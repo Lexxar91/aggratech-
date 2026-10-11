@@ -1,0 +1,76 @@
+{
+  "project": "Aggratech",
+  "prepared_on": "2026-10-11",
+  "scope": "Documentation only; no application changes or new product test execution",
+  "qa_source": {
+    "filename": "qa-summary-fsp-2026.md",
+    "section": 7,
+    "sha256": "536765976fe3f3c132e436dc2eab6340fce02ce91e7a2b744904bb55a6de9fee"
+  },
+  "files": {
+    "01_jury_guide.pdf": {
+      "sha256": "b56b4597018f0d8aa4de3f1ad3962d42dbf628a3f59e8f5fcee70730ebd3a0c7",
+      "bytes": 89325,
+      "pages": 16
+    },
+    "02_api_reference.pdf": {
+      "sha256": "a6c77de20cd76b01f94b5f71b6e145c7de227c62171a7c26da6f7780057889d1",
+      "bytes": 86333,
+      "pages": 24
+    },
+    "03_submission_checklist.pdf": {
+      "sha256": "91480fbdf3f3af9ed6c45b887acfdd6f298476e8618c4ab895a410f961da7baa",
+      "bytes": 52119,
+      "pages": 6
+    },
+    "api_reference.md": {
+      "sha256": "40310ed77a94c88bf21ccd74cabff72ebaff6b3112d80767cf0fbe5b629fce6d",
+      "bytes": 34566
+    },
+    "jury_guide.md": {
+      "sha256": "4c741012d97b1de3902998433a23bee0c2a71bde68f49fb6c52a91f848ca8b81",
+      "bytes": 41091
+    },
+    "submission_checklist.md": {
+      "sha256": "fed0972b73ad990b393b42621956cde48d1aa7b73738840c5b97ff48cbba1927",
+      "bytes": 9080
+    }
+  },
+  "sources": {
+    "docs/release/openapi.json": "b0b7819e14574cbf9d4a700c7d698a0935ce952fd19a2102a1d2baab7600f929",
+    "pyproject.toml": "65a47294e643fbd4a6e79dda86cd76974eb5bea4bd4eee75e6a57081579e71a3",
+    "uv.lock": "1adb34419035df27948252318a518d1fa41574f6ca2e35b139ca60b522f4367f",
+    "frontend/package.json": "da4414445bac1a7254ea40d1a862188bce3dea13df5d4d7628aedd9419e377cd",
+    "frontend/package-lock.json": "1a10c5c685a9a370c6e5c2fc0775b3b21608fbf22f781643b6f46828de3c62c9",
+    "compose.yaml": "efe691b4cccd8920f5069435e2d242108e367377338df7b7d6e121174b844f42",
+    "Dockerfile": "1dd666d6c9f83fb205989503b1df83bf1915b08f2555ff7dfee2908250496af9",
+    "docs/02_assessment_algorithm.md": "712c65b464eb5a6af8da8a3a51d39949b6d6fa6ac6be909213229fb6b63fd5d2",
+    "docs/03_matching_and_invitation_algorithm.md": "e1f93f38c01095a32e017350ff0377872e3d9118ed40005e889f5f88cf117b50",
+    "docs/04_validation_procedure.md": "eae0694abd0c483c59e1c88d183d3920e67d1fcf4e1e07ec3b1c7edd8b318efb",
+    "docs/05_architecture.md": "b1b6f1993697041abc2f0e77ff556de2a3c85045ad20388fa57afe5087e467bc"
+  },
+  "openapi": {
+    "paths": 70,
+    "operations": 83,
+    "version": "0.1.0"
+  },
+  "assessment_report_snapshot": {
+    "bank_version": "3.0",
+    "bank_hash": "95696fdadd45e145f52064c82972e77661e0d89c1dc6aed34773420b965a6d1f",
+    "source_hash": "5705b3a6d2d5c4a0da11064b1fc4fed69e40fe034d4f24f609f411168d1ec458",
+    "grader_version": "backend-v3-grader-1",
+    "grader_hash": "867b64783c9ac4784feca0921f45c20de30e22792ae7f11210d26c62e90fc220",
+    "acceptance_hash": "64d7dd6ffca1be9b831084796695bb7fa18425c3368b90f5dc000b257e41e687",
+    "technical_status": "passed",
+    "admission_status": "admitted",
+    "checks": 28764,
+    "technical_errors": [],
+    "human_calibration": "not_measured_by_this_run"
+  },
+  "human_review": "Human review and acceptance of v3 confirmed by user; statistical accuracy not inferred",
+  "external_delivery": {
+    "repository": "https://github.com/Lexxar91/aggratech-",
+    "expert_access": "not_checked_in_this_task",
+    "task_submission_link": "not_submitted_in_this_task"
+  }
+}

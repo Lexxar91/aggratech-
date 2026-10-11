@@ -59,12 +59,18 @@ async function response(
   if (!result.ok) {
     const problem: { code?: string; detail?: string | { msg: string }[] } =
       await result.json().catch(() => ({}));
-    const detail =
+    const messages: Record<string, string> = {
+      active_invitation_exists: "Вы уже пригласили этого кандидата по этой потребности. Другим кандидатам можно отправить приглашения.",
+      bank_not_admitted: "Проверка навыков временно недоступна. Попробуйте позже.",
+      credit_origin_invalid: "Не удалось подтвердить результат этого прохождения. Обратитесь в поддержку.",
+      form_exhausted: "Новых вариантов заданий для этого уровня пока нет.",
+    };
+    const detail = messages[problem.code ?? ""] ?? (
       typeof problem.detail === "string"
         ? problem.detail
         : Array.isArray(problem.detail)
           ? problem.detail.map((item) => item.msg).join("; ")
-          : "Запрос не выполнен. Повторите действие.";
+          : "Запрос не выполнен. Повторите действие.");
     throw new ApiError(result.status, problem.code ?? "request_failed", detail);
   }
   return result;

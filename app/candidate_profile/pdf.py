@@ -13,6 +13,13 @@ from app.candidate_profile.schemas import ContactsView, SafeCard
 from app.core.errors import ApiError
 
 FONT = "DejaVuSans"
+SKILL_NAMES = {
+    "language_algorithms": "Python и алгоритмы",
+    "sql_data": "SQL и данные",
+    "http_api": "HTTP и API",
+    "debug_reliability": "Отладка и надёжность",
+    "security_validation": "Безопасность и валидация",
+}
 pdfmetrics.registerFont(
     TTFont(FONT, str(Path(__file__).parents[1] / "assets" / "DejaVuSans.ttf"))
 )
@@ -42,28 +49,45 @@ def generate_pdf(
         ),
         "Доступен с: "
         + (str(card.available_from) if card.available_from else "не указано"),
-        "Форматы работы: " + ", ".join(card.work_preferences.formats),
+        "Форматы работы: "
+        + ", ".join(
+            {"remote": "удалённо", "hybrid": "гибрид", "onsite": "в офисе"}.get(
+                value, value
+            )
+            for value in card.work_preferences.formats
+        ),
         "Город: " + (card.work_preferences.location or "не указан"),
         "Заявленные технологии: " + (", ".join(card.technology_names) or "не указаны"),
         (
             "Технологии заявлены самостоятельно."
             if card.assessment and card.assessment.verified
-            else "Технологии заявлены самостоятельно; категория пока не подтверждена."
+            else "Технологии заявлены самостоятельно; уровень пока не подтверждён."
         ),
     ]
     if card.assessment:
         assessment = card.assessment
         lines += [
-            assessment.label,
-            f"Уровень: {assessment.grade}; версия: {assessment.methodology}",
-            assessment.scope,
-            f"Дата: {assessment.assessed_at}",
+            f"Уровень: {assessment.grade.title()}"
+            if assessment.verified
+            else "Уровень пока не подтверждён",
+            "Проверенные навыки Backend",
+            "Дата проверки: "
+            + (
+                assessment.assessed_at.strftime("%d.%m.%Y")
+                if assessment.assessed_at
+                else "проверка ещё не завершена"
+            ),
         ]
-        lines += [
-            f"{item.skill}: {item.status}; различных семейств: {item.families}; "
-            f"результат: {item.score}"
-            for item in assessment.skills
-        ]
+        for item in assessment.skills:
+            status = (
+                "требования выполнены" if item.status == "met" else "нужна доработка"
+            )
+            if item.score is None:
+                status = "недостаточно данных"
+            lines.append(
+                f"{SKILL_NAMES.get(item.skill, 'Навык')}: {status}; "
+                f"результат: {item.score if item.score is not None else 'нет данных'}"
+            )
     if contacts:
         lines += [
             "Контакты владельца",

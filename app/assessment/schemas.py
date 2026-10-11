@@ -71,6 +71,7 @@ class SaveAnswer(BaseModel):
 
 
 class PublicTask(BaseModel):
+    number: int = 1
     family: str
     family_id: str | None = None
     task_id: str | None = None
@@ -120,6 +121,8 @@ class RequirementResult(BaseModel):
     """Публичное основание без тестовых параметров, правильных ответов и рубрик."""
 
     task_id: str
+    task_title: str = ""
+    task_number: int = 1
     family_id: str
     skill: str
     action: str
